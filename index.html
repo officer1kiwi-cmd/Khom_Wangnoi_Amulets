@@ -31,7 +31,7 @@
                 </button>
             </div>
             <div class="bg-black/50 p-4 rounded-2xl border border-zinc-700/60 gold-glow">
-                <p class="text-xs font-bold text-amber-400 flex items-center gap-1">⚜️ ประกาศข่าวสารด่วนโดย คม วังน้อย</p>
+                <p class="text-xs font-bold text-amber-400 flex items-center gap-1">ประกาศข่าวสารด่วน !</p>
                 <h2 id="admin-news-box" class="text-base font-bold text-white mt-1">กำลังเชื่อมต่อระบบฐานข้อมูลกลาง...</h2>
             </div>
         </div>
@@ -194,7 +194,7 @@
     <div id="postModal" class="hidden fixed inset-0 bg-black/85 z-50 flex items-end justify-center">
         <div class="bg-zinc-900 w-full max-w-md rounded-t-3xl p-5 space-y-3.5 border-t border-zinc-700 max-h-[90vh] overflow-y-auto text-sm">
             <div class="flex justify-between items-center">
-                <h3 class="text-lg font-black text-white">📝 ลงประกาศขึ้นบอร์ดสายตรง คม วังน้อย</h3>
+                <h3 class="text-lg font-black text-white">📝 ลงประกาศขึ้นบอร์ด</h3>
                 <button onclick="closeModal('postModal')" class="text-zinc-500 text-2xl font-bold hover:text-white">×</button>
             </div>
             <div class="space-y-3">
@@ -304,7 +304,7 @@
         ];
 
         const mockNews = [
-            {message: "📣 ยินดีต้อนรับสู่สังคมพระเครื่องระดับท็อป คม วังน้อย อัปเดตตารางประกวดงานใหญ่เรียบร้อยแล้ว!", date: new Date().toISOString()},
+            {message: "📣 ยินดีต้อนรับสู่สังคมพระเครื่อง คม วังน้อย", date: new Date().toISOString()},
             {message: "🚨 ประกาศเตือน: โปรดนัดรับตรวจสอบองค์พระจริงเพื่อความโปร่งใส ปลอดภัยทั้งผู้เช่าและผู้ให้เช่า", date: new Date().toISOString()}
         ];
 
@@ -427,7 +427,7 @@
                         </div>
                     `;
                 } else {
-                    imageBlockHTML = `<img src="${images[0] || 'https://via.placeholder.com/400x300?text=Khom+Wangnoi'}" class="w-full h-56 object-cover rounded-t-2xl">`;
+                    imageBlockHTML = `<img src="${images[0] || 'https://via.placeholder.com/400x250?text=Khom+Wangnoi'}" class="w-full h-56 object-cover rounded-t-2xl">`;
                 }
 
                 // สไตล์สถานะประกาศ (พร้อมขาย, จองแล้ว, ขายแล้ว)
@@ -671,7 +671,7 @@
             if(!title || !price || !phone || !pin) { alert("กรุณากรอกข้อมูลดั้งเดิมสำคัญให้ครบถ้วนก่อนส่งโพสต์ครับ"); return; }
 
             const base64Images = await convertFilesToBase64(fileEl);
-            const fallbackImg = base64Images.length > 0 ? base64Images.join(",") : "https://via.placeholder.com/400x300?text=Khom+Wangnoi";
+            const fallbackImg = base64Images.length > 0 ? base64Images.join(",") : "https://via.placeholder.com/400x250?text=Khom+Wangnoi";
 
             const payload = {
                 action: "createListing", type, isAuction, price, badge, title, location: locationName, phone, line, pin,
