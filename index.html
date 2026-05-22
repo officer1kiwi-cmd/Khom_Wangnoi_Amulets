@@ -427,7 +427,7 @@
                         </div>
                     `;
                 } else {
-                    imageBlockHTML = `<img src="${images[0] || 'https://via.placeholder.com/400x250?text=Khom+Wangnoi'}" class="w-full h-56 object-cover rounded-t-2xl">`;
+                    imageBlockHTML = `<img src="${images[0] || 'https://via.placeholder.com/400x300?text=Khom+Wangnoi'}" class="w-full h-56 object-cover rounded-t-2xl">`;
                 }
 
                 // สไตล์สถานะประกาศ (พร้อมขาย, จองแล้ว, ขายแล้ว)
@@ -671,7 +671,7 @@
             if(!title || !price || !phone || !pin) { alert("กรุณากรอกข้อมูลดั้งเดิมสำคัญให้ครบถ้วนก่อนส่งโพสต์ครับ"); return; }
 
             const base64Images = await convertFilesToBase64(fileEl);
-            const fallbackImg = base64Images.length > 0 ? base64Images.join(",") : "https://via.placeholder.com/400x250?text=Khom+Wangnoi";
+            const fallbackImg = base64Images.length > 0 ? base64Images.join(",") : "https://via.placeholder.com/400x300?text=Khom+Wangnoi";
 
             const payload = {
                 action: "createListing", type, isAuction, price, badge, title, location: locationName, phone, line, pin,
@@ -782,6 +782,8 @@
         function openCheckModal() { document.getElementById("checkModal").classList.remove("hidden"); }
         function openPostModal() { document.getElementById("postModal").classList.remove("hidden"); }
         function closeModal(id) { document.getElementById(id).classList.add("hidden"); }
+		
     </script>
+	
 </body>
 </html>
