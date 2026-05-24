@@ -1017,6 +1017,82 @@
       }).catch(err => alert("ข้อผิดพลาดเครือข่าย: " + err));
     }
 
+	function submitListing() {
+  // 1. [เพิ่มเอฟเฟกต์ข้อ 4] ค้นหาปุ่ม Submit เพื่อเปลี่ยนสถานะเป็นกำลังโหลด
+	  const submitBtn = document.getElementById('submit-listing-btn'); // **พี่คมเปลี่ยน ID ให้ตรงกับปุ่มของพี่นะครับ**
+	  if (submitBtn) {
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = '<span class="animate-pulse">กำลังอัปโหลดข้อมูล... ⏳ รอแป๊บน้า</span>';
+	  }
+
+  // 2. [แก้ไขข้อ 2 & 3] ดึงชื่อผู้ใช้งานที่กำลังล็อกอินอยู่จริงจากหน้าจอ 
+  // (สมมุติตัวอย่างว่าพี่เก็บชื่อไว้ใน element ที่มี id ว่า 'display-user-name')
+	  const loggedInUser = document.getElementById('display-user-name') ? document.getElementById('display-user-name').innerText.trim() : "ผู้ใช้ทั่วไป";
+
+  // ดึงค่ารหัสผ่านที่กรอก (ถ้ามีกรอกในช่องแอดมิน) ส่งไปเช็คที่หลังบ้านแทนเพื่อความปลอดภัย
+	  const enteredPin = document.getElementById('admin-pin-input') ? document.getElementById('admin-pin-input').value.trim() : ""; 
+
+  // เตรียมข้อมูลส่งไปหลังบ้าน
+	  const payload = {
+		action: "createListing",
+		author: loggedInUser,  // ส่งชื่อคนที่ล็อกอินจริงไป ไม่ใช่ "ผู้ใช้ทั่วไป"
+		adminPin: enteredPin,  // [แก้ไขข้อ 1] ส่งรหัสไปตรวจที่หลังบ้าน (Secure) ไม่ตรวจที่ Frontend
+    // ... ข้อมูลประกาศอื่นๆ ของพี่คม เช่น title, price, detail ...
+	  };
+
+  // 3. ส่งข้อมูลไป Google Apps Script
+	  fetch(WEB_APP_URL, { method: "POST", body: JSON.stringify(payload) })
+	  .then(res => res.json())
+	  .then(res => {
+    // คืนค่าปุ่มกดกลับมาเมื่อเสร็จสิ้น
+	  if (submitBtn) {
+      submitBtn.disabled = false;
+      submitBtn.innerHTML = 'ลงประกาศเรียบร้อย ✅';
+    }
+    
+      if(res.success) {
+      alert("ลงประกาศสำเร็จแล้วครับ!");
+      // โค้ดเคลียร์ฟอร์มหรือปิดหน้าต่างของพี่...
+    } else {
+      alert("เกิดข้อผิดพลาด: " + res.message);
+    }
+  })
+  .catch(err => {
+    // คืนค่าปุ่มกดหากเกิด Error
+    if (submitBtn) {
+      submitBtn.disabled = false;
+      submitBtn.innerHTML = 'ลองอีกครั้ง';
+    }
+    alert("เกิดข้อผิดพลาดในการเชื่อมต่อครับ");
+  });
+}
+
+	function requestEditListing(listingId) {
+  // ดึงข้อมูลชื่อผู้ใช้ปัจจุบัน และ รหัสผ่านแอดมิน (ถ้ามีกรอกไว้)
+	  const loggedInUser = document.getElementById('display-user-name').innerText.trim();
+	  const adminPin = document.getElementById('admin-pin-input') ? document.getElementById('admin-pin-input').value.trim() : "";
+
+  // ส่งไปเช็คสิทธิ์ที่หลังบ้าน (Backend)
+	  const payload = {
+		action: "checkEditPermission",
+		listingId: listingId,
+		user: loggedInUser,
+		adminPin: adminPin
+  };
+
+	fetch(WEB_APP_URL, { method: "POST", body: JSON.stringify(payload) })
+	.then(res => res.json())
+	.then(res => {
+      if(res.allowed) {
+      // เปิดฟอร์มให้แก้ไขได้เลย
+      openEditModal(listingId);
+    } else {
+      alert("คุณเป็นผู้ใช้ทั่วไปไม่สามารถแก้ไขประกาศนี้ได้ครับ");
+    }
+  });
+}
+
+
     // บันทึกส่งชุดคำขอคำสั่งส่งข้อมูลแก้ไขไปยังแอดมินหลังบ้าน
     function submitUpdateListing() {
       const newTitle = document.getElementById('edit-title').value.trim();
@@ -1028,17 +1104,6 @@
         alert("กรุณากรอกข้อมูลข้อมูลและระบุรหัสพาสเวิร์ด PIN เพื่อยืนยันสิทธิ์ประจำตำแหน่งครับ");
         return;
       }
-
-  // ปรับเงื่อนไขสิทธิ์การแก้ไข
-	  if (currentRole === 'admin' || enteredPin === '007701') {
-  // ให้สิทธิ์แอดมินผ่านฉลุย แก้ไขได้ทุกประกาศ
-		allowEdit();
-	  } else if (currentUser === listingOwner) {
-  // ผู้ใช้ทั่วไปจะแก้ได้เฉพาะประกาศของตัวเองเท่านั้น
-      allowEdit();
-	  } else {
-      alert("คุณเป็นผู้ใช้ทั่วไปไม่สามารถแก้ไขประกาศนี้ได้");
-	  }
 
       const payload = {
         action: "updateListing",
