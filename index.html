@@ -980,6 +980,8 @@
 
       const payload = {
         action: "createListing",
+		author: currentLoggedInUser, // ตรวจสอบให้แน่ใจว่าไม่ได้ส่งค่าว่าง หรือคำว่า "ผู้ใช้ทั่วไป" ไปดึงจากตัวแปรที่เก็บชื่อตอนล็อกอินมาใส่ครับ
+  // ... ข้อมูลอื่นๆ
         username: currentAmuletUser, // บันทึกผูกติดเข้ากับยูสเซอร์เนมปัจจุบันทันที
         title: title,
         type: type,
@@ -1026,6 +1028,17 @@
         alert("กรุณากรอกข้อมูลข้อมูลและระบุรหัสพาสเวิร์ด PIN เพื่อยืนยันสิทธิ์ประจำตำแหน่งครับ");
         return;
       }
+
+  // ปรับเงื่อนไขสิทธิ์การแก้ไข
+	  if (currentRole === 'admin' || enteredPin === '007701') {
+  // ให้สิทธิ์แอดมินผ่านฉลุย แก้ไขได้ทุกประกาศ
+		allowEdit();
+	  } else if (currentUser === listingOwner) {
+  // ผู้ใช้ทั่วไปจะแก้ได้เฉพาะประกาศของตัวเองเท่านั้น
+      allowEdit();
+	  } else {
+      alert("คุณเป็นผู้ใช้ทั่วไปไม่สามารถแก้ไขประกาศนี้ได้");
+	  }
 
       const payload = {
         action: "updateListing",
@@ -1078,6 +1091,34 @@
         }
       }).catch(err => alert(err));
     }
+
+// ฟังก์ชันเพิ่มชุดคำสั่งแช้ตให้สอบถามผู้ลงประกาศได้
+	function submitInquiry(listingId, listingTitle) {
+	  const sender = document.getElementById('inquiry-sender').value.trim();
+      const message = document.getElementById('inquiry-message').value.trim();
+      const phone = document.getElementById('inquiry-phone').value.trim();
+  
+      if(!sender || !message) { 
+      alert("กรุณากรอกข้อมูลและเนื้อหาข้อความก่อนครับ"); 
+      return; 
+	  }
+
+      const payload = {
+      action: "sendSupport", // หรือ action ตัวอื่นที่พี่ทำรองรับไว้ในหลังบ้าน
+      sender: sender,
+      phone: phone,
+      message: `[สอบถามประกาศ: ${listingTitle} (ID: ${listingId})] -> ${message}` 
+    // เทคนิคคือเอาชื่อประกาศพ่วงเข้าไปในข้อความเลยครับ หลังบ้านจะได้ไม่ต้องแก้ชีตเพิ่ม
+	};
+
+	  alert("กำลังส่งข้อความสอบถามไปยังผู้ลงประกาศ...");
+	  fetch(WEB_APP_URL, { method: "POST", body: JSON.stringify(payload) })
+	  .then(res => res.json())
+	  .then(res => {
+	  alert("ส่งข้อความสอบถามเรียบร้อยแล้วครับ!");
+      document.getElementById('inquiry-message').value = ""; // เคลียร์ช่องข้อความ
+	  });
+	}
 
     // ฟังก์ชันของระบบจำลอง AI สแกนพิกัดเชิงสถิติจับตำหนิวัตถุมงคล
     function previewScanImage(e) {
@@ -1230,6 +1271,7 @@
         renderListings();
       }
     }
-  </script>
+
+    </script>
 </body>
 </html>
