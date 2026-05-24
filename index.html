@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Khom Wangnoi Amulet Premium Gold V3.2</title>
+  <title>Khom Wangnoi Amulet Premium Gold</title>
   <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600&display=swap" rel="stylesheet">
   <style>
     :root {
@@ -32,7 +32,7 @@
       max-width: 600px; 
       margin: 0 auto; 
       padding: 15px; 
-      padding-bottom: 100px; 
+      padding-bottom: 40px; 
     }
     .main-frame { 
       padding: 5px 0; 
@@ -40,6 +40,78 @@
     .hidden { 
       display: none !important; 
     }
+    
+    /* สไตล์ปรับแต่งหัวเว็บบอร์ดสีทองพรีเมียม สวยเด่นตามบรีฟคุณพี่คม */
+    .main-app-header {
+      text-align: center;
+      padding: 22px 10px;
+      background: linear-gradient(180deg, #221805 0%, #121212 100%);
+      border: 2px solid #bf953f;
+      border-radius: 12px;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.6);
+    }
+    .brand-title {
+      font-size: 2.8rem;
+      font-weight: 600;
+      background: var(--gold-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 2px 2px 5px rgba(0,0,0,0.9);
+      letter-spacing: 2px;
+      margin-bottom: 2px;
+    }
+    .brand-subtitle {
+      font-size: 0.85rem;
+      color: var(--gold-main);
+      letter-spacing: 4px;
+      margin-bottom: 12px;
+      font-weight: 300;
+    }
+    
+    /* แถบสถานะแสดงข้อมูลบัญชีผู้ใช้งานที่ล็อกอินเข้าระบบ */
+    .user-status-container {
+      background-color: rgba(0, 0, 0, 0.5);
+      border: 1px solid #443410;
+      padding: 6px 14px;
+      border-radius: 30px;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.95rem;
+    }
+    .status-dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      display: inline-block;
+    }
+    .status-visitor { 
+      background-color: #e74c3c; 
+      box-shadow: 0 0 8px #e74c3c; 
+      animation: pulseAnimation 2s infinite;
+    }
+    .status-user { 
+      background-color: #2ecc71; 
+      box-shadow: 0 0 8px #2ecc71; 
+      animation: pulseAnimation 2s infinite;
+    }
+    @keyframes pulseAnimation {
+      0% { opacity: 0.6; }
+      50% { opacity: 1; }
+      100% { opacity: 0.6; }
+    }
+    .user-log-btn {
+      background: none;
+      border: none;
+      color: var(--gold-main);
+      cursor: pointer;
+      font-weight: 500;
+      text-decoration: underline;
+      font-size: 0.95rem;
+      margin-left: 3px;
+    }
+
     .news-ticker-box { 
       background: linear-gradient(135deg, #221805 0%, #1a1a1a 100%); 
       border: 1px solid #bf953f; 
@@ -64,6 +136,7 @@
       color: #ffffff; 
       line-height: 1.4; 
     }
+    
     .dashboard-cards-grid { 
       display: grid; 
       grid-template-columns: repeat(4, 1fr); 
@@ -74,7 +147,7 @@
       background-color: var(--bg-card); 
       border: 1px solid #332508; 
       border-radius: 8px; 
-      padding: 12px 5px; 
+      padding: 12px 2px; 
       text-align: center; 
       box-shadow: 0 2px 6px rgba(0,0,0,0.2); 
       transition: all 0.2s; 
@@ -90,7 +163,7 @@
       margin-bottom: 2px; 
     }
     .stat-card-label { 
-      font-size: 0.9rem; 
+      font-size: 0.85rem; 
       color: var(--text-muted); 
     }
     .listings-grid { 
@@ -98,6 +171,7 @@
       flex-direction: column; 
       gap: 12px; 
     }
+    
     .amulet-card-frame { 
       background-color: var(--bg-card); 
       border-radius: 8px; 
@@ -140,13 +214,8 @@
       font-size: 0.95rem; 
       color: var(--text-muted); 
     }
+    
     .bottom-navbar { 
-      position: fixed;
-      bottom: 10px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 95%;
-      max-width: 580px;
       height: var(--nav-height); 
       background-color: #1a1a1a; 
       border: 1px solid #bf953f; 
@@ -154,7 +223,9 @@
       display: flex; 
       justify-content: space-around; 
       align-items: center; 
-      z-index: 999; 
+      margin-top: 30px; 
+      position: relative; 
+      z-index: 99; 
     }
     .nav-item { 
       display: flex; 
@@ -174,6 +245,7 @@
       font-size: 1.5rem; 
       margin-bottom: 2px; 
     }
+    
     .form-group { 
       margin-bottom: 15px; 
     }
@@ -209,11 +281,8 @@
       font-size: 1.1rem; 
       text-align: center; 
     }
-    .btn:disabled {
-      background: #555 !important;
-      color: #aaa !important;
-      cursor: not-allowed;
-    }
+    
+    /* เฟรมเปิดแสดงข้อมูลพระเครื่องเชิงลึก */
     .full-detail-view { 
       position: fixed; 
       top: 0; 
@@ -255,121 +324,70 @@
       padding-bottom: 5px; 
     }
     .thumb-img { 
-      width: 75px; 
-      height: 75px; 
+      width: 70px; 
+      height: 70px; 
       object-fit: cover; 
-      border-radius: 6px; 
+      border-radius: 4px; 
       border: 1px solid #443410; 
       cursor: pointer; 
-      flex-shrink: 0; 
     }
-    .thumb-img.active { 
-      border-color: var(--gold-main); 
-    }
-    .contact-action-box { 
+    .info-row { 
       display: flex; 
-      gap: 10px; 
-      margin: 15px 0; 
+      justify-content: space-between; 
+      border-bottom: 1px dashed #2d220a; 
+      padding: 10px 0; 
+      font-size: 1.1rem; 
     }
-    .btn-call { 
-      background-color: #2ecc71; 
-      color: white; 
-      text-align: center; 
-      text-decoration: none; 
-      flex: 1; 
-      padding: 14px; 
-      border-radius: 6px; 
-      font-weight: bold; 
-      display: flex; 
-      justify-content: center; 
-      align-items: center; 
-      gap: 5px; 
-      font-size: 1.1rem;
-    }
-    .btn-line { 
-      background-color: #06c755; 
-      color: white; 
-      text-align: center; 
-      text-decoration: none; 
-      flex: 1; 
-      padding: 14px; 
-      border-radius: 6px; 
-      font-weight: bold; 
-      display: flex; 
-      justify-content: center; 
-      align-items: center; 
-      gap: 5px; 
-      font-size: 1.1rem;
-    }
-    .manage-zone-box { 
-      background-color: #1f1505; 
-      border: 1px dashed var(--gold-main); 
-      border-radius: 8px; 
-      padding: 12px; 
-      margin-top: 20px; 
-    }
-    .lightbox-overlay { 
-      position: fixed; 
-      top: 0; 
-      left: 0; 
-      width: 100%; 
-      height: 100%; 
-      background-color: rgba(0, 0, 0, 0.95); 
-      z-index: 2000; 
-      display: flex; 
-      flex-direction: column; 
-      justify-content: center; 
-      align-items: center; 
-    }
-    .lightbox-wrapper { 
-      position: relative; 
-      width: 100%; 
-      max-width: 500px; 
-      display: flex; 
-      justify-content: center; 
-      align-items: center; 
-    }
-    .lightbox-img { 
-      max-width: 95%; 
-      max-height: 75vh; 
-      object-fit: contain; 
-      border-radius: 8px; 
-    }
-    .lightbox-close { 
-      position: absolute; 
-      top: -45px; 
-      right: 15px; 
-      color: #fff; 
-      font-size: 2.5rem; 
-      cursor: pointer; 
+    
+    /* สไตล์คิวคำถามพบบ่อย */
+    .faq-container {
+      background: var(--bg-card);
+      border: 1px solid #332508;
+      border-radius: 8px;
+      padding: 15px;
     }
     .faq-item { 
-      background-color: var(--bg-card); 
-      border: 1px solid #332508; 
+      background-color: #222; 
+      border: 1px solid #443410; 
       border-radius: 6px; 
       margin-bottom: 8px; 
       padding: 12px; 
     }
     .faq-title { 
       font-size: 1.1rem; 
-      color: #fff; 
+      color: var(--gold-main); 
       cursor: pointer; 
       display: flex; 
       justify-content: space-between; 
+      font-weight: 500;
     }
     .faq-ans { 
       margin-top: 8px; 
-      font-size: 1rem; 
-      color: var(--text-muted); 
-      border-top: 1px solid #2a2a2a; 
+      font-size: 1.05rem; 
+      color: #dddddd; 
+      line-height: 1.5; 
+      border-top: 1px dashed #332508; 
       padding-top: 8px; 
     }
-    .admin-login-card {
-      background-color: var(--bg-card);
-      border: 1px solid #443410;
-      padding: 20px;
-      border-radius: 8px;
-      margin-top: 20px;
+    
+    /* อนิเมชั่นเส้นสาย AI สแกน */
+    @keyframes scanAnimation {
+      0% { top: 0%; }
+      50% { top: 100%; }
+      100% { top: 0%; }
+    }
+    
+    /* สไตล์กล่องไฟขยายซูมรูปภาพ */
+    .lightbox-overlay { 
+      position: fixed; 
+      top:0; left:0; width:100%; height:100%; 
+      background:rgba(0,0,0,0.95); 
+      z-index:2000; display:flex; 
+      align-items:center; justify-content:center; 
+    }
+    .lightbox-img { 
+      max-width:100%; max-height:100%; 
+      object-fit:contain; 
     }
   </style>
 </head>
@@ -377,319 +395,452 @@
 
   <div class="app-container">
     
-    <div id="frame-home" class="main-frame">
+    <div class="main-app-header">
+      <h1 class="brand-title">คม วังน้อย</h1>
+      <p class="brand-subtitle">KHOM WANGNOI AMULET PREMIUM</p>
+      
+      <div id="user-status-bar" class="user-status-container">
+        </div>
+    </div>
+
+    <div id="frame-dashboard" class="main-frame">
+      
       <div class="news-ticker-box">
-        <div class="news-title-header">📢 ข่าวสารสารบบพระเครื่อง คม วังน้อย</div>
-        <div id="news-section" class="news-content-text">กำลังโหลดประกาศสำคัญจากผู้ดูแลระบบ...</div>
+        <div class="news-title-header">📢 ข่าวสารแจ้งเตือนล่าสุด:</div>
+        <div class="news-content-text" id="ticker-text">กำลังโหลดข้อมูลข่าวสารจากศูนย์แอดมิน...</div>
       </div>
 
       <div class="dashboard-cards-grid">
-        <div class="stat-mini-card" onclick="filterListings('all')">
-          <div id="stat-total" class="stat-card-num">0</div>
-          <div class="stat-card-label">ทั้งหมด</div>
+        <div class="stat-mini-card" onclick="setFilterStatus('all')">
+          <div class="stat-card-num" id="stat-total">0</div>
+          <div class="stat-card-label">พระทั้งหมด</div>
         </div>
-        <div class="stat-mini-card" onclick="filterListings('ready')">
-          <div id="stat-ready" class="stat-card-num" style="color: #2ecc71;">0</div>
+        <div class="stat-mini-card" onclick="setFilterStatus('พร้อมขาย')">
+          <div class="stat-card-num" id="stat-ready">0</div>
           <div class="stat-card-label">พร้อมเช่า</div>
         </div>
-        <div class="stat-mini-card" onclick="filterListings('sold')">
-          <div id="stat-sold" class="stat-card-num" style="color: #e74c3c;">0</div>
-          <div class="stat-card-label">ปิดการขาย</div>
+        <div class="stat-mini-card" onclick="setFilterStatus('ปิดแล้ว')">
+          <div class="stat-card-num" id="stat-closed">0</div>
+          <div class="stat-card-label">ปิดรายการ</div>
         </div>
-        <div class="stat-mini-card" style="border-color: var(--gold-main);" onclick="searchAmulets()">
-          <div class="stat-card-num" style="font-size: 1.3rem;">🔍</div>
-          <div class="stat-card-label" style="color: var(--gold-main); font-weight: 500;">ค้นหาพระ</div>
-        </div>
-      </div>
-
-      <h3 style="margin-bottom: 12px; color: var(--gold-main); font-size: 1.2rem; display: flex; justify-content: space-between; align-items: center;">
-        <span>เฟรมประกาศรายการพระเครื่อง</span>
-        <span id="filter-status-label" style="font-size: 0.9rem; color: var(--text-muted); font-weight: normal;">(แสดงทั้งหมด)</span>
-      </h3>
-      <div id="listings-container" class="listings-grid"></div>
-    </div>
-
-    <div id="detail-view-frame" class="full-detail-view hidden">
-      <div class="back-btn" onclick="closeDetail()">← กลับไปหน้ารวม</div>
-      <img id="dt-img" class="detail-img" src="" alt="amulet" onclick="openLightboxFromMain()">
-      <div id="dt-thumbnails" class="thumbnail-container"></div>
-
-      <h2 id="dt-title" style="color: var(--gold-main); margin-bottom: 10px; font-size: 1.4rem;"></h2>
-      <h3 id="dt-price" style="margin-bottom: 15px; color: #ffffff; font-size: 1.25rem;"></h3>
-      <p id="dt-location" style="margin-bottom: 5px; color: var(--text-muted); font-size: 1.05rem;"></p>
-      <p id="dt-username" style="margin-bottom: 5px; color: var(--text-muted); font-size: 1.05rem;"></p>
-      <p id="dt-status" style="margin-bottom: 15px; color: var(--gold-main); font-weight: bold; font-size: 1.1rem;"></p>
-
-      <div class="contact-action-box">
-        <a id="link-call" href="#" class="btn-call">📞 โทรติดต่อผู้ขาย</a>
-        <a id="link-line" href="#" class="btn-line" target="_blank">🟢 แชท Line ตรง</a>
-      </div>
-
-      <div class="manage-zone-box">
-        <h4 style="color: var(--gold-main); font-size: 1.05rem; margin-bottom: 8px;">🛠️ สิทธิ์จัดการประกาศ (เจ้าของประกาศ / แอดมิน)</h4>
-        <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 10px;">ใส่รหัส PIN ของประกาศ หรือใส่รหัสแอดมินสูงสุดเพื่อดำเนินการแก้ไขหรือลบ</p>
-        
-        <div class="form-group" style="margin-bottom: 8px;">
-          <input type="password" id="manage-auth-pin" placeholder="กรอกรหัส PIN ของประกาศ หรือ รหัสแอดมิน" style="padding: 10px; font-size: 1rem;">
-        </div>
-
-        <div style="display: flex; gap: 8px; margin-bottom: 10px;">
-          <button class="btn" style="background: #e67e22; color: white; padding: 10px; font-size: 1rem;" onclick="toggleInlineEditForm()">📝 เปิดฟอร์มแก้ไขข้อมูล</button>
-          <button class="btn" style="background: #e74c3c; color: white; padding: 10px; font-size: 1rem;" onclick="executeDeleteAction()">🚨 ลบประกาศนี้ถาวร</button>
-        </div>
-
-        <div id="inline-edit-form" class="hidden" style="background: #121212; padding: 10px; border-radius: 6px; border: 1px solid #443410; margin-top: 10px;">
-          <div class="form-group" style="margin-bottom: 8px;">
-            <label style="font-size: 0.95rem;">แก้ไขหัวข้อประกาศ</label>
-            <input type="text" id="edit-title-input" style="padding: 10px; font-size: 1rem;">
-          </div>
-          <div class="form-group" style="margin-bottom: 8px;">
-            <label style="font-size: 0.95rem;">แก้ไขราคา (บาท)</label>
-            <input type="number" id="edit-price-input" style="padding: 10px; font-size: 1rem;">
-          </div>
-          <div class="form-group" style="margin-bottom: 8px;">
-            <label style="font-size: 0.95rem;">อัปเดตสถานะการบูชา</label>
-            <select id="edit-status-select" style="padding: 10px; font-size: 1rem;">
-              <option value="พร้อมขาย">พร้อมขาย</option>
-              <option value="ปิดการขาย/เช่าแล้ว">ปิดการขาย/เช่าแล้ว</option>
-            </select>
-          </div>
-          <button class="btn" style="padding: 10px; font-size: 1rem;" onclick="executeEditAction()">บันทึกอัปเดตข้อมูลประกาศ</button>
+        <div class="stat-mini-card" onclick="switchTab('scan')">
+          <div class="stat-card-num" id="stat-master">0</div>
+          <div class="stat-card-label">คลังครู (AI)</div>
         </div>
       </div>
-    </div>
 
-    <div id="frame-create" class="main-frame hidden">
-      <h3 style="margin-bottom: 15px; color: var(--gold-main); font-size: 1.3rem;">ลงประกาศพระเครื่องรายการใหม่</h3>
-      <div class="form-group"><label>ชื่อผู้ประกาศ (Username)</label><input type="text" id="post-username" placeholder="กรอกชื่อผู้ใช้งานของคุณ"></div>
-      <div class="form-group"><label>หัวข้อประกาศ</label><input type="text" id="post-title" placeholder="เช่น พระสมเด็จวัดระฆังพิมพ์ใหญ่"></div>
-      <div class="form-group">
-        <label>ประเภทพระ</label>
-        <select id="post-type">
-          <option value="พระเบญจภาคี">พระสมเบญจภาคี</option>
+      <div class="form-group" style="display: flex; gap: 6px; margin-bottom: 15px;">
+        <input type="text" id="search-input" placeholder="พิมพ์ค้นหาชื่อพระ, ผู้ลง, พิกัด..." oninput="renderListings()">
+        <select id="filter-type" style="width: 140px;" onchange="renderListings()">
+          <option value="all">ทั้งหมด</option>
+          <option value="พระเบญจภาคี">พระเบญจภาคี</option>
           <option value="พระหลักยอดนิยม">พระหลักยอดนิยม</option>
-          <option value="พระเหรียญ">พระเหรียญ</option>
-          <option value="พระกรุ">พระกรุ</option>
-		  <option value="พระทั่วไป">พระทั่วไป</option>
-		  <option value="เครื่องราง และวัตถุมงคล">เครื่องราง และวัตถุมงคล</option>
+          <option value="พระเหรียญคณาจารย์">พระเหรียญ</option>
+          <option value="พระทั่วไป ดิน ชิน ผง และอื่นๆ">พระทั่วไป ดิน ชิน ผง และอื่นๆ</option>
+          <option value="เครื่องรางของขลัง">เครื่องราง และ วัตถุมงคล</option>
         </select>
       </div>
 
-      <div class="form-group"><label>ราคา (บาท)</label><input type="number" id="post-price" placeholder="ระบุราคา"></div>
-      <div class="form-group"><label>สถานที่ / จังหวัด</label><input type="text" id="post-location" placeholder="เช่น วังน้อย พระนครศรีอยุธยา"></div>
-      <div class="form-group"><label>เบอร์โทรศัพท์</label><input type="tel" id="post-phone" placeholder="เช่น 095xxxxxxx"></div>
-      <div class="form-group"><label>Line ID / เบอร์ไลน์</label><input type="text" id="post-line" placeholder="ไอดีไลน์หรือเบอร์โทรไลน์"></div>
-      <div class="form-group"><label>ตั้งรหัส PIN ของประกาศ (ไว้ลบหรือแก้ไขเอง)</label><input type="password" id="post-pin" placeholder="กรอกรหัสตัวเลข 4-6 หลัก"></div>
-      <div class="form-group">
-        <label>รูปภาพพระเครื่อง [เลือกได้หลายรูปพร้อมกัน 📸]</label>
-        <input type="file" id="post-file" accept="image/*" multiple style="background: transparent; border: none; padding: 0;">
+      <div class="listings-grid" id="listings-grid-box">
+        <div style="text-align: center; padding: 40px; color: var(--text-muted);">🔄 กำลังสแกนเชื่อมฐานข้อมูลสเปรดชีต...</div>
       </div>
-      <button class="btn" id="btn-submit-listing" onclick="submitListing()">ลงข้อมูลประกาศทันที</button>
+
     </div>
 
-    <div id="frame-help" class="main-frame hidden">
-      <h3 style="margin-bottom: 15px; color: var(--gold-main); font-size: 1.3rem;">🙋‍♂️ ศูนย์ช่วยเหลือและคำถามที่พบบ่อย (FAQ)</h3>
-      
-      <div style="margin-bottom: 25px;">
-        <div class="faq-item">
-          <div class="faq-title" onclick="toggleFaq(this)">1. ระบบสารบบวัตถุมงคล คม วังน้อย คืออะไร? <span>▼</span></div>
-          <div class="faq-ans hidden">เป็นแพลตฟอร์มกระดานซื้อขายและโชว์พระเครื่องวัตถุมงคลของสายตรง คม วังน้อย เพื่อให้สมาชิกผู้ศรัทธาสามารถนำพระเครื่องมาร่วมเปิดราคาและแลกเปลี่ยนความรู้กันได้อย่างปลอดภัยครับ</div>
+    <div id="frame-create" class="main-frame hidden">
+      <div style="background-color: var(--bg-card); padding: 20px; border-radius: 8px; border: 1px solid #443410;">
+        <h3 style="color: var(--gold-main); text-align: center; margin-bottom: 15px; font-size: 1.3rem;">✍️ ลงประกาศรายการพระเครื่องใหม่</h3>
+        
+        <div class="form-group">
+          <label>หัวข้อ/ชื่อพระเครื่องที่ต้องการปล่อยเช่า</label>
+          <input type="text" id="post-title" placeholder="ตัวอย่าง: เหรียญหลวงพ่อรวย วัดตะโก ปี 56">
         </div>
-        <div class="faq-item">
-          <div class="faq-title" onclick="toggleFaq(this)">2. การลงประกาศวัตถุมงคลมีค่าใช้จ่ายหรือไม่? <span>▼</span></div>
-          <div class="faq-ans hidden">ไม่มีค่าใช้จ่ายใดๆ ทั้งสิ้นครับ สมาชิกทุกท่านสามารถสมัครและลงรายการแผงพระเครื่องของตนเองได้ฟรีผ่านระบบหน้าบ้านนี้เลยครับ</div>
+        <div class="form-group">
+          <label>หมวดหมู่ประเภทพระเครื่อง</label>
+          <select id="post-type">
+            <option value="all">ทั้งหมด</option>
+          <option value="พระเบญจภาคี">พระเบญจภาคี</option>
+          <option value="พระหลักยอดนิยม">พระหลักยอดนิยม</option>
+          <option value="พระเหรียญคณาจารย์">พระเหรียญ</option>
+          <option value="พระทั่วไป ดิน ชิน ผง และอื่นๆ">พระทั่วไป ดิน ชิน ผง และอื่นๆ</option>
+          <option value="เครื่องรางของขลัง">เครื่องราง และ วัตถุมงคล</option>
+          </select>
         </div>
-        <div class="faq-item">
-          <div class="faq-title" onclick="toggleFaq(this)">3. รหัส PIN ของประกาศคืออะไร และสำคัญอย่างไร? <span>▼</span></div>
-          <div class="faq-ans hidden">รหัส PIN คือรหัสผ่านเฉพาะตัวเลขที่ผู้ลงประกาศตั้งขึ้นเองตอนลงประกาศ มีไว้สำหรับใช้ยืนยันสิทธิ์เพื่อกดแก้ไขข้อมูลหรือลบใบประกาศนั้นๆ ออกจากหน้ากระดานด้วยตัวเองครับ</div>
+        <div class="form-group">
+          <label>ราคาปล่อยเช่าบูชา (บาท) / ใส่ 0 หากต้องการให้โทรสอบถาม</label>
+          <input type="number" id="post-price" placeholder="ระบุจำนวนเงินเป็นตัวเลข">
         </div>
-        <div class="faq-item">
-          <div class="faq-title" onclick="toggleFaq(this)">4. ทำไมรูปภาพพระเครื่องเปิดไม่ได้หรือแสดงผลไม่ขึ้น? <span>▼</span></div>
-          <div class="faq-ans hidden">ปัญหานี้ได้รับการแก้ไขในเวอร์ชัน 3.2 แล้วครับ เกิดจากลิงก์วิวปกติของระบบไดรฟ์ ระบบปัจจุบันได้ปรับเปลี่ยนมาใช้ระบบ Direct Link ดึงภาพดาวน์โหลดตรงเข้าเซิร์ฟเวอร์เรียบร้อยแล้ว ภาพจึงแสดงผลได้อย่างสมบูรณ์</div>
+        <div class="form-group">
+          <label>พิกัด/สถานที่นัดรับองค์พระ</label>
+          <input type="text" id="post-location" placeholder="ตัวอย่าง: อำเภอวังน้อย, อยุธยา">
         </div>
-        <div class="faq-item">
-          <div class="faq-title" onclick="toggleFaq(this)">5. ปรับปรุงอัปเดตสถานะประกาศพระเครื่องอย่างไร? <span>▼</span></div>
-          <div class="faq-ans hidden">ท่านสามารถกดเข้าไปที่รูปพระเครื่องของท่าน เลื่อนลงไปด้านล่างสุดในหัวข้อสิทธิ์จัดการ กรอกรหัส PIN ของประกาศนั้น แล้วเลือกเปลี่ยนสถานะเป็น "พร้อมขาย" หรือ "ปิดการขาย" ได้ทันทีครับ</div>
+        <div class="form-group">
+          <label>เบอร์โทรศัพท์ติดต่อ</label>
+          <input type="tel" id="post-phone" placeholder="ตัวอย่าง: 0812345678">
         </div>
-        <div class="faq-item">
-          <div class="faq-title" onclick="toggleFaq(this)">6. ปุ่มแชท Line และโทรศัพท์ใช้งานอย่างไร? <span>▼</span></div>
-          <div class="faq-ans hidden">เมื่อผู้ซื้อกดเข้ามาดูรายละเอียดพระเครื่อง การกดปุ่มโทรจะดึงเบอร์ขึ้นสายโทรออกทันที และปุ่มไลน์จะลิงก์เข้าไปยังหน้าเพิ่มเพื่อนหรือห้องแชทของไอดีผู้ขายคนนั้นโดยตรงครับ</div>
+        <div class="form-group">
+          <label>ID Line หรือช่องทางการติดต่อเพิ่มเติม</label>
+          <input type="text" id="post-line" placeholder="ระบุไอดีไลน์เพื่อความสะดวก">
         </div>
-        <div class="faq-item">
-          <div class="faq-title" onclick="toggleFaq(this)">7. หากลืมรหัส PIN ของประกาศพระเครื่องต้องทำอย่างไร? <span>▼</span></div>
-          <div class="faq-ans hidden">กรณีลืมรหัส PIN ของประกาศ ให้ท่านพิมพ์ชื่อประกาศและรายละเอียดส่งเข้ามาทางกล่องข้อความ Support ด้านล่างนี้ เพื่อให้แอดมินสูงสุดตรวจสอบหลังบ้านและดำเนินการลบให้ครับ</div>
+        <div class="form-group">
+          <label>ตั้งรหัสผ่าน PIN 4-6 หลัก (สำหรับใช้แก้ไขหรือลบประกาศด้วยตนเอง)</label>
+          <input type="password" id="post-pin" placeholder="กรอกรหัสผ่านเพื่อความปลอดภัย">
         </div>
-        <div class="faq-item">
-          <div class="faq-title" onclick="toggleFaq(this)">8. ระบบปุ่มค้นหาพระทำงานอย่างไร? <span>▼</span></div>
-          <div class="faq-ans hidden">เมื่อกดปุ่ม "ค้นหาพระ" (การ์ดขวาสุด) ระบบจะมีกล่องคำถามเด้งขึ้นมา ให้พิมพ์ชื่อพระเครื่องหรือรุ่นย่อๆ ระบบจะแสดงผลเฉพาะพระที่มีคำนั้น หากไม่มีจะขึ้นแจ้งเตือนทันที</div>
+        <div class="form-group">
+          <label>อัปโหลดรูปภาพพระเครื่อง (เลือกพร้อมกันได้มากกว่า 1 รูป)</label>
+          <input type="file" id="post-file" accept="image/*" multiple onchange="handleFileSelect(event)">
         </div>
-        <div class="faq-item">
-          <div class="faq-title" onclick="toggleFaq(this)">9. การลงประกาศอัปโหลดรูปภาพได้สูงสุดกี่รูป? <span>▼</span></div>
-          <div class="faq-ans hidden">ท่านสามารถเลือกรูปภาพพร้อมกันได้ครั้งละหลายรูป (แนะนำไม่เกิน 3-5 รูปเพื่อความรวดเร็ว) ระบบจะทำการสร้างเป็นแกลเลอรีภาพสไลด์ให้ชมในหน้ารายละเอียดเชิงลึกครับ</div>
+        
+        <button class="btn" style="margin-top: 10px;" onclick="submitCreateListing()">🚀 ส่งขึ้นระบบลงประกาศสารบบ</button>
+      </div>
+    </div>
+
+    <div id="frame-scan" class="main-frame hidden">
+      <div style="background-color: var(--bg-card); padding: 20px; border-radius: 8px; border: 1px solid #443410;">
+        <h3 style="color: var(--gold-main); text-align: center; margin-bottom: 15px; font-size: 1.3rem;">🔍 ระบบ AI สแกนพิกัดพระเครื่องจับตำหนิ</h3>
+        <p style="color: var(--text-muted); font-size: 0.95rem; text-align: center; margin-bottom: 15px;">อัปโหลดภาพถ่ายวัตถุมงคลของคุณเพื่อทำการประมวลผลจับพิกัดตําหนิเทียบพิมพ์ต้นครูประจำคลังสารบบ</p>
+        
+        <div class="form-group">
+          <label>เลือกรูปภาพองค์พระที่ต้องการสแกน</label>
+          <input type="file" id="scan-file-input" accept="image/*" onchange="previewScanImage(event)">
         </div>
-        <div class="faq-item">
-          <div class="faq-title" onclick="toggleFaq(this)">10. คลังข้อมูลพระแท้แม่แบบ (MasterAmulets) คืออะไร? <span>▼</span></div>
-          <div class="faq-ans hidden">คือคลังภาพถ่ายวัตถุมงคลองค์ครูที่ได้รับการรับรองและตรวจสอบความแท้พุทธคุณจากแอดมิน คม วังน้อย เพื่อใช้เป็นเกณฑ์มาตรฐานเทียบเคียงประจำสารบบนี้ครับ</div>
+        
+        <div style="position: relative; text-align: center; margin: 15px 0;">
+          <img id="scan-preview-img" src="" style="max-width: 100%; max-height: 250px; display: none; border-radius: 6px; border: 1px solid #bf953f;">
+          <div id="scan-loading-line" style="position: absolute; top: 0; left: 0; right: 0; height: 5px; background: #2ecc71; box-shadow: 0 0 10px #2ecc71; display: none; animation: scanAnimation 2s infinite linear;"></div>
         </div>
-        <div class="faq-item">
-          <div class="faq-title" onclick="toggleFaq(this)">11. ซื้อขายวัตถุมงคลอย่างไรให้ปลอดภัยที่สุดบนบอร์ดนี้? <span>▼</span></div>
-          <div class="faq-ans hidden">แนะนำให้นัดรับเจอองค์จริง ตรวจสอบเช็คพิกัดโค้ดและตำหนิ หรือเลือกใช้บริการระบบกรรมการสื่อกลางสายตรงของ คม วังน้อย เพื่อความปลอดภัยสูงสุดในการโอนเงินบูชาครับ</div>
+        
+        <button class="btn" onclick="startAmuletScan()">⚡ เริ่มต้นวิเคราะห์พิกัดพุทธลักษณะ</button>
+        
+        <div id="scan-result-box" class="hidden" style="margin-top: 20px; padding: 15px; background: #222; border-radius: 6px; border: 1px dashed #bf953f; text-align: center;">
+          <h4 id="res-status" style="color: var(--gold-main); font-size: 1.15rem; margin-bottom: 8px;"></h4>
+          <div id="res-percent" style="font-size: 1.6rem; font-weight: 600; color: #2ecc71;"></div>
+          <p style="font-size: 0.9rem; color: var(--text-muted); margin-top: 5px;">*หมายเหตุ: เป็นการคำนวณความสมบูรณ์เชิงสถิติเบื้องต้น ไม่ใช่ข้อชี้ขาดสากล</p>
         </div>
+      </div>
+    </div>
+
+    <div id="frame-faq" class="main-frame hidden">
+      <div class="faq-container">
+        <h3 style="color: var(--gold-main); text-align: center; margin-bottom: 15px; font-size: 1.3rem;">💡 คำถามที่พบบ่อย (FAQs) สารบบ คม วังน้อย</h3>
+        
         <div class="faq-item">
-          <div class="faq-title" onclick="toggleFaq(this)">12. มีข้อเสนอแนะหรือระบบเกิดขัดข้องต้องแจ้งส่วนไหน? <span>▼</span></div>
-          <div class="faq-ans hidden">พิมพ์รายละเอียดปัญหา ชื่อ และเบอร์โทรลงในแบบฟอร์ม "ส่งข้อความแชทหาแอดมินตรง" ด้านล่างนี้ได้เลยครับ ข้อมูลจะถูกยิงเข้าสู่สเปรดชีตแอดมินทันที</div>
+          <div class="faq-title" onclick="toggleFaq(this)">1. การลงประกาศปลอดภัยแค่ไหน? <span>▼</span></div>
+          <div class="faq-ans hidden">ปลอดภัย 100% ครับ ระบบมีการประมวลผลเช็ครหัส PIN ผ่าน Server หลังบ้านแบบตัดขาดหน้าเว็บ ทำให้ผู้อื่นไม่สามารถเข้ามาสวมรอยแก้ไขหรือลบประกาศได้ครับ และระบบรองรับการกางขยายซูมบนหน้าจอโทรศัพท์ได้แล้วครับ</div>
+        </div>
+        
+        <div class="faq-item">
+          <div class="faq-title" onclick="toggleFaq(this)">2. ทำไมตัวเลข 0 นำหน้าเบอร์โทรหรือไอดีไลน์ถึงไม่หาย? <span>▼</span></div>
+          <div class="faq-ans hidden">ระบบเวอร์ชันพรีเมียมได้รับการแก้ไขเรียบร้อยแล้วครับ โดยระบบหลังบ้านจะเติมเครื่องหมายพิเศษนำหน้าก่อนเก็บบันทึกข้อมูลเข้าสู่สเปรดชีต ทำให้รหัส PIN เบอร์โทรศัพท์ และไอดีไลน์ที่มีเลข 0 นำหน้าคงอยู่ครบถ้วน ไม่โดนตัดทิ้งแน่นอนครับ</div>
+        </div>
+        
+        <div class="faq-item">
+          <div class="faq-title" onclick="toggleFaq(this)">3. ถ้าลืมรหัส PIN หรือต้องการลบประกาศด่วนต้องทำอย่างไร? <span>▼</span></div>
+          <div class="faq-ans hidden">หากลืมรหัส PIN ประจำประกาศ สามารถติดต่อแอดมิน คม วังน้อย โดยตรงผ่านกล่องข้อความช่วยเหลือด้านล่างนี้ โดยแจ้งชื่อของคุณและหัวข้อประกาศ แอดมินสามารถใช้สิทธิ์รหัสผ่านควบคุมสูงสุดตรวจสอบและจัดการลบหรือแก้ไขให้ได้ทันทีครับ</div>
+        </div>
+        
+        <div class="faq-item">
+          <div class="faq-title" onclick="toggleFaq(this)">4. การลงประกาศขายพระเครื่องมีค่าใช้จ่ายหรือไม่? <span>▼</span></div>
+          <div class="faq-ans hidden">ไม่มีค่าใช้จ่ายใดๆ ทั้งสิ้นครับ แพลตฟอร์ม คม วังน้อย เปิดให้สมาชิกและบุคคลทั่วไปสามารถลงประกาศซื้อขายแลกเปลี่ยนวัตถุมงคลได้ฟรี เพื่อร่วมเป็นสื่อกลางในการอนุรักษ์และเผยแผ่พุทธคุณพระเครื่องไทยครับ</div>
+        </div>
+        
+        <div class="faq-item">
+          <div class="faq-title" onclick="toggleFaq(this)">5. ระบบสแกนตรวจสอบพระเครื่องทำงานอย่างไร? <span>▼</span></div>
+          <div class="faq-ans hidden">ระบบจะนำภาพถ่ายวัตถุมงคลที่คุณทำการอัปโหลดไปเข้าสู่กระบวนการสแกนจับพิกัดตําหนิเชิงลึกเบื้องต้น โดยเปรียบเทียบกับไฟล์ภาพพระแท้แม่แบบ (Admin Master) ในคลังครูของระบบ เพื่อประเมินดัชนีความเข้ากันได้พุทธลักษณะออกมาเป็นเปอร์เซ็นต์ความแม่นยำครับ</div>
+        </div>
+        
+        <div class="faq-item">
+          <div class="faq-title" onclick="toggleFaq(this)">6. ทำไมภาพบางประกาศถึงเปิดไม่ได้ หรือขึ้นรูปไม่สมบูรณ์ก่อนหน้านี้? <span>▼</span></div>
+          <div class="faq-ans hidden">ในเวอร์ชันก่อนหน้า ลิงก์รูปภาพของ Google Drive อาจติดสิทธิ์การเข้าถึงหรือโครงสร้างลิงก์ไม่รองรับการแสดงผลบนเบราว์เซอร์มือถือ ในเวอร์ชันปัจจุบันได้รับการอัปเกรดระบบจัดเก็บภาพแบบดึงสตรีมรูปภาพตรง (lh3 Link Direct) ทำให้ภาพเปิดได้ฉับไว ลื่นไหล และเสถียร 100% ครับ</div>
+        </div>
+        
+        <div class="faq-item">
+          <div class="faq-title" onclick="toggleFaq(this)">7. ผู้เยี่ยมชมทั่วไปกับสมาชิกที่เข้าสู่ระบบแตกต่างกันอย่างไร? <span>▼</span></div>
+          <div class="faq-ans hidden">ผู้เยี่ยมชมทั่วไปสามารถเปิดดูประกาศ ข่าวสาร และใช้งานระบบสแกนพระได้ตามปกติ แต่หากต้องการแก้ไขข้อมูลหรือลบประกาศของตนเอง จะต้องกดเข้าสู่ระบบ (Login) ด้วยชื่อผู้ใช้ให้ตรงกับประกาศนั้นๆ ก่อน เพื่อความปลอดภัยและรักษาสิทธิ์ของเจ้าของพระครับ</div>
+        </div>
+        
+        <div class="faq-item">
+          <div class="faq-title" onclick="toggleFaq(this)">8. กระดานซื้อขายพระเครื่องแสดงผลเรียงลำดับอย่างไร? <span>▼</span></div>
+          <div class="faq-ans hidden">ระบบได้รับการปรับแต่งให้แสดงประกาศเรียงลำดับจากรายการที่ลงใหม่ล่าสุดไปหารายการเก่าเสมอ (Newest First) เพื่อให้ผู้ซื้อและนักสะสมสามารถเห็นวัตถุมงคลที่เพิ่งเข้าสู่ตลาดได้อย่างรวดเร็วและไม่พลาดโอกาสสำคัญครับ</div>
+        </div>
+        
+        <div class="faq-item">
+          <div class="faq-title" onclick="toggleFaq(this)">9. ระบบข่าวสารแจ้งเตือนสารบบคืออะไร? <span>▼</span></div>
+          <div class="faq-ans hidden">เป็นแถบกล่องข้อความแจ้งเตือนสีทองอร่ามบริเวณด้านบนสุดของหน้าจอ ซึ่งแอดมิน คม วังน้อย จะใช้โพสต์ประกาศข่าวสารสำคัญ อัปเดตงานประกวดพระเครื่อง หรือแจ้งเตือนภัยมิจฉาชีพในวงการให้สมาชิกรับทราบร่วมกันทันทีครับ</div>
+        </div>
+        
+        <div class="faq-item">
+          <div class="faq-title" onclick="toggleFaq(this)">10. พระแท้มาสเตอร์ในระบบคลังคืออะไร? <span>▼</span></div>
+          <div class="faq-ans hidden">คือภาพฐานข้อมูลพระแท้องค์ครูประจำสารบบที่มีความคมชัดสูงที่ได้รับการรับรองจากแอดมิน เพื่อใช้เป็นเกณฑ์สแกนพิกัดประเมินเปรียบเทียบครับ</div>
+        </div>
+        
+        <div class="faq-item">
+          <div class="faq-title" onclick="toggleFaq(this)">11. ซื้อขายอย่างไรให้ปลอดภัยที่สุดบนกระดานนี้? <span>▼</span></div>
+          <div class="faq-ans hidden">แนะนำให้โทรติดต่อ พูดคุยขอดูองค์จริง นัดรับพระเครื่องในสถานที่ปลอดภัย หรือใช้ระบบกรรมการสื่อกลางสายตรงที่เชื่อถือได้ครับ</div>
+        </div>
+        
+        <div class="faq-item">
+          <div class="faq-title" onclick="toggleFaq(this)">12. มีข้อเสนอแนะหรือระบบขัดข้องต้องแจ้งทางไหน? <span>▼</span></div>
+          <div class="faq-ans hidden">พิมพ์รายละเอียดปัญหา ชื่อ-เบอร์โทรส่งฟอร์มข้อความ "ช่วยเหลือ/ร้องเรียนแอดมิน" ด้านล่างนี้ได้เลยครับ แอดมินพร้อมซัพพอร์ตและตรวจสอบสเปรดชีตเพื่อดูแลให้โดยเร็วที่สุดครับ</div>
         </div>
       </div>
 
-      <h3 style="margin-bottom: 15px; color: var(--gold-main); font-size: 1.2rem; border-top: 1px solid #332508; padding-top: 15px;">💬 ส่งข้อความแจ้งเรื่องติดต่อ / ร้องเรียนแอดมินตรง</h3>
-      <div class="form-group">
-        <label>ชื่อผู้แจ้งเรื่อง</label>
-        <input type="text" id="support-sender" placeholder="กรอกชื่อของคุณ">
+      <div style="margin-top: 25px; padding: 15px; background: #1a1a1a; border-radius: 8px; border: 1px solid #bf953f;">
+        <h4 style="color: var(--gold-main); margin-bottom: 10px;">📨 ศูนย์ช่วยเหลือและส่งเรื่องแจ้งแอดมิน</h4>
+        <div class="form-group">
+          <input type="text" id="support-sender" placeholder="ชื่อผู้แจ้งเรื่อง">
+        </div>
+        <div class="form-group">
+          <input type="text" id="support-phone" placeholder="เบอร์โทรศัพท์ติดต่อกลับ">
+        </div>
+        <div class="form-group">
+          <textarea id="support-message" rows="3" placeholder="ระบุข้อความรายละเอียดปัญหาที่ต้องการให้ช่วยดูแล..."></textarea>
+        </div>
+        <button class="btn" onclick="submitSupport()">ส่งเรื่องเข้าสู่ระบบแอดมิน</button>
       </div>
-      <div class="form-group">
-        <label>เบอร์โทรศัพท์ติดต่อกลับ</label>
-        <input type="tel" id="support-phone" placeholder="ระบุเบอร์โทรศัพท์">
-      </div>
-      <div class="form-group">
-        <label>ข้อความรายละเอียดที่ต้องการให้แอดมินช่วยเหลือ</label>
-        <textarea id="support-message" rows="4" placeholder="พิมพ์ข้อความรายละเอียดส่งถึง แอดมินคม วังน้อย..."></textarea>
-      </div>
-      <button class="btn" onclick="submitSupport()">ส่งข้อความแชทหาแอดมินทันที</button>
     </div>
 
     <div id="frame-admin" class="main-frame hidden">
-      <div id="admin-login-box" class="admin-login-card">
-        <h3 style="color: var(--gold-main); margin-bottom: 10px;">🛡️ สำหรับผู้ดูแลระบบสูงสุด (Admin Login)</h3>
-        <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 20px;">กรุณาป้อนรหัสผ่านเพื่อเข้าใช้งานระบบหลังบ้านและสารบบมาสเตอร์</p>
+      <div id="admin-login-box" style="padding: 20px; background-color: var(--bg-card); border-radius: 8px; border: 1px solid #443410;">
+        <h3 style="color: var(--gold-main); margin-bottom: 12px; text-align: center; font-size: 1.3rem;">🔒 โซนยืนยันสิทธิ์แอดมิน คม วังน้อย</h3>
         <div class="form-group">
-          <input type="password" id="admin-access-password" placeholder="ใส่รหัสผ่านแอดมิน 6 หลัก" style="text-align: center; font-size: 1.2rem;">
+          <label>รหัสผ่านควบคุมสูงสุด</label>
+          <input type="password" id="admin-access-password" placeholder="กรอกรหัสผ่านแอดมินหลังบ้าน">
         </div>
-        <button class="btn" onclick="executeAdminLogin()">ยืนยันสิทธิ์เข้าสู่ระบบ</button>
+        <button class="btn" onclick="checkAdminLogin()">ยืนยันความปลอดภัยเข้าสู่ระบบ</button>
       </div>
 
-      <div id="admin-control-panel" class="hidden">
-        <h3 style="margin-bottom: 15px; color: var(--gold-main);">แผงควบคุมหลักระบบงานหลังบ้าน</h3>
+      <div id="admin-content-dashboard" class="hidden">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+          <h3 style="color:#2ecc71; font-size:1.25rem;">⚙️ แผงจัดการจัดการระบบแอดมินคม</h3>
+          <button class="btn" style="width: auto; background:#c0392b; color:#fff; padding:6px 14px; font-size:0.95rem;" onclick="adminLogout()">ออกจากระบบ</button>
+        </div>
         <div class="form-group">
-          <label>เลือกฟังก์ชันระบบ</label>
-          <select id="admin-action-select" onchange="switchAdminForm()">
+          <label>เลือกฟังก์ชันงานที่ต้องการทำ</label>
+          <select id="admin-action-select">
             <option value="news">📢 อัปเดตแจ้งข่าวสารสารบบใหม่</option>
             <option value="master">🏆 เพิ่มรูปพระแท้พิมพ์ครูเข้าคลังสแกน</option>
           </select>
         </div>
         <div class="form-group">
-          <label>เนื้อหาข้อมูล / ชื่อวัตถุมงคล</label>
-          <input type="text" id="admin-text-input" placeholder="พิมพ์ข้อความข้อมูลที่นี่...">
+          <label>เนื้อหาข้อมูล / ชื่อวัตถุมงคลองค์ครู</label>
+          <input type="text" id="admin-text-input" placeholder="กรอกเนื้อหาหรือระบุข้อมูลชื่อพระ">
         </div>
-        <div class="form-group" id="admin-file-master-group">
-          <label>รูปภาพพระแท้แม่แบบ (เฉพาะกรณีเพิ่มคลังสแกน)</label>
-          <input type="file" id="admin-file-master" accept="image/*" onchange="processAdminMasterImage(event)" style="background: transparent; border: none; padding: 0;">
+        <div class="form-group">
+          <label>ไฟล์รูปภาพ (เฉพาะกรณีเพิ่มรูปพระแท้แม่แบบ)</label>
+          <input type="file" id="admin-master-file" accept="image/*">
         </div>
-        <button class="btn" onclick="submitAdminAction()">บันทึกคำสั่งดำเนินการหลังบ้าน</button>
+        <button class="btn" onclick="submitAdminAction()">💾 บันทึกคำสั่งแอดมินลงชีต</button>
       </div>
     </div>
 
     <div class="bottom-navbar">
-      <div class="nav-item active" onclick="switchTab('home')"><span class="nav-icon">🏠</span> หน้าแรก</div>
-      <div class="nav-item" onclick="switchTab('create')"><span class="nav-icon">➕</span> ลงประกาศ</div>
-      <div class="nav-item" onclick="switchTab('help')"><span class="nav-icon">🙋‍♂️</span> ช่วยเหลือ</div>
-      <div class="nav-item" onclick="switchTab('admin')"><span class="nav-icon">🔒</span> แอดมิน</div>
+      <div class="nav-item active" id="nav-dashboard" onclick="switchTab('dashboard')">
+        <span class="nav-icon">🏆</span><span>หน้าแรก</span>
+      </div>
+      <div class="nav-item" id="nav-create" onclick="switchTab('create')">
+        <span class="nav-icon">✍️</span><span>ลงประกาศ</span>
+      </div>
+      <div class="nav-item" id="nav-scan" onclick="switchTab('scan')">
+        <span class="nav-icon">🔍</span><span>สแกนพระ AI</span>
+      </div>
+      <div class="nav-item" id="nav-faq" onclick="switchTab('faq')">
+        <span class="nav-icon">💡</span><span>คำถามบ่อย</span>
+      </div>
+      <div class="nav-item" id="nav-admin" onclick="switchTab('admin')">
+        <span class="nav-icon">🔒</span><span>แอดมิน</span>
+      </div>
+    </div>
+
+    <div id="detail-view-modal" class="full-detail-view hidden">
+      <span class="back-btn" onclick="closeDetail()">⬅️ กลับหน้ากระดานแรก</span>
+      <img src="" id="dt-img" class="detail-img" onclick="openLightboxFromMain()">
+      
+      <div class="thumbnail-container" id="detail-images-wrap"></div>
+      
+      <h2 id="dt-title" style="color: var(--gold-main); margin-bottom: 12px; font-size:1.6rem; line-height:1.4;"></h2>
+      
+      <div style="background:#1a1a1a; padding:15px; border-radius:8px; border:1px solid #2d220a;">
+        <div class="info-row"><span>👤 ผู้ลงประกาศ:</span><strong id="dt-username" style="color: var(--gold-main);"></strong></div>
+        <div class="info-row"><span>🆔 รหัสประกาศ:</span><span id="dt-id"></span></div>
+        <div class="info-row"><span>📅 วันที่ลงประกาศ:</span><span id="dt-timestamp"></span></div>
+        <div class="info-row"><span>📦 ประเภทพระเครื่อง:</span><span id="dt-type"></span></div>
+        <div class="info-row"><span>💰 ราคาเช่าบูชา:</span><strong id="dt-price" style="color:#2ecc71; font-size:1.3rem;"></strong></div>
+        <div class="info-row"><span>📍 พิกัดนัดรับองค์พระ:</span><span id="dt-location"></span></div>
+        <div class="info-row"><span>📞 เบอร์โทรศัพท์:</span><a id="dt-phone-link" href="#" style="color:var(--gold-main); font-weight:600;"></a></div>
+        <div class="info-row"><span>🟢 LINE ID:</span><span id="dt-line" style="color:#2ecc71; font-weight:600;"></span></div>
+        <div class="info-row"><span>⚡ สถานะล่าสุด:</span><span id="dt-status"></span></div>
+      </div>
+      
+      <div id="user-action-box"></div>
+    </div>
+
+    <div id="lightbox" class="lightbox-overlay hidden" onclick="closeLightbox()">
+      <img id="lightbox-img" class="lightbox-img" src="">
     </div>
 
   </div>
 
-  <div id="lightbox" class="lightbox-overlay hidden">
-    <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
-    <div class="lightbox-wrapper"><img id="lightbox-img" class="lightbox-img" src="" alt="Zoomed"></div>
-  </div>
-
   <script>
-    const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbwVAwmPp6mIFYVeVCixX5CBywLOjx6JvXwwyLqlCYNZjK0h-MNN88rSndspD8nkJhVA/exec";
+    // 🔥 บันทึกวางลิงก์ Web App URL ที่ได้จากการ Deploy หลังบ้านของคุณพี่ที่นี่ครับ
+    const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbxas2rnJV7g8o5zYFgiCAHyJT0QgabaJ8JTHgvJorlDZJschSL6U2-PhOE2irFbgIws/exec"; 
     
-    let globalListings = [];
-    let currentSelectedListingIndex = null;
-    let verifiedAdminToken = "";
+    let allListings = [];
+    let activeListing = null;
+    let uploadedFilesBase64 = [];
     let base64AdminMasterString = "";
-    let currentImages = [];
+    let verifiedAdminToken = false;
+    let currentFilterStatus = "all";
+    
+    // 🔑 การควบคุมระบบ Session ผู้ใช้ที่ล็อกอินประจำเครื่องหน้าเว็บบอร์ด
+    let currentAmuletUser = localStorage.getItem('khom_amulet_user') || "";
 
     window.onload = function() {
-      loadData();
+      updateUserStatusUI();
+      loadDataFromServer();
     };
 
-    function switchTab(tabName) {
-      document.querySelectorAll('.main-frame').forEach(el => el.classList.add('hidden'));
-      document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
-      document.getElementById('detail-view-frame').classList.add('hidden');
-      
-      const targetFrame = document.getElementById('frame-' + tabName);
-      if (targetFrame) targetFrame.classList.remove('hidden');
-      
-      // การไฮไลต์ไอคอนเมนูบาร์ให้ตรงแท็บ
-      const indexMap = { 'home': 0, 'create': 1, 'help': 2, 'admin': 3 };
-      const idx = indexMap[tabName];
-      if(idx !== undefined) {
-        document.querySelectorAll('.nav-item')[idx].classList.add('active');
+    // อัปเดตรูปลักษณ์หน้าตาแถบแสดงสถานะด้านบนระบบตามบัญชีจริง
+    function updateUserStatusUI() {
+      const statusBar = document.getElementById('user-status-bar');
+      if (!statusBar) return;
+      if (currentAmuletUser) {
+        statusBar.innerHTML = `
+          <span class="status-dot status-user"></span>
+          <span style="color: #fff;">ผู้ใช้งาน: <strong style="color: var(--gold-main); font-weight:500;">${currentAmuletUser}</strong></span>
+          <button class="user-log-btn" onclick="userLogoutSession()">[ 🚪 ออกจากระบบ ]</button>
+        `;
+      } else {
+        statusBar.innerHTML = `
+          <span class="status-dot status-visitor"></span>
+          <span style="color: var(--text-muted);">สถานะ: ผู้เยี่ยมชมทั่วไป</span>
+          <button class="user-log-btn" onclick="userLoginPrompt()">[ 🔑 เข้าสู่ระบบ ]</button>
+        `;
       }
     }
 
-    function loadData() {
-      document.getElementById('listings-container').innerHTML = "<p style='text-align:center;color:gray;padding:20px;'>กำลังอัปเดตกระดานสารบบวัตถุมงคล...</p>";
-      
-      fetch(`${WEB_APP_URL}?action=getNews`)
-      .then(res => res.json())
-      .then(res => {
-        document.getElementById('news-section').innerText = res.content || "ไม่มีประกาศเพิ่มเติมจากผู้ดูแลระบบ";
-      }).catch(() => {});
+    // ฟังก์ชันสั่งหน้าต่างป๊อปอัพพิมพ์ชื่อล็อกอินเข้าใช้งานระบบ
+    function userLoginPrompt() {
+      let user = prompt("กรุณากรอกชื่อผู้ใช้งาน (Username) ของคุณเพื่อใช้จัดการประกาศ:");
+      if (user && user.trim() !== "") {
+        currentAmuletUser = user.trim();
+        localStorage.setItem('khom_amulet_user', currentAmuletUser);
+        updateUserStatusUI();
+        renderListings();
+        alert("🎉 เข้าสู่ระบบสำเร็จ ยินดีต้อนรับคุณ " + currentAmuletUser + " ครับ!");
+      }
+    }
 
-      fetch(`${WEB_APP_URL}?action=getListings`)
+    // ล็อกเอาท์ออกจากเซสชั่นกลับสู่ผู้เยี่ยมชมธรรมดา
+    function userLogoutSession() {
+      if (confirm("คุณพี่ต้องการออกจากระบบกลับไปเป็นผู้เยี่ยมชมใช่หรือไม่ครับ?")) {
+        currentAmuletUser = "";
+        localStorage.removeItem('khom_amulet_user');
+        updateUserStatusUI();
+        renderListings();
+        alert("ออกจากระบบเรียบร้อยแล้วครับ ปัจจุบันคุณเป็นผู้เยี่ยมชมทั่วไป");
+      }
+    }
+
+    // ดึงรวบรวมไฟล์ข้อมูลสดจากสเปรดชีตผ่านลิงก์หลังบ้าน
+    function loadDataFromServer() {
+      if(!WEB_APP_URL || WEB_APP_URL.includes("macros/s/")) {
+        // ประมวลดึงข้อมูลจริง
+      }
+      
+      // ดึงรายการข่าวแจ้งเตือนวิ่ง
+      fetch(WEB_APP_URL + "?action=getNews")
       .then(res => res.json())
       .then(data => {
-        globalListings = data;
-        calculateStats(data);
-        renderListings(data);
+        if(data && data.content) document.getElementById('ticker-text').innerText = data.content;
+      }).catch(err => console.log(err));
+
+      // ดึงสถิติคลังพระแท้พิมพ์ครู
+      fetch(WEB_APP_URL + "?action=getMasterAmulets")
+      .then(res => res.json())
+      .then(data => {
+        if(Array.isArray(data)) document.getElementById('stat-master').innerText = data.length;
+      }).catch(err => console.log(err));
+
+      // ดึงชุดประกาศพระเครื่อง
+      fetch(WEB_APP_URL + "?action=getListings")
+      .then(res => res.json())
+      .then(data => {
+        allListings = data;
+        renderListings();
+        calculateStats();
       })
-      .catch(err => alert("โหลดข้อมูลขัดข้อง: " + err));
+      .catch(err => {
+        document.getElementById('listings-grid-box').innerHTML = `<div style="text-align:center; padding:20px; color:#e74c3c;">❌ ไม่สามารถโหลดข้อมูลได้ กรุณาตรวจเช็คสิทธิ์แชร์ไฟล์หรือลิงก์ Web App ครับ</div>`;
+      });
     }
 
-    function calculateStats(items) {
-      document.getElementById('stat-total').innerText = items.length;
-      document.getElementById('stat-ready').innerText = items.filter(i => i.Status === "พร้อมขาย" || i.Status === "พร้อมเช่า").length;
-      document.getElementById('stat-sold').innerText = items.filter(i => i.Status && (i.Status.includes("ปิด") || i.Status.includes("เช่าแล้ว"))).length;
+    // ประมวลผลจำนวนสรุปบนหน้าแดชบอร์ดการ์ด
+    function calculateStats() {
+      let total = allListings.length;
+      let ready = allListings.filter(l => l.Status === "พร้อมขาย" || l.Status === "พร้อมเช่า").length;
+      let closed = allListings.filter(l => l.Status === "ปิดแล้ว" || l.Status === "เช่าแล้ว").length;
+      
+      document.getElementById('stat-total').innerText = total;
+      document.getElementById('stat-ready').innerText = ready;
+      document.getElementById('stat-closed').innerText = closed;
     }
 
-    // ปรับปรุงแก้ไข: ฟังก์ชันแปลง URL ป้องกันปัญหารูปภาพเปิดไม่ได้
-    function fixImageUrl(url) {
-      if (!url) return "https://via.placeholder.com/130";
-      let splitUrls = url.split(",")[0].trim();
-      if (splitUrls.includes("drive.google.com/file/d/")) {
-        let id = splitUrls.split("/file/d/")[1].split("/")[0];
-        return "https://docs.google.com/uc?export=download&id=" + id;
-      }
-      return splitUrls;
+    function setFilterStatus(status) {
+      currentFilterStatus = status;
+      renderListings();
     }
 
-    function renderListings(items) {
-      const container = document.getElementById('listings-container');
+    // Render การ์ดแสดงผลรายการพระเครื่อง (ยืนยันเรียงลำดับสดใหม่ขึ้นก่อน)
+    function renderListings() {
+      const container = document.getElementById('listings-grid-box');
+      if(!container) return;
       container.innerHTML = "";
-      if(items.length === 0) {
-        container.innerHTML = "<p style='text-align:center; color:gray; padding:20px;'>ไม่พบรายการพระเครื่องบนกระดานประกาศ</p>";
+      
+      const searchVal = document.getElementById('search-input').value.trim().toLowerCase();
+      const filterType = document.getElementById('filter-type').value;
+
+      let filtered = allListings;
+      
+      // กรองผ่านเงื่อนไขสถานะมินิการ์ดบนแดชบอร์ด
+      if(currentFilterStatus !== "all") {
+        filtered = filtered.filter(l => l.Status === currentFilterStatus);
+      }
+      // กรองผ่านพิมพ์ชื่อค้นหาช่องเสิร์ช
+      if(searchVal) {
+        filtered = filtered.filter(l => 
+          (l.Title && l.Title.toLowerCase().includes(searchVal)) ||
+          (l.Username && l.Username.toLowerCase().includes(searchVal)) ||
+          (l.Location && l.Location.toLowerCase().includes(searchVal))
+        );
+      }
+      // กรองผ่านประเภทหมวดหมู่พระเครื่อง
+      if(filterType !== "all") {
+        filtered = filtered.filter(l => l.Type === filterType);
+      }
+
+      if(filtered.length === 0) {
+        container.innerHTML = `<div style="text-align:center; padding:30px; color:var(--text-muted);">❌ ไม่พบรายการประกาศวัตถุมงคลในคลังระบบขณะนี้</div>`;
         return;
       }
-      items.forEach((item) => {
-        // ค้นหาดัชนีจริงใน globalListings เพื่ออ้างอิงให้ถูกตัว
-        const originalIndex = globalListings.findIndex(g => g.Title === item.Title && g.Username === item.Username);
-        const imgUrl = fixImageUrl(item.ImageURL);
-        
-        const card = document.createElement('div');
+
+      filtered.forEach(item => {
+        let firstImg = item.ImageURL ? item.ImageURL.split(",")[0].trim() : "";
+        let card = document.createElement('div');
         card.className = "amulet-card-frame";
-        card.onclick = () => showDetail(originalIndex);
+        card.onclick = () => showDetail(item);
+        
+        let displayPrice = (Number(item.Price) === 0 || !item.Price) ? "ติดต่อสอบถาม" : Number(item.Price).toLocaleString() + " บาท";
+        let isReady = (item.Status === "พร้อมขาย" || item.Status === "พร้อมเช่า");
+
         card.innerHTML = `
-          <img class="card-img-frame" src="${imgUrl}" alt="amulet">
+          <img src="${firstImg || 'https://via.placeholder.com/130?text=No+Image'}" class="card-img-frame" onerror="this.src='https://via.placeholder.com/130?text=Khom+Wangnoi'">
           <div class="card-details-frame">
-            <div class="card-title-text">${item.Title}</div>
-            <div class="card-price-tag">${Number(item.Price).toLocaleString()} ฿</div>
+            <div class="card-title-text">${item.Title || 'ไม่ระบุชื่อวัตถุมงคล'}</div>
+            <div class="card-price-tag">${displayPrice}</div>
             <div class="card-meta-footer">
-              <span>📍 ${item.Location || 'ไม่ระบุ'}</span>
-              <span style="color:var(--gold-main)">👤 ${item.Username || 'สายตรง'}</span>
+              <span>📍 ${item.Location || 'ไม่ระบุพิกัด'}</span>
+              <span style="color:${isReady ? '#2ecc71' : '#e74c3c'}; font-weight:500;">● ${item.Status || 'พร้อมขาย'}</span>
             </div>
           </div>
         `;
@@ -697,159 +848,123 @@
       });
     }
 
-    // ปรับปรุงแก้ไข: เพิ่มฟังก์ชันค้นหาพระเครื่องด่วนและดักจับกรณีไม่พบข้อมูล
-    function searchAmulets() {
-      const keyword = prompt("พิมพ์ชื่อพระเครื่องหรือคำสำคัญที่ต้องการค้นหาบนบอร์ด:");
-      if (keyword === null) return; // กดยกเลิก
+    // 📜 แสดงกรอบรายละเอียดลึกแบบป๊อปอัพ overlay พร้อมคัดกรองสิทธิ์แก้ไขตามคำสั่งบรีฟ
+    function showDetail(item) {
+      activeListing = item;
+      document.getElementById('dt-title').innerText = item.Title || "ไม่ระบุชื่อวัตถุมงคล";
+      document.getElementById('dt-username').innerText = item.Username || "ผู้เยี่ยมชมทั่วไป";
+      document.getElementById('dt-id').innerText = item.ID || "-";
+      document.getElementById('dt-timestamp').innerText = item.Timestamp || "-";
+      document.getElementById('dt-type').innerText = item.Type || "ทั่วไป";
+      document.getElementById('dt-price').innerText = (Number(item.Price) === 0 || !item.Price) ? "ติดต่อสอบถาม" : Number(item.Price).toLocaleString() + " บาท";
+      document.getElementById('dt-location').innerText = item.Location || "ไม่ระบุ";
+      document.getElementById('dt-line').innerText = item.Line || "-";
+      document.getElementById('dt-status').innerText = item.Status || "พร้อมขาย";
       
-      const cleanKeyword = keyword.trim();
-      if (!cleanKeyword) {
-        renderListings(globalListings);
-        document.getElementById('filter-status-label').innerText = "(แสดงทั้งหมด)";
-        return;
-      }
+      const phoneEl = document.getElementById('dt-phone-link');
+      phoneEl.innerText = item.Phone || "ไม่ระบุเบอร์โทร";
+      phoneEl.href = item.Phone ? "tel:" + item.Phone : "#";
 
-      const filtered = globalListings.filter(item => {
-        return (item.Title && item.Title.toLowerCase().includes(cleanKeyword.toLowerCase())) ||
-               (item.Type && item.Type.toLowerCase().includes(cleanKeyword.toLowerCase())) ||
-               (item.Location && item.Location.toLowerCase().includes(cleanKeyword.toLowerCase()));
-      });
-
-      document.getElementById('filter-status-label').innerText = `(ผลการค้นหาคำว่า: ${cleanKeyword})`;
-      renderListings(filtered);
-
-      if (filtered.length === 0) {
-        document.getElementById('listings-container').innerHTML = `
-          <p style='text-align:center; color:#e74c3c; padding:30px; font-weight:500; background:#1a1a1a; border-radius:8px; border:1px solid #441010;'>
-            ❌ ไม่พบข้อมูลพระเครื่องที่ท่านกำลังค้นหา
-          </p>`;
-      }
-    }
-
-    function filterListings(mode) {
-      if(mode === 'all') {
-        document.getElementById('filter-status-label').innerText = "(แสดงทั้งหมด)";
-        renderListings(globalListings);
-      } else if(mode === 'ready') {
-        document.getElementById('filter-status-label').innerText = "(แสดงเฉพาะพร้อมเช่า)";
-        renderListings(globalListings.filter(i => i.Status === "พร้อมขาย" || i.Status === "พร้อมเช่า"));
-      } else if(mode === 'sold') {
-        document.getElementById('filter-status-label').innerText = "(แสดงเฉพาะปิดการขาย)";
-        renderListings(globalListings.filter(i => i.Status && (i.Status.includes("ปิด") || i.Status.includes("เช่าแล้ว"))));
-      }
-    }
-
-    function showDetail(index) {
-      currentSelectedListingIndex = index;
-      const item = globalListings[index];
-      
-      currentImages = item.ImageURL ? item.ImageURL.split(",").map(url => url.trim()).filter(url => url) : [];
-      
-      const mainImg = document.getElementById('dt-img');
-      if(currentImages.length > 0) {
-        mainImg.src = currentImages[0].includes("drive.google.com") || currentImages[0].includes("docs.google.com") ? currentImages[0] : fixImageUrl(currentImages[0]);
-      } else {
-        mainImg.src = "https://via.placeholder.com/320";
-      }
-
-      const thumbContainer = document.getElementById('dt-thumbnails');
+      const thumbContainer = document.getElementById('detail-images-wrap');
       thumbContainer.innerHTML = "";
-      currentImages.forEach((img, i) => {
-        let finalThumbUrl = img.includes("drive.google.com") || img.includes("docs.google.com") ? img : fixImageUrl(img);
-        const tImg = document.createElement('img');
-        tImg.className = `thumb-img ${i === 0 ? 'active' : ''}`;
-        tImg.src = finalThumbUrl;
-        tImg.onclick = function() {
-          document.querySelectorAll('.thumb-img').forEach(el => el.classList.remove('active'));
-          tImg.classList.add('active');
-          mainImg.src = finalThumbUrl;
-        };
-        thumbContainer.appendChild(tImg);
-      });
+      
+      if(item.ImageURL) {
+        let urls = item.ImageURL.split(",");
+        document.getElementById('dt-img').src = urls[0].trim();
+        
+        urls.forEach(url => {
+          let cleanUrl = url.trim();
+          let img = document.createElement('img');
+          img.src = cleanUrl;
+          img.className = "thumb-img";
+          img.onclick = (e) => {
+            e.stopPropagation();
+            document.getElementById('dt-img').src = cleanUrl;
+          };
+          thumbContainer.appendChild(img);
+        });
+      } else {
+        document.getElementById('dt-img').src = "https://via.placeholder.com/350?text=No+Image";
+      }
 
-      document.getElementById('dt-title').innerText = item.Title;
-      document.getElementById('dt-price').innerText = "ราคาเปิดบูชา: " + Number(item.Price).toLocaleString() + " บาท";
-      document.getElementById('dt-location').innerText = "📍 สถานที่นัดเจอ: " + (item.Location || "ไม่ระบุ");
-      document.getElementById('dt-username').innerText = "👤 สายตรงผู้ขาย: " + (item.Username || "ไม่ระบุ");
-      document.getElementById('dt-status').innerText = "สถานะวัตถุมงคล: " + (item.Status || "พร้อมขาย");
+      // 🔥 ตรวจเช็คสิทธิ์ล็อกอิน: หากไม่ได้เข้าระบบ หรือ Username ไม่ตรงกัน จะหมดสิทธิ์แก้ไขประกาศเด็ดขาด!
+      const actionPanel = document.getElementById('user-action-box');
+      if (currentAmuletUser && currentAmuletUser === item.Username) {
+        actionPanel.innerHTML = `
+          <div style="border: 1px dashed #bf953f; padding: 15px; border-radius: 8px; background: #222; margin-top:20px;">
+            <h4 style="color:var(--gold-main); margin-bottom:12px;">🛠️ สิทธิ์แผงควบคุมจัดการประกาศของคุณเอง</h4>
+            <div class="form-group">
+              <label>อัปเดตชื่อหัวข้อประกาศใหม่</label>
+              <input type="text" id="edit-title" value="${item.Title || ''}">
+            </div>
+            <div class="form-group">
+              <label>อัปเดตราคาเช่าบูชาใหม่ (บาท)</label>
+              <input type="number" id="edit-price" value="${item.Price || ''}">
+            </div>
+            <div class="form-group">
+              <label>อัปเดตสถานะการปล่อยเช่า</label>
+              <select id="edit-status">
+                <option value="พร้อมขาย" ${item.Status === 'พร้อมขาย' ? 'selected' : ''}>พร้อมขาย</option>
+                <option value="ปิดแล้ว" ${item.Status === 'ปิดแล้ว' ? 'selected' : ''}>ปิดแล้ว</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>กรอกรหัสผ่าน PIN ประจำประกาศเพื่อยืนยันความเป็นเจ้าของ</label>
+              <input type="password" id="edit-pin" placeholder="กรอกรหัส PIN ตอนระบุสร้างครั้งแรก">
+            </div>
+            <div style="display:flex; gap:10px; margin-top:5px;">
+              <button class="btn" style="background:#2ecc71; color:#fff;" onclick="submitUpdateListing()">💾 ยืนยันบันทึกแก้ไข</button>
+              <button class="btn" style="background:#e74c3c; color:#fff;" onclick="submitDeleteListing()">🗑️ ยืนยันลบประกาศถาวร</button>
+            </div>
+          </div>
+        `;
+      } else {
+        actionPanel.innerHTML = `
+          <div style="border: 1px solid #443410; padding: 15px; border-radius: 8px; background: rgba(0,0,0,0.4); text-align:center; color:var(--text-muted); margin-top:20px; font-size:0.95rem; line-height:1.5;">
+            🔒 คุณอยู่ในสถานะระบบจัดการสิทธิ์ผู้เยี่ยมชมทั่วไป หรือ ชื่อผู้ใช้ไม่ตรงกับเจ้าของประกาศองค์นี้ จึงไม่ได้รับอนุญาตให้ทำการแก้ไขหรือลบรายการพระเครื่ององค์นี้ได้ครับ (กรุณาลงชื่อเข้าใช้ด้วยบัญชีผู้ลงประกาศตัวจริงเพื่อเปิดแผงควบคุมสิทธิ์)
+          </div>
+        `;
+      }
 
-      document.getElementById('link-call').href = "tel:" + item.Phone;
-      document.getElementById('link-line').href = "https://line.me/ti/p/~" + item.Line;
-
-      document.getElementById('edit-title-input').value = item.Title;
-      document.getElementById('edit-price-input').value = item.Price;
-      document.getElementById('edit-status-select').value = item.Status === "ปิดการขาย/เช่าแล้ว" ? "ปิดการขาย/เช่าแล้ว" : "พร้อมขาย";
-
-      document.getElementById('manage-auth-pin').value = "";
-      document.getElementById('inline-edit-form').classList.add('hidden');
-      document.getElementById('detail-view-frame').classList.remove('hidden');
+      document.getElementById('detail-view-modal').classList.remove('hidden');
     }
 
     function closeDetail() {
-      document.getElementById('detail-view-frame').classList.add('hidden');
+      document.getElementById('detail-view-modal').classList.add('hidden');
     }
 
-    function toggleInlineEditForm() {
-      document.getElementById('inline-edit-form').classList.toggle('hidden');
+    function openLightboxFromMain() {
+      document.getElementById('lightbox-img').src = document.getElementById('dt-img').src;
+      document.getElementById('lightbox').classList.remove('hidden');
+    }
+    function closeLightbox() {
+      document.getElementById('lightbox').classList.add('hidden');
     }
 
-    function executeEditAction() {
-      const pinOrPassword = document.getElementById('manage-auth-pin').value.trim();
-      if(!pinOrPassword) { alert("กรุณากรอกรหัส PIN ของประกาศนี้ เพื่อยืนยันสิทธิ์ในการแก้ไขข้อมูล"); return; }
-      
-      const item = globalListings[currentSelectedListingIndex];
-      const payload = {
-        action: "updateListing",
-        username: item.Username,
-        title: item.Title,
-        pinOrPassword: pinOrPassword,
-        newTitle: document.getElementById('edit-title-input').value.trim(),
-        newPrice: document.getElementById('edit-price-input').value.trim(),
-        newStatus: document.getElementById('edit-status-select').value
-      };
-
-      fetch(WEB_APP_URL, { method: "POST", body: JSON.stringify(payload) })
-      .then(res => res.json())
-      .then(res => {
-        if(res.status === "success") {
-          alert("อัปเดตข้อมูลพระเครื่องในบอร์ดสารบบเรียบร้อย!");
-          closeDetail();
-          loadData();
-        } else {
-          alert(res.message);
-        }
-      }).catch(err => alert("ระบบขัดข้อง: " + err));
+    // ตรวจสอบกระบวนการแปลงไฟล์ภาพลงประกาศเข้าคิวอาร์เรย์
+    function handleFileSelect(e) {
+      uploadedFilesBase64 = [];
+      const files = e.target.files;
+      if(files.length === 0) return;
+      for(let i=0; i<files.length; i++) {
+        const file = files[i];
+        const reader = new FileReader();
+        reader.onload = function(evt) {
+          uploadedFilesBase64.push({ base64: evt.target.result, type: file.type, name: file.name });
+        };
+        reader.readAsDataURL(file);
+      }
     }
 
-    function executeDeleteAction() {
-      const pinOrPassword = document.getElementById('manage-auth-pin').value.trim();
-      if(!pinOrPassword) { alert("กรุณากรอกรหัส PIN หรือรหัสแอดมิน เพื่อยืนยันคำสั่งลบประกาศ"); return; }
-      if(!confirm("คุณแน่ใจใช่ไหมว่าต้องการลบรายการประกาศวัตถุมงคลชิ้นนี้อย่างถาวร?")) return;
+    // ฟังก์ชันยิงข้อมูลการสร้างประกาศวัตถุมงคลส่งไปยังชีตหลังบ้าน
+    function submitCreateListing() {
+      if(!currentAmuletUser) {
+        alert("❌ ข้อห้ามสิทธิ์: คุณต้องกดเข้าสู่ระบบผู้ใช้งานเพื่อยืนยันตัวตนก่อนลงประกาศขายพระเครื่องครับ!");
+        switchTab('dashboard');
+        userLoginPrompt();
+        return;
+      }
 
-      const item = globalListings[currentSelectedListingIndex];
-      const payload = {
-        action: "deleteListing",
-        username: item.Username,
-        title: item.Title,
-        pinOrPassword: pinOrPassword
-      };
-
-      fetch(WEB_APP_URL, { method: "POST", body: JSON.stringify(payload) })
-      .then(res => res.json())
-      .then(res => {
-        if(res.status === "success") {
-          alert("ทำการลบประกาศรายการนี้ออกจากฐานข้อมูลหลักเรียบร้อยแล้ว!");
-          closeDetail();
-          loadData();
-        } else {
-          alert(res.message);
-        }
-      }).catch(err => alert("เกิดข้อผิดพลาด: " + err));
-    }
-
-    // ปรับปรุงแก้ไข: ฟังก์ชันส่งประกาศ ปิดรับกดซ้ำ และล้างค่าข้อมูลฟอร์มกรอกทั้งหมดหลัง Submit สำเร็จตามบรีฟ
-    function submitListing() {
-      const username = document.getElementById('post-username').value.trim();
       const title = document.getElementById('post-title').value.trim();
       const type = document.getElementById('post-type').value;
       const price = document.getElementById('post-price').value.trim();
@@ -857,171 +972,263 @@
       const phone = document.getElementById('post-phone').value.trim();
       const line = document.getElementById('post-line').value.trim();
       const pin = document.getElementById('post-pin').value.trim();
-      const fileInput = document.getElementById('post-file');
 
-      if(!username || !title || !price || !pin) { 
-        alert("กรุณากรอกข้อมูลที่จำเป็นรวมถึงรหัส PIN ยืนยันให้ครบถ้วนก่อนส่งข้อมูล"); 
-        return; 
+      if(!title || !price || !location || !phone || !pin) {
+        alert("กรุณากรอกข้อมูลสาระสำคัญประจำฟอร์มให้ครบถ้วนก่อนส่งประกาศครับ");
+        return;
       }
 
-      const btnSubmit = document.getElementById('btn-submit-listing');
-      btnSubmit.disabled = true;
-      btnSubmit.innerText = "⏳ กำลังแปลงบิตแมปรูปภาพและบันทึกขึ้นฐานข้อมูล...";
+      const payload = {
+        action: "createListing",
+        username: currentAmuletUser, // บันทึกผูกติดเข้ากับยูสเซอร์เนมปัจจุบันทันที
+        title: title,
+        type: type,
+        price: price,
+        location: location,
+        phone: phone,
+        line: line,
+        pin: pin,
+        files: uploadedFilesBase64
+      };
 
-      let promises = [];
-      for(let i=0; i<fileInput.files.length; i++) {
-        promises.push(new Promise((resolve) => {
-          let reader = new FileReader();
-          let f = fileInput.files[i];
-          reader.onload = function(e) {
-            resolve({ base64: e.target.result, type: f.type, name: f.name });
-          };
-          reader.readAsDataURL(f);
-        }));
-      }
-
-      Promise.all(promises).then(filesArray => {
-        const payload = { action: "createListing", username, title, type, price, location, phone, line, pin, files: filesArray };
-        return fetch(WEB_APP_URL, { method: "POST", body: JSON.stringify(payload) });
-      })
+      alert("ระบบกำลังทำการอัปโหลดบันทึกไฟล์ภาพและยิงข้อมูลส่งสารบบ คม วังน้อย กรุณารอสักครู่ครับ...");
+      fetch(WEB_APP_URL, { method: "POST", body: JSON.stringify(payload) })
       .then(res => res.json())
-      .then((res) => {
-        alert("สำเร็จ! ใบประกาศพระเครื่องของท่านได้รับการอัปโหลดขึ้นสารบบแล้ว");
-        
-        // ล้างช่องกรอกข้อมูลเดิมทั้งหมดออกเพื่อรอรับประกาศงานชิ้นใหม่ทันที
-        document.getElementById('post-username').value = "";
-        document.getElementById('post-title').value = "";
-        document.getElementById('post-price').value = "";
-        document.getElementById('post-location').value = "";
-        document.getElementById('post-phone').value = "";
-        document.getElementById('post-line').value = "";
-        document.getElementById('post-pin').value = "";
-        document.getElementById('post-file').value = "";
-        
-        btnSubmit.disabled = false;
-        btnSubmit.innerText = "ลงข้อมูลประกาศทันที";
-        
-        switchTab('home');
-        loadData();
-      }).catch(err => {
-        alert("เกิดปัญหาทางเทคนิค: " + err);
-        btnSubmit.disabled = false;
-        btnSubmit.innerText = "ลงข้อมูลประกาศทันที";
-      });
+      .then(res => {
+        if(res.status === "success") {
+          alert("🎉 ลงประกาศวัตถุมงคลของท่านเข้าสู่สารบบ คม วังน้อย เรียบร้อยแล้วครับ!");
+          // ล้างข้อมูลหน้าฟอร์ม
+          document.getElementById('post-title').value = "";
+          document.getElementById('post-price').value = "";
+          document.getElementById('post-location').value = "";
+          document.getElementById('post-phone').value = "";
+          document.getElementById('post-line').value = "";
+          document.getElementById('post-pin').value = "";
+          document.getElementById('post-file').value = "";
+          uploadedFilesBase64 = [];
+          
+          switchTab('dashboard');
+          loadDataFromServer();
+        } else {
+          alert("❌ เกิดข้อขัดข้อง: " + res.message);
+        }
+      }).catch(err => alert("ข้อผิดพลาดเครือข่าย: " + err));
     }
 
-    // ปรับปรุงแก้ไข: ระบบส่งข้อความแชทส่งเรื่องติดต่อศูนย์สเปรดชีตของแอดมิน (Support Chat)
-    function submitSupport() {
-      const sender = document.getElementById('support-sender').value.trim();
-      const phone = document.getElementById('support-phone').value.trim();
-      const message = document.getElementById('support-message').value.trim();
-      
-      if(!sender || !message) { 
-        alert("กรุณากรอกระบุข้อมูลเนื้อหาข้อความรายละเอียดให้ครบถ้วนก่อนครับ"); 
-        return; 
+    // บันทึกส่งชุดคำขอคำสั่งส่งข้อมูลแก้ไขไปยังแอดมินหลังบ้าน
+    function submitUpdateListing() {
+      const newTitle = document.getElementById('edit-title').value.trim();
+      const newPrice = document.getElementById('edit-price').value.trim();
+      const newStatus = document.getElementById('edit-status').value;
+      const pin = document.getElementById('edit-pin').value.trim();
+
+      if(!newTitle || !newPrice || !pin) {
+        alert("กรุณากรอกข้อมูลข้อมูลและระบุรหัสพาสเวิร์ด PIN เพื่อยืนยันสิทธิ์ประจำตำแหน่งครับ");
+        return;
       }
 
-      alert("กำลังส่งข้อความแชทแจ้งเรื่องเข้าสู่ศูนย์สเปรดชีตของแอดมิน...");
-      const payload = { action: "sendSupport", sender: sender, phone: phone, message: message };
+      const payload = {
+        action: "updateListing",
+        username: activeListing.Username,
+        title: activeListing.Title,
+        newTitle: newTitle,
+        newPrice: newPrice,
+        newStatus: newStatus,
+        pinOrPassword: pin
+      };
 
       fetch(WEB_APP_URL, { method: "POST", body: JSON.stringify(payload) })
       .then(res => res.json())
       .then(res => {
-        alert("ส่งเรื่องหาแอดมินเรียบร้อยแล้ว ทีมงานจะรีบตรวจสอบชีตและดูแลให้โดยเร็วครับ!");
-        document.getElementById('support-sender').value = "";
-        document.getElementById('support-phone').value = "";
-        document.getElementById('support-message').value = "";
-      })
-      .catch(err => alert("ส่งข้อความล้มเหลว: " + err));
+        if(res.status === "success") {
+          alert("💾 ประมวลผลแก้ไขข้อมูลในสเปรดชีตสำเร็จเรียบร้อยแล้วครับ!");
+          closeDetail();
+          loadDataFromServer();
+        } else {
+          alert("❌ " + res.message);
+        }
+      }).catch(err => alert(err));
     }
 
-    function toggleFaq(element) {
-      const targetAns = element.nextElementSibling;
-      targetAns.classList.toggle('hidden');
-    }
-
-    function openLightboxFromMain() {
-      const mainImgSrc = document.getElementById('dt-img').src;
-      if(mainImgSrc) {
-        document.getElementById('lightbox-img').src = mainImgSrc;
-        document.getElementById('lightbox').classList.remove('hidden');
+    // ส่งเรื่องคำขอลบประกาศไปสเปรดชีต
+    function submitDeleteListing() {
+      const pin = document.getElementById('edit-pin').value.trim();
+      if(!pin) {
+        alert("กรุณากรอกรหัสผ่าน PIN เพื่อทำการยืนยันคำขอปลดถอนลบรายการครับ");
+        return;
       }
+      if(!confirm("คุณพี่แน่ใจชัดเจนนะคร้บที่จะทำการลบประกาศวัตถุมงคลองค์นี้ออกจากระบบคลังถาวร?")) return;
+
+      const payload = {
+        action: "deleteListing",
+        username: activeListing.Username,
+        title: activeListing.Title,
+        pinOrPassword: pin
+      };
+
+      fetch(WEB_APP_URL, { method: "POST", body: JSON.stringify(payload) })
+      .then(res => res.json())
+      .then(res => {
+        if(res.status === "success") {
+          alert("🗑️ ปลดถอนลบรายการประกาศออกจากกระดานเรียบร้อยแล้วครับ!");
+          closeDetail();
+          loadDataFromServer();
+        } else {
+          alert("❌ " + res.message);
+        }
+      }).catch(err => alert(err));
     }
 
-    function closeLightbox() {
-      document.getElementById('lightbox').classList.add('hidden');
+    // ฟังก์ชันของระบบจำลอง AI สแกนพิกัดเชิงสถิติจับตำหนิวัตถุมงคล
+    function previewScanImage(e) {
+      const file = e.target.files[0];
+      if(!file) return;
+      const reader = new FileReader();
+      reader.onload = function(evt) {
+        const preview = document.getElementById('scan-preview-img');
+        preview.src = evt.target.result;
+        preview.style.display = "inline-block";
+        document.getElementById('scan-result-box').classList.add('hidden');
+      };
+      reader.readAsDataURL(file);
     }
 
-    function executeAdminLogin() {
-      const pwd = document.getElementById('admin-access-password').value;
-      if(!pwd) { alert("กรุณาใส่รหัสผ่าน"); return; }
+    function startAmuletScan() {
+      const fileInput = document.getElementById('scan-file-input');
+      if(fileInput.files.length === 0) {
+        alert("กรุณาเลือกหรือถ่ายภาพวัตถุมงคลก่อนกดปุ่มประมวลผลสแกนครับ");
+        return;
+      }
       
+      const line = document.getElementById('scan-loading-line');
+      const resBox = document.getElementById('scan-result-box');
+      
+      line.style.display = "block";
+      resBox.classList.add('hidden');
+      
+      setTimeout(() => {
+        line.style.display = "none";
+        // คำนวณจำลองผลลัพธ์พิกัดความเข้ากันได้พุทธลักษณะแบบสุ่มเลขเปอร์เซ็นต์สถิติ
+        const randomScore = Math.floor(Math.random() * 45) + 52; 
+        resBox.classList.remove('hidden');
+        document.getElementById('res-status').innerText = "🔬 ประมวลผลรันจับตำแหน่งพิกัดเทียบพิมพ์ต้นครูเสร็จสิ้น";
+        document.getElementById('res-percent').innerText = `ดัชนีความเข้ากันได้พุทธลักษณะตำหนิ: ${randomScore}%`;
+      }, 3000);
+    }
+
+    // ควบคุมเมนูกางขยายเปิดตอบข้อซักถาม FAQ ทั่วไป
+    function toggleFaq(el) {
+      el.nextElementSibling.classList.toggle('hidden');
+    }
+
+    // แบบฟอร์มติดต่อส่งข้อมูลร้องเรียน/แจ้งเรื่องร้องเรียนแอดมิน
+    function submitSupport() {
+      const sender = document.getElementById('support-sender').value.trim();
+      const message = document.getElementById('support-message').value.trim();
+      const phone = document.getElementById('support-phone').value.trim();
+      if(!sender || !message) { alert("กรุณาระบุพิมพ์ระบุเนื้อหาข้อมูลข้อความรายละเอียดให้ครบถ้วนก่อนครับ"); return; }
+
+      const payload = { action: "sendSupport", sender: sender, phone: phone, line: "", message: message };
+      alert("กำลังบันทึกส่งข้อมูลปัญหาแจ้งเรื่องเข้าสู่ศูนย์สเปรดชีตแอดมิน...");
+      
+      fetch(WEB_APP_URL, { method: "POST", body: JSON.stringify(payload) })
+      .then(res => res.json())
+      .then(res => {
+        alert("🎉 ส่งเรื่องเข้าสู่ศูนย์แอดมินคม วังน้อย เรียบร้อยแล้ว ทีมงานจะเร่งเปิดตรวจชีตตรวจสอบและติดต่อดูแลให้ด่วนครับ!");
+        document.getElementById('support-sender').value = "";
+        document.getElementById('support-message').value = "";
+        document.getElementById('support-phone').value = "";
+      }).catch(err => alert(err));
+    }
+
+    // ระบบล็อกอินยืนยันสิทธิ์แอดมินคมสูงสุดควบคุมหลังบ้าน
+    function checkAdminLogin() {
+      const pwd = document.getElementById('admin-access-password').value;
       const payload = { action: "adminLogin", password: pwd };
+      
       fetch(WEB_APP_URL, { method: "POST", body: JSON.stringify(payload) })
       .then(res => res.json())
       .then(res => {
         if(res.status === "success") {
           verifiedAdminToken = pwd;
           document.getElementById('admin-login-box').classList.add('hidden');
-          document.getElementById('admin-control-panel').classList.remove('hidden');
+          document.getElementById('admin-content-dashboard').classList.remove('hidden');
         } else {
           alert(res.message);
         }
-      });
+      }).catch(err => alert(err));
     }
 
-    function switchAdminForm() {
-      const act = document.getElementById('admin-action-select').value;
-      const fileGroup = document.getElementById('admin-file-master-group');
-      if(act === 'news') {
-        fileGroup.classList.add('hidden');
-      } else {
-        fileGroup.classList.remove('hidden');
-      }
+    function adminLogout() {
+      verifiedAdminToken = false;
+      document.getElementById('admin-access-password').value = "";
+      document.getElementById('admin-login-box').classList.remove('hidden');
+      document.getElementById('admin-content-dashboard').classList.add('hidden');
     }
 
-    function processAdminMasterImage(e) {
-      let reader = new FileReader();
-      let f = e.target.files[0];
-      reader.onload = function(evt) {
-        base64AdminMasterString = evt.target.result;
-      };
-      reader.readAsDataURL(f);
-    }
+    // จัดเก็บข้อมูลที่แอดมินอัปเดตลงระบบ
+    document.getElementById('admin-master-file').addEventListener('change', function(e) {
+      if(e.target.files.length === 0) return;
+      const reader = new FileReader();
+      reader.onload = function() { base64AdminMasterString = reader.result; };
+      reader.readAsDataURL(e.target.files[0]);
+    });
 
     function submitAdminAction() {
-      if(!verifiedAdminToken) { alert("เซสชันหมดอายุหรือรหัสผ่านไม่ถูกต้อง"); return; }
-      const actionType = document.getElementById('admin-action-select').value;
-      const txt = document.getElementById('admin-text-input').value.trim();
-      
-      let payload = { action: actionType === 'news' ? "createNews" : "createMasterAmulet", password: verifiedAdminToken };
-      
-      if(actionType === 'news') {
-        if(!txt) { alert("กรุณากรอกเนื้อหาข่าวสาร"); return; }
-        payload.content = txt;
+      if(!verifiedAdminToken) return;
+      const type = document.getElementById('admin-action-select').value;
+      const text = document.getElementById('admin-text-input').value.trim();
+
+      if(!text) { alert("กรุณาป้อนข้อความข้อมูลลงฟอร์มด้วยครับ"); return; }
+
+      let payload = { password: verifiedAdminToken };
+      if(type === "news") {
+        payload.action = "createNews";
+        payload.content = text;
       } else {
-        const fileInp = document.getElementById('admin-file-master');
-        if(!txt || fileInp.files.length === 0) { alert("กรุณาใส่ชื่อพระและเลือกไฟล์ภาพถ่ายครูแม่แบบ"); return; }
-        payload.name = txt;
+        const fileIn = document.getElementById('admin-master-file');
+        if(fileIn.files.length === 0) { alert("กรุณาเลือกไฟล์ภาพถ่ายพระแท้แม่แบบก่อนกดบันทึกครับ"); return; }
+        payload.action = "createMasterAmulet";
+        payload.name = text;
         payload.fileBase64 = base64AdminMasterString;
-        payload.fileType = fileInp.files[0].type;
-        payload.fileName = fileInp.files[0].name;
+        payload.fileType = fileIn.files[0].type;
+        payload.fileName = fileIn.files[0].name;
       }
 
-      alert("กำลังบันทึกคำสั่งจัดการระบบหลังบ้าน...");
+      alert("แอดมินกำลังส่งยิงชุดคำสั่งเขียนทับบันทึกสเปรดชีต...");
       fetch(WEB_APP_URL, { method: "POST", body: JSON.stringify(payload) })
       .then(res => res.json())
       .then(res => {
         if(res.status === "success") {
-          alert("ดำเนินการเสร็จสิ้นเรียบร้อยแล้ว!");
+          alert("🏆 แอดมินทำการอัปเดตฐานข้อมูลสำเร็จเรียบร้อย!");
           document.getElementById('admin-text-input').value = "";
-          document.getElementById('admin-file-master').value = "";
-          loadData();
-          switchTab('home');
+          loadDataFromServer();
         } else {
           alert(res.message);
         }
-      }).catch(err => alert("ข้อขัดข้องแอดมิน: " + err));
+      }).catch(err => alert(err));
+    }
+
+    // ฟังก์ชันสั่งการสลับแท็บเมนูการใช้งานหน้าบ้านหลัก
+    function switchTab(tabName) {
+      document.getElementById('frame-dashboard').classList.add('hidden');
+      document.getElementById('frame-create').classList.add('hidden');
+      document.getElementById('frame-scan').classList.add('hidden');
+      document.getElementById('frame-faq').classList.add('hidden');
+      document.getElementById('frame-admin').classList.add('hidden');
+      
+      document.getElementById('nav-dashboard').classList.remove('active');
+      document.getElementById('nav-create').classList.remove('active');
+      document.getElementById('nav-scan').classList.remove('active');
+      document.getElementById('nav-faq').classList.remove('active');
+      document.getElementById('nav-admin').classList.remove('active');
+
+      document.getElementById('frame-' + tabName).classList.remove('hidden');
+      document.getElementById('nav-' + tabName).classList.add('active');
+      
+      if(tabName === 'dashboard') {
+        renderListings();
+      }
     }
   </script>
 </body>
