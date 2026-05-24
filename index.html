@@ -2,7 +2,7 @@
 <html lang="th">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0, user-scalable=yes">
   <title>Khom Wangnoi Amulet Premium Gold</title>
   <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600&display=swap" rel="stylesheet">
   <style>
@@ -683,7 +683,7 @@
 
   <script>
     // 🔥 บันทึกวางลิงก์ Web App URL ที่ได้จากการ Deploy หลังบ้านของคุณพี่ที่นี่ครับ
-    const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbxas2rnJV7g8o5zYFgiCAHyJT0QgabaJ8JTHgvJorlDZJschSL6U2-PhOE2irFbgIws/exec"; 
+    const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbxMifBPQijUPdRV03XyOr-KeYEOyxYEm31ueSM2CZqQlIZKPtXnFWbgu1aN9Qbt2fhZ/exec"; 
     
     let allListings = [];
     let activeListing = null;
@@ -829,8 +829,8 @@
         let card = document.createElement('div');
         card.className = "amulet-card-frame";
         card.onclick = () => showDetail(item);
-        
-        let displayPrice = (Number(item.Price) === 0 || !item.Price) ? "ติดต่อสอบถาม" : Number(item.Price).toLocaleString() + " บาท";
+              
+		let displayPrice = (Number(item.Price) === 0 || !item.Price) ? "ติดต่อสอบถาม" : Number(item.Price).toLocaleString() + " บาท";
         let isReady = (item.Status === "พร้อมขาย" || item.Status === "พร้อมเช่า");
 
         card.innerHTML = `
@@ -850,8 +850,8 @@
 
     // 📜 แสดงกรอบรายละเอียดลึกแบบป๊อปอัพ overlay พร้อมคัดกรองสิทธิ์แก้ไขตามคำสั่งบรีฟ
     function showDetail(item) {
-      activeListing = item;
-      document.getElementById('dt-title').innerText = item.Title || "ไม่ระบุชื่อวัตถุมงคล";
+	  activeListing = item;
+	  document.getElementById('dt-title').innerText = item.Title || "ไม่ระบุชื่อวัตถุมงคล";
       document.getElementById('dt-username').innerText = item.Username || "ผู้เยี่ยมชมทั่วไป";
       document.getElementById('dt-id').innerText = item.ID || "-";
       document.getElementById('dt-timestamp').innerText = item.Timestamp || "-";
@@ -868,7 +868,7 @@
       const thumbContainer = document.getElementById('detail-images-wrap');
       thumbContainer.innerHTML = "";
       
-      if(item.ImageURL) {
+	  if(item.ImageURL) {
         let urls = item.ImageURL.split(",");
         document.getElementById('dt-img').src = urls[0].trim();
         
@@ -886,8 +886,8 @@
       } else {
         document.getElementById('dt-img').src = "https://via.placeholder.com/350?text=No+Image";
       }
-
-      // 🔥 ตรวจเช็คสิทธิ์ล็อกอิน: หากไม่ได้เข้าระบบ หรือ Username ไม่ตรงกัน จะหมดสิทธิ์แก้ไขประกาศเด็ดขาด!
+	        
+	  // 🔥 ตรวจเช็คสิทธิ์ล็อกอิน: หากไม่ได้เข้าระบบ หรือ Username ไม่ตรงกัน จะหมดสิทธิ์แก้ไขประกาศเด็ดขาด!
       const actionPanel = document.getElementById('user-action-box');
       if (currentAmuletUser && currentAmuletUser === item.Username) {
         actionPanel.innerHTML = `
@@ -924,10 +924,61 @@
             🔒 คุณอยู่ในสถานะระบบจัดการสิทธิ์ผู้เยี่ยมชมทั่วไป หรือ ชื่อผู้ใช้ไม่ตรงกับเจ้าของประกาศองค์นี้ จึงไม่ได้รับอนุญาตให้ทำการแก้ไขหรือลบรายการพระเครื่ององค์นี้ได้ครับ (กรุณาลงชื่อเข้าใช้ด้วยบัญชีผู้ลงประกาศตัวจริงเพื่อเปิดแผงควบคุมสิทธิ์)
           </div>
         `;
-      }
+      	  
+	  }
 
       document.getElementById('detail-view-modal').classList.remove('hidden');
-    }
+	  const lineId = item.LineID || ""; // ดึง Line ID จากตารางของพี่คม
+	  if(document.getElementById('line-button') && lineId) {
+     document.getElementById('line-button').href = "https://line.me/R/ti/p/~" + lineId;
+  }
+
+	  window.currentActiveChatItem = item; // บันทึกไอเทมนี้ไว้ให้ปุ่มกดส่งแชทเอาไปใช้ต่อ
+	  loadListingChats(item);              // สั่งให้ระบบโหลดแชทของไอเทมชิ้นนี้ขึ้นมาโชว์
+	
+  } 
+	
+	  
+function loadListingChats(item) {
+  if (!item) return;
+  const chatContainer = document.getElementById('listing-chat-messages');
+  if (!chatContainer) return;
+
+  chatContainer.innerHTML = "<p style='color:gray; font-size:0.9rem; text-align:center;'>กำลังดึงข้อมูลแชท... 💬</p>";
+
+  // ส่งชื่อพระ (item.Title) และชื่อผู้ลงประกาศ (item.Username) ไปดึงแชทที่คุยค้างไว้
+  fetch(`${WEB_APP_URL}?action=getChats&title=${encodeURIComponent(item.Title)}&username=${encodeURIComponent(item.Username)}`)
+    .then(res => res.json())
+    .then(data => {
+      chatContainer.innerHTML = "";
+      if (data && data.length > 0) {
+        data.forEach(chat => {
+          const msgDiv = document.createElement('div');
+          msgDiv.style.marginBottom = "8px";
+          msgDiv.style.padding = "8px 12px";
+          msgDiv.style.borderRadius = "6px";
+          msgDiv.style.background = chat.Sender === "ผู้ซื้อ (ผู้สนใจ)" ? "#222" : "#332508";
+          msgDiv.style.borderLeft = chat.Sender === "ผู้ซื้อ (ผู้สนใจ)" ? "3px solid #888" : "3px solid var(--gold-main)";
+          
+          msgDiv.innerHTML = `
+            <div style="display:flex; justify-content:space-between; font-size:0.85rem; margin-bottom:3px;">
+              <span style="color:var(--gold-main); font-weight:600;">👤 ${chat.Sender}</span>
+              <span style="color:gray; font-size:0.75rem;">${chat.Date}</span>
+            </div>
+            <div style="color:#fff; font-size:1rem; word-break:break-all;">${chat.Message}</div>
+          `;
+          chatContainer.appendChild(msgDiv);
+        });
+        chatContainer.scrollTop = chatContainer.scrollHeight; // เลื่อนกล่องลงมาที่ข้อความล่าสุด
+      } else {
+        chatContainer.innerHTML = "<p style='color:gray; font-size:0.9rem; text-align:center; padding:10px;'>ยังไม่มีข้อความสอบถามในประกาศนี้<br>พิมพ์ข้อความด้านล่างส่งทักทายผู้ขายได้เลยครับ</p>";
+      }
+    })
+    .catch(() => {
+      chatContainer.innerHTML = "<p style='color:#e74c3c; font-size:0.9rem; text-align:center;'>ระบบกล่องแชทขัดข้อง</p>";
+    });
+}
+
 
     function closeDetail() {
       document.getElementById('detail-view-modal').classList.add('hidden');
@@ -1016,14 +1067,14 @@
     }
 
 	function submitListing() {
-  // 1. [เพิ่มเอฟเฟกต์ข้อ 4] ค้นหาปุ่ม Submit เพื่อเปลี่ยนสถานะเป็นกำลังโหลด
+  // 1. [เพิ่มเอฟเฟกต์] ค้นหาปุ่ม Submit เพื่อเปลี่ยนสถานะเป็นกำลังโหลด
 	  const submitBtn = document.getElementById('submit-listing-btn'); // **พี่คมเปลี่ยน ID ให้ตรงกับปุ่มของพี่นะครับ**
 	  if (submitBtn) {
       submitBtn.disabled = true;
       submitBtn.innerHTML = '<span class="animate-pulse">กำลังอัปโหลดข้อมูล... ⏳ รอแป๊บน้า</span>';
 	  }
 
-  // 2. [แก้ไขข้อ 2 & 3] ดึงชื่อผู้ใช้งานที่กำลังล็อกอินอยู่จริงจากหน้าจอ 
+  // 2.  ดึงชื่อผู้ใช้งานที่กำลังล็อกอินอยู่จริงจากหน้าจอ 
   // (สมมุติตัวอย่างว่าพี่เก็บชื่อไว้ใน element ที่มี id ว่า 'display-user-name')
 	  const loggedInUser = document.getElementById('display-user-name') ? document.getElementById('display-user-name').innerText.trim() : "ผู้ใช้ทั่วไป";
 
@@ -1334,6 +1385,133 @@
         renderListings();
       }
     }
+	
+// 1. ฟังก์ชันโหลดประวัติแชทของพระเครื่ององค์นี้มาแสดงผลในกล่อง
+	function loadListingChats() {
+	  const item = globalListings[currentSelectedListingIndex];
+	  const chatContainer = document.getElementById('listing-chat-messages');
+	  if (!chatContainer) return;
+
+	  chatContainer.innerHTML = "<p style='color:gray; font-size:0.9rem; text-align:center;'>กำลังดึงข้อมูลแชท... 💬</p>";
+
+  // ดึงข้อมูลแชทจากสเปรดชีตหลังบ้าน โดยกรองจากหัวข้อประกาศ และชื่อผู้ลงประกาศ
+	fetch(`${WEB_APP_URL}?action=getChats&title=${encodeURIComponent(item.Title)}&username=${encodeURIComponent(item.Username)}`)
+    .then(res => res.json())
+    .then(data => {
+      chatContainer.innerHTML = "";
+      if (data && data.length > 0) {
+        data.forEach(chat => {
+          const msgDiv = document.createElement('div');
+          msgDiv.style.marginBottom = "8px";
+          msgDiv.style.padding = "8px 12px";
+          msgDiv.style.borderRadius = "6px";
+ // ดีไซน์สีการสนทนา: หากเป็นผู้ซื้อสนใจจะเป็นสีเทา / หากเป็นเจ้าของประกาศตอบจะเป็นสีโทนทองแดง
+          msgDiv.style.background = chat.Sender === "ผู้ซื้อ (ผู้สนใจ)" ? "#222" : "#332508";
+          msgDiv.style.borderLeft = chat.Sender === "ผู้ซื้อ (ผู้สนใจ)" ? "3px solid #888" : "3px solid var(--gold-main)";
+          
+          msgDiv.innerHTML = `
+            <div style="display:flex; justify-content:space-between; font-size:0.85rem; margin-bottom:3px;">
+              <span style="color:var(--gold-main); font-weight:600;">👤 ${chat.Sender}</span>
+              <span style="color:gray; font-size:0.75rem;">${chat.Date}</span>
+            </div>
+            <div style="color:#fff; font-size:1rem; word-break:break-all;">${chat.Message}</div>
+          `;
+          chatContainer.appendChild(msgDiv);
+        });
+        chatContainer.scrollTop = chatContainer.scrollHeight; // สั่งเลื่อนกล่องแชทลงไปข้อความล่าสุดล่างสุด
+      } else {
+        chatContainer.innerHTML = "<p style='color:gray; font-size:0.9rem; text-align:center; padding:10px;'>ยังไม่มีข้อความสอบถามในประกาศนี้<br>พิมพ์ข้อความด้านล่างส่งทักทายผู้ขายได้เลยครับ</p>";
+      }
+    })
+    .catch(() => {
+      chatContainer.innerHTML = "<p style='color:#e74c3c; font-size:0.9rem; text-align:center;'>ระบบกล่องแชทขัดข้อง</p>";
+    });
+}
+
+// 2. ฟังก์ชันเมื่อผู้ใช้งานกดปุ่ม "ส่งแชท"
+	function sendListingChat() {
+	  const chatInput = document.getElementById('listing-chat-input');
+	  if (!chatInput) return;
+	  const message = chatInput.value.trim();
+	  if (!message) { alert("กรุณาพิมพ์ข้อความก่อนกดส่งแชทครับ"); return; }
+
+	  const item = globalListings[currentSelectedListingIndex];
+  
+// เช็คเบื้องต้นว่าชื่อผู้ใช้งานหน้าเว็บบนหน้าจอปัจจุบัน ตรงกับคนลงประกาศไหมเพื่อแยกฝั่งคนพูด
+	  const currentUserName = document.getElementById('display-user-name') ? document.getElementById('display-user-name').innerText.trim() : "ผู้ใช้ทั่วไป";
+	  const senderRole = (currentUserName === item.Username) ? "เจ้าของประกาศ" : "ผู้ซื้อ (ผู้สนใจ)";
+
+	  const payload = {
+		action: "sendListingChat",
+		title: item.Title,
+		username: item.Username,
+		sender: senderRole,
+		message: message
+  };
+
+		chatInput.disabled = true; // ล็อกช่องพิมพ์ชั่วคราวกันเบิ้ลส่งข้อความซ้ำๆ
+
+	fetch(WEB_APP_URL, { method: "POST", body: JSON.stringify(payload) })
+    .then(res => res.json())
+    .then(res => {
+      chatInput.disabled = false;
+      if (res.status === "success") {
+        chatInput.value = ""; // เคลียร์ข้อความที่พิมพ์ค้างไว้
+        loadListingChats();   // สั่งสั่งโหลดประวัติแชทอัปเดตใหม่ขึ้นมาโชว์ทันที
+      } else {
+        alert("เกิดข้อผิดพลาด: " + res.message);
+      }
+    })
+    .catch(err => {
+      chatInput.disabled = false;
+      alert("ไม่สามารถเชื่อมต่อเซิร์ฟเวอร์แชทหลังบ้านได้");
+    });
+}
+
+[span_6](start_span)// ฟังก์ชันโหลดประวัติแชทของพระเครื่ององค์นี้ (วางพื้นที่โล่งล่างสุดของไฟล์)[span_6](end_span)
+function loadListingChats(item) {
+  if (!item) return;
+  const chatContainer = document.getElementById('listing-chat-messages');
+  if (!chatContainer) return;
+
+  chatContainer.innerHTML = "<p style='color:gray; font-size:0.9rem; text-align:center;'>กำลังดึงข้อมูลแชท... 💬</p>";
+
+  [span_7](start_span)[span_8](start_span)// ดึงค่า Title และ Username จากก้อน item ของพี่คมมาใช้งาน[span_7](end_span)[span_8](end_span)
+  const title = item.Title || "";
+  const username = item.Username || "";
+
+  fetch(`${WEB_APP_URL}?action=getChats&title=${encodeURIComponent(title)}&username=${encodeURIComponent(username)}`)
+    .then(res => res.json())
+    .then(data => {
+      chatContainer.innerHTML = "";
+      if (data && data.length > 0) {
+        data.forEach(chat => {
+          const msgDiv = document.createElement('div');
+          msgDiv.style.marginBottom = "8px";
+          msgDiv.style.padding = "8px 12px";
+          msgDiv.style.borderRadius = "6px";
+          msgDiv.style.background = chat.Sender === "ผู้ซื้อ (ผู้สนใจ)" ? "#222" : "#332508";
+          msgDiv.style.borderLeft = chat.Sender === "ผู้ซื้อ (ผู้สนใจ)" ? "3px solid #888" : "3px solid var(--gold-main)";
+          
+          msgDiv.innerHTML = `
+            <div style="display:flex; justify-content:space-between; font-size:0.85rem; margin-bottom:3px;">
+              <span style="color:var(--gold-main); font-weight:600;">👤 ${chat.Sender}</span>
+              <span style="color:gray; font-size:0.75rem;">${chat.Date}</span>
+            </div>
+            <div style="color:#fff; font-size:1rem; word-break:break-all;">${chat.Message}</div>
+          `;
+          chatContainer.appendChild(msgDiv);
+        });
+        chatContainer.scrollTop = chatContainer.scrollHeight;
+      } else {
+        chatContainer.innerHTML = "<p style='color:gray; font-size:0.9rem; text-align:center; padding:10px;'>ยังไม่มีข้อความสอบถามในประกาศนี้<br>พิมพ์ข้อความด้านล่างส่งทักทายผู้ขายได้เลยครับ</p>";
+      }
+    })
+    .catch(() => {
+      chatContainer.innerHTML = "<p style='color:#e74c3c; font-size:0.9rem; text-align:center;'>ระบบกล่องแชทขัดข้อง</p>";
+    });
+}
+
 
     </script>
 </body>
