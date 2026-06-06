@@ -215,28 +215,18 @@
       color: var(--text-muted); 
     }
     
-	/* ส่วนพื้นหลัง กว้างเต็มจอ */
-	.bottom-navbar {
-	  position: fixed;
-	  bottom: 0;
-	  left: 0;
-	  width: 100%;
-	  background-color: #1a1a1a;
-	  border-top: 1px solid #bf953f;
-	  z-index: 1000;
-	}
-
-
-	/* ส่วนเนื้อหา จำกัดความกว้างให้เท่ากับกล่องเนื้อหาหลัก */
-	.navbar-inner {
-	  max-width: 600px; /* ปรับค่าตัวเลขนี้ให้เท่ากับ max-width ของกล่อง Content หลักที่คุณใช้ */
-	  margin: 0 auto;   /* จัดให้อยู่กึ่งกลางหน้าจอเสมอ */
-	  height: 60px;     /* กำหนดความสูงให้เมนู */
-	  display: flex;
-	  justify-content: space-around;
-	  align-items: center;
-	}
-
+    .bottom-navbar { 
+      height: var(--nav-height); 
+      background-color: #1a1a1a; 
+      border: 1px solid #bf953f; 
+      border-radius: 8px; 
+      display: flex; 
+      justify-content: space-around; 
+      align-items: center; 
+      margin-top: 30px; 
+      position: relative; 
+      z-index: 99; 
+    }
     .nav-item { 
       display: flex; 
       flex-direction: column; 
@@ -420,7 +410,6 @@
         <div class="news-content-text" id="ticker-text">กำลังโหลดข้อมูลข่าวสารจากศูนย์แอดมิน...</div>
       </div>
 
-</div>
       <div class="dashboard-cards-grid">
         <div class="stat-mini-card" onclick="setFilterStatus('all')">
           <div class="stat-card-num" id="stat-total">0</div>
@@ -439,6 +428,8 @@
           <div class="stat-card-label">คลังครู (AI)</div>
         </div>
       </div>
+	  
+
 
       <div class="form-group" style="display: flex; gap: 6px; margin-bottom: 15px;">
         <input type="text" id="search-input" placeholder="พิมพ์ค้นหาชื่อพระ, ผู้ลง, พิกัด..." oninput="renderListings()">
@@ -533,7 +524,7 @@
 
     <div id="frame-faq" class="main-frame hidden">
       <div class="faq-container">
-        <h3 style="color: var(--gold-main); text-align: center; margin-bottom: 15px; font-size: 1.3rem;">💡 คำถามที่พบบ่อย (FAQs) สารบบ คม วังน้อย</h3>
+        <h3 style="color: var(--gold-main); text-align: center; margin-bottom: 15px; font-size: 1.3rem;">💡 FAQs</h3>
         
         <div class="faq-item">
           <div class="faq-title" onclick="toggleFaq(this)">1. การลงประกาศปลอดภัยแค่ไหน? <span>▼</span></div>
@@ -541,8 +532,8 @@
         </div>
         
         <div class="faq-item">
-          <div class="faq-title" onclick="toggleFaq(this)">2. ผู้ซื้อไม่มั่นใจว่าพระที่ลงประกาศนั้นแท้หรือไม่ จะทำอย่างไร ? <span>▼</span></div>
-          <div class="faq-ans hidden">ผู้ซื้อที่ไม่มั่นใจในการซื้อพระตามรายการที่ประกาศ สามารถติดต่อซื้อผ่านแอดมินได้ โดยไม่มีค่าบริการ พระเครื่องทุกประกาศที่ท่านซื้อไปโดยผ่านทางแอดมิน จะรับประกันความแท้ และสามารถคืนเงินได้เต็มจำนวนหากพบว่าไม่แท้ในภายหลัง</div>
+          <div class="faq-title" onclick="toggleFaq(this)">2. ประกาศที่ลง มีหมดอายุหรือไม่? <span>▼</span></div>
+          <div class="faq-ans hidden">ไม่มีหมดอายุครับ ประกาศจะยังอยู่ จนกว่าผู้ลงประกาศจะลบเอง</div>
         </div>
         
         <div class="faq-item">
@@ -561,8 +552,8 @@
         </div>
         
         <div class="faq-item">
-          <div class="faq-title" onclick="toggleFaq(this)">6. ประกาศมีวันหมดอายุหรือไม่ ? <span>▼</span></div>
-          <div class="faq-ans hidden">ประกาศในแพลทฟอร์มของเราจะไม่มีการกำหนดอายุครับ เพียงแต่ประกาศที่ใหม่กว่าจะเห็นในหน้าแรกๆ ประกาศของท่านที่เก่ากว่าก็จะอยู่ไกลจากหน้าแรก ซึ่งถ้าท่านลบประกาศเก่าแล้วลงประกาศใหม่อีกครั้ง ประกาศของท่านก็จะกลับมาอยู่หน้าแรกๆ เช่นเดิม</div>
+          <div class="faq-title" onclick="toggleFaq(this)">6. การลงประกาศของแต่ละ ID มีจำกัดจำนวนหรือไม่ ? <span>▼</span></div>
+          <div class="faq-ans hidden">ไม่มีจำกัดจำนวนครับ ลงได้ฟรีเรื่อยๆ</div>
         </div>
         
         <div class="faq-item">
@@ -587,7 +578,7 @@
         
         <div class="faq-item">
           <div class="faq-title" onclick="toggleFaq(this)">11. ซื้อขายอย่างไรให้ปลอดภัยที่สุดบนกระดานนี้? <span>▼</span></div>
-          <div class="faq-ans hidden">แนะนำให้โทรติดต่อ พูดคุยขอดูองค์จริง นัดรับพระเครื่องในสถานที่ปลอดภัย หรือใช้ระบบกรรมการสื่อกลางสายตรงที่เชื่อถือได้ครับ หรือจะซื้อผ่านแอดมินก็สามารถทำได้แบบไม่มีค่าบริการครับ</div>
+          <div class="faq-ans hidden">แนะนำให้โทรติดต่อ พูดคุยขอดูองค์จริง นัดรับพระเครื่องในสถานที่ปลอดภัย หรือใช้ระบบกรรมการสื่อกลางสายตรงที่เชื่อถือได้ครับ</div>
         </div>
         
         <div class="faq-item">
@@ -645,25 +636,22 @@
       </div>
     </div>
 
-    </div>
     <div class="bottom-navbar">
-		<div class="navbar-inner">
-			<div class="nav-item active" id="nav-dashboard" onclick="switchTab('dashboard')">
-			<span class="nav-icon">🏆</span><span>หน้าแรก</span>
-			</div>
-			<div class="nav-item" id="nav-create" onclick="switchTab('create')">
-			<span class="nav-icon">✍️</span><span>ลงประกาศ</span>
-			</div>
-			<div class="nav-item" id="nav-scan" onclick="switchTab('scan')">
-			<span class="nav-icon">🔍</span><span>สแกนพระ</span>
-			</div>
-			<div class="nav-item" id="nav-faq" onclick="switchTab('faq')">
-			<span class="nav-icon">💡</span><span>คำถามที่พบบ่อย</span>
-			</div>
-			<div class="nav-item" id="nav-admin" onclick="switchTab('admin')">
-			<span class="nav-icon">🔒</span><span>แอดมิน</span>
-			</div>
-		</div>
+      <div class="nav-item active" id="nav-dashboard" onclick="switchTab('dashboard')">
+        <span class="nav-icon">🏆</span><span>หน้าแรก</span>
+      </div>
+      <div class="nav-item" id="nav-create" onclick="switchTab('create')">
+        <span class="nav-icon">✍️</span><span>ลงประกาศ</span>
+      </div>
+      <div class="nav-item" id="nav-scan" onclick="switchTab('scan')">
+        <span class="nav-icon">🔍</span><span>สแกนพระ</span>
+      </div>
+      <div class="nav-item" id="nav-faq" onclick="switchTab('faq')">
+        <span class="nav-icon">💡</span><span>ช่วยเหลือ</span>
+      </div>
+      <div class="nav-item" id="nav-admin" onclick="switchTab('admin')">
+        <span class="nav-icon">🔒</span><span>แอดมิน</span>
+      </div>
     </div>
 
     <div id="detail-view-modal" class="full-detail-view hidden">
@@ -680,7 +668,7 @@
         <div class="info-row"><span>📅 วันที่ลงประกาศ:</span><span id="dt-timestamp"></span></div>
         <div class="info-row"><span>📦 ประเภทพระเครื่อง:</span><span id="dt-type"></span></div>
         <div class="info-row"><span>💰 ราคาเช่าบูชา:</span><strong id="dt-price" style="color:#2ecc71; font-size:1.3rem;"></strong></div>
-        <div class="info-row"><span>📍 พิกัดพระเครื่อง:</span><span id="dt-location"></span></div>
+        <div class="info-row"><span>📍 พิกัดนัดรับองค์พระ:</span><span id="dt-location"></span></div>
         <div class="info-row"><span>📞 เบอร์โทรศัพท์:</span><a id="dt-phone-link" href="#" style="color:var(--gold-main); font-weight:600;"></a></div>
         <div class="info-row"><span>🟢 LINE ID:</span><span id="dt-line" style="color:#2ecc71; font-weight:600;"></span></div>
         <div class="info-row"><span>⚡ สถานะล่าสุด:</span><span id="dt-status"></span></div>
@@ -697,7 +685,7 @@
 
   <script>
     // 🔥 บันทึกวางลิงก์ Web App URL ที่ได้จากการ Deploy หลังบ้านของคุณพี่ที่นี่ครับ
-    const WEB_APP_URL = "https://script.google.com/macros/s/AKfycby-yH2xxuTiGuKtMXXTfN7q7ELiIKSZv66T1WShBa4fDkC3YO77X0egVgBsU4q1kJex/exec"; 
+    const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbx8ukRqowahv8kJhIHRszMK6aJIvsW9ONGudnowAPdPV9uT6LNhu1omENK4kaQOr729/exec"; 
     
     let allListings = [];
     let activeListing = null;
@@ -900,7 +888,7 @@
       } else {
         document.getElementById('dt-img').src = "https://via.placeholder.com/350?text=No+Image";
       }
-
+	        
 	  // 🔥 ตรวจเช็คสิทธิ์ล็อกอิน: หากไม่ได้เข้าระบบ หรือ Username ไม่ตรงกัน จะหมดสิทธิ์แก้ไขประกาศเด็ดขาด!
       const actionPanel = document.getElementById('user-action-box');
       if (currentAmuletUser && currentAmuletUser === item.Username) {
@@ -931,6 +919,7 @@
               <button class="btn" style="background:#e74c3c; color:#fff;" onclick="submitDeleteListing()">🗑️ ยืนยันลบประกาศถาวร</button>
             </div>
           </div>
+		  
         `;
       } else {
         actionPanel.innerHTML = `
@@ -938,7 +927,7 @@
             🔒 คุณอยู่ในสถานะระบบจัดการสิทธิ์ผู้เยี่ยมชมทั่วไป หรือ ชื่อผู้ใช้ไม่ตรงกับเจ้าของประกาศองค์นี้ จึงไม่ได้รับอนุญาตให้ทำการแก้ไขหรือลบรายการพระเครื่ององค์นี้ได้ครับ (กรุณาลงชื่อเข้าใช้ด้วยบัญชีผู้ลงประกาศตัวจริงเพื่อเปิดแผงควบคุมสิทธิ์)
           </div>
         `;
-      	  
+      	
 	  }
 
       document.getElementById('detail-view-modal').classList.remove('hidden');
@@ -952,6 +941,7 @@
 	
   } 
 	
+	  
 function loadListingChats(item) {
   if (!item) return;
   const chatContainer = document.getElementById('listing-chat-messages');
@@ -1071,16 +1061,13 @@ function loadListingChats(item) {
           document.getElementById('post-file').value = "";
           uploadedFilesBase64 = [];
           
-
-		  
           switchTab('dashboard');
           loadDataFromServer();
         } else {
           alert("❌ เกิดข้อขัดข้อง: " + res.message);
         }
       }).catch(err => alert("ข้อผิดพลาดเครือข่าย: " + err));
-	  
-	}
+    }
 
 	function submitListing() {
   // 1. [เพิ่มเอฟเฟกต์] ค้นหาปุ่ม Submit เพื่อเปลี่ยนสถานะเป็นกำลังโหลด
@@ -1402,15 +1389,6 @@ function loadListingChats(item) {
       }
     }
 	
-	function submitWanted() {
-  const data = {
-    name: document.getElementById('w-name').value,
-    price: document.getElementById('w-price').value,
-    contact: document.getElementById('w-contact').value
-  };
-  google.script.run.withSuccessHandler(() => alert("ประกาศแล้ว")).saveWanted(data);
-}
-
 // 1. ฟังก์ชันโหลดประวัติแชทของพระเครื่ององค์นี้มาแสดงผลในกล่อง
 	function loadListingChats() {
 	  const item = globalListings[currentSelectedListingIndex];
@@ -1453,13 +1431,6 @@ function loadListingChats(item) {
     });
 }
 
-function shareLink(id) {
-  // สร้าง URL ที่ระบุ ID ของประกาศ
-  const url = window.location.origin + window.location.pathname + "?id=" + id;
-  navigator.clipboard.writeText(url).then(() => {
-    alert("คัดลอกลิงก์เรียบร้อย! นำไปโพสต์ที่อื่นได้เลย");
-  });
-}
 // 2. ฟังก์ชันเมื่อผู้ใช้งานกดปุ่ม "ส่งแชท"
 	function sendListingChat() {
 	  const chatInput = document.getElementById('listing-chat-input');
@@ -1543,6 +1514,7 @@ function loadListingChats(item) {
       chatContainer.innerHTML = "<p style='color:#e74c3c; font-size:0.9rem; text-align:center;'>ระบบกล่องแชทขัดข้อง</p>";
     });
 }
+
 
     </script>
 </body>
