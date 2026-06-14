@@ -5,38 +5,54 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>แพลตฟอร์ม คม วังน้อย พระเครื่อง ออนไลน์</title>
   <style>
-    body {
+    /* ตั้งค่าโครงสร้างหลัก */
+    html, body {
       background-color: #060a12;
       color: #e2e8f0;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       margin: 0;
       padding: 0;
+      height: 100%;
     }
+
+    /* 📌 1. ระบบล็อกส่วนหัวแพลตฟอร์มจนถึงข่าวสารวิ่งไว้ไม่ให้เลื่อนตาม (Sticky Top) */
+    .sticky-header-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      background-color: #060a12;
+      box-shadow: 0px 4px 20px rgba(0, 180, 216, 0.4);
+    }
+
     header {
       background: linear-gradient(135deg, #0b132b 0%, #1c2541 100%);
-      padding: 25px;
+      padding: 15px 20px;
       border-bottom: 3px solid #ffd700;
-      box-shadow: 0px 4px 20px rgba(0, 180, 216, 0.3);
       text-align: center;
     }
-    h1 {
+    header h1 {
       color: #00b4d8; 
       margin: 0;
       text-shadow: 0 0 15px rgba(0, 180, 216, 0.9);
-      font-size: 32px;
+      font-size: 24px;
     }
-    .neon-text {
-      color: #00b4d8 !important;
-      text-shadow: 0 0 10px rgba(0, 180, 216, 0.7);
+    header p {
+      margin: 3px 0 0 0; 
+      color: #ffffff; 
+      font-size: 12px;
     }
+
     .marquee-container {
       background-color: #020617;
       border-bottom: 1px solid #1e293b;
-      padding: 10px 0;
+      padding: 8px 0;
       overflow: hidden;
       white-space: nowrap;
       color: #00b4d8;
       font-weight: bold;
+      font-size: 13px;
     }
     .marquee-text {
       display: inline-block;
@@ -47,41 +63,86 @@
       0% { transform: translate3d(0, 0, 0); }
       100% { transform: translate3d(-100%, 0, 0); }
     }
-    .main-layout {
+
+    /* 📌 2. แถบสลับแท็บเมนูด้านบน (Navigation Tabs) */
+    .tab-bar {
       display: flex;
-      flex-wrap: wrap;
-      padding: 20px;
-      gap: 20px;
+      background-color: #0b132b;
+      border-bottom: 2px solid #1c2541;
+      overflow-x: auto; /* ถ้ายาวเกินจอมือถือจะเลื่อนสไลด์ด้านข้างได้ */
+      scrollbar-width: none;
     }
-    .sidebar {
+    .tab-bar::-webkit-scrollbar {
+      display: none;
+    }
+    .tab-btn {
       flex: 1;
-      min-width: 340px;
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
+      min-width: 100px;
+      padding: 12px 10px;
+      background: none;
+      border: none;
+      color: #94a3b8;
+      font-weight: bold;
+      font-size: 14px;
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.2s;
+      white-space: nowrap;
+      border-bottom: 3px solid transparent;
     }
-    .content-area {
-      flex: 3;
-      min-width: 600px;
-      display: flex;
-      flex-direction: column;
-      gap: 30px;
+    .tab-btn:hover {
+      color: #00b4d8;
+      background-color: rgba(0, 180, 216, 0.05);
     }
+    .tab-btn.active {
+      color: #00b4d8;
+      border-bottom-color: #00b4d8;
+      background-color: rgba(0, 180, 216, 0.1);
+      text-shadow: 0 0 8px rgba(0, 180, 216, 0.6);
+    }
+
+    /* ส่วนเนื้อหาขยับลงมาด้านล่างเพื่อไม่ให้โดนหัวเว็บบัง */
+    .main-content {
+      margin-top: 175px; /* ระยะเว้นเผื่อส่วนหัวที่โดนล็อก */
+      padding: 15px;
+      box-sizing: border-box;
+    }
+
+    /* 📌 ควบคุมการแสดงผลของแต่ละแท็บ */
+    .tab-content {
+      display: none; /* ซ่อนไว้ก่อน */
+    }
+    .tab-content.active {
+      display: block; /* แสดงเฉพาะแท็บที่ถูกเลือก */
+      animation: fadeIn 0.3s ease-in-out;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(5px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* สไตล์กล่องพาร์ทเนื้อหาต่างๆ */
     .panel-box {
       background-color: #0b132b;
       border: 1px solid #1c2541;
       border-top: 3px solid #ffd700; 
       border-radius: 8px;
-      padding: 20px;
+      padding: 15px;
+      margin-bottom: 20px;
       box-shadow: 0 6px 12px rgba(0,0,0,0.5);
     }
     .panel-box h2 {
       margin-top: 0;
       color: #00b4d8; 
-      font-size: 20px;
+      font-size: 18px;
       border-bottom: 1px solid #1c2541;
-      padding-bottom: 10px;
+      padding-bottom: 8px;
     }
+    .neon-text {
+      color: #00b4d8 !important;
+      text-shadow: 0 0 10px rgba(0, 180, 216, 0.7);
+    }
+
     .form-group {
       margin-bottom: 12px;
     }
@@ -93,65 +154,69 @@
     }
     .form-group input, .form-group select, .form-group textarea {
       width: 100%;
-      padding: 9px 12px;
+      padding: 10px 12px;
       background-color: #1c2541;
       border: 1px solid #3a506b;
       border-radius: 4px;
       color: #fff;
       box-sizing: border-box;
+      font-size: 14px;
     }
+
     .btn-cyan {
       background-color: #00b4d8;
       color: #060a12;
       border: none;
-      padding: 10px 15px;
+      padding: 12px 15px;
       font-weight: bold;
       border-radius: 4px;
       cursor: pointer;
       width: 100%;
+      font-size: 14px;
       transition: all 0.2s;
     }
     .btn-cyan:hover {
       background-color: #0096c7;
       box-shadow: 0 0 12px rgba(0, 180, 216, 0.6);
     }
+
+    /* กระดานสินค้าแสดงผลแบบ Grid ปรับให้ยืดหยุ่นตามหน้าจอ */
     .board-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 20px;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 15px;
     }
     .amulet-card {
       background-color: #1c2541;
       border: 1px solid #3a506b;
       border-radius: 6px;
-      padding: 15px;
+      padding: 12px;
       position: relative;
       cursor: pointer;
       transition: transform 0.2s;
     }
     .amulet-card:hover {
-      transform: translateY(-4px);
       border-color: #00b4d8;
     }
     .card-badge {
       position: absolute;
-      top: 10px;
-      left: 10px;
+      top: 8px;
+      left: 8px;
       background: #ffd700;
       color: #060a12;
       font-size: 11px;
       font-weight: bold;
-      padding: 3px 8px;
+      padding: 3px 6px;
       border-radius: 4px;
       z-index: 2;
     }
     .status-badge {
       position: absolute;
-      top: 10px;
-      right: 10px;
+      top: 8px;
+      right: 8px;
       font-size: 11px;
       font-weight: bold;
-      padding: 3px 8px;
+      padding: 3px 6px;
       border-radius: 4px;
       z-index: 2;
     }
@@ -160,10 +225,10 @@
     
     .card-thumbnail-container {
       width: 100%;
-      height: 200px;
+      height: 180px;
       background-color: #060a12;
       border-radius: 4px;
-      margin: 10px 0;
+      margin: 8px 0;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -176,108 +241,17 @@
     }
     .price {
       color: #00b4d8;
-      font-size: 22px;
+      font-size: 20px;
       font-weight: bold;
-      margin: 5px 0;
+      margin: 4px 0;
     }
-    
-    /* โมดอลป๊อปอัปรายละเอียด */
-    .modal {
-      display: none;
-      position: fixed;
-      z-index: 1000;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      overflow: auto;
-      background-color: rgba(4, 7, 13, 0.9);
-      backdrop-filter: blur(5px);
-    }
-    .modal-content {
-      background-color: #0b132b;
-      margin: 5% auto;
-      padding: 25px;
-      border: 2px solid #ffd700;
-      border-radius: 8px;
-      width: 90%;
-      max-width: 580px;
-      position: relative;
-    }
-    .close-modal {
-      position: absolute;
-      top: 15px;
-      right: 20px;
-      color: #ffd700;
-      font-size: 28px;
-      font-weight: bold;
-      cursor: pointer;
-    }
-    .carousel-container {
-      position: relative;
-      width: 100%;
-      height: 350px;
-      background: #060a12;
-      border-radius: 6px;
-      margin-bottom: 15px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: zoom-in; /* เปลี่ยนรูปเมาส์เป็นแว่นขยายส่องพระ */
-    }
-    .carousel-img {
-      max-width: 100%;
-      max-height: 100%;
-      object-fit: contain;
-      display: none;
-    }
-    .carousel-img.active { display: block; }
-    
-    /* ปรับแต่งปุ่มกดไม่ให้ทับซ้อนกันเพื่อป้องกันการบล็อกคลิกขยายรูป */
-    .carousel-btn {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      background: rgba(0, 180, 216, 0.8);
-      color: white;
-      border: none;
-      padding: 12px 16px;
-      cursor: pointer;
-      font-weight: bold;
-      border-radius: 4px;
-      z-index: 50; /* ดันปุ่มไว้เหนือสุดเฉพาะจุด */
-    }
-    .btn-prev { left: 10px; }
-    .btn-next { right: 10px; }
 
-    .action-buttons {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 8px;
-      margin: 15px 0;
-    }
-    .act-btn {
-      padding: 10px 2px;
-      border: none;
-      border-radius: 4px;
-      font-weight: bold;
-      font-size: 13px;
-      cursor: pointer;
-      text-align: center;
-      text-decoration: none;
-      display: inline-block;
-    }
-    .btn-phone { background-color: #2ec4b6; color: #fff; }
-    .btn-line { background-color: #06d6a0; color: #000; }
-    .btn-chat { background-color: #00b4d8; color: #000; }
-    .btn-share { background-color: #ff9f1c; color: #fff; }
-    .btn-edit { background-color: #e63946; color: #fff; grid-column: span 4; margin-top: 5px; }
-
+    /* รายการอื่นๆ */
     .wanted-item {
       background-color: #111a36;
       border-left: 4px solid #ff9f1c;
       border-bottom: 1px solid #ffd700;
-      padding: 15px;
+      padding: 12px;
       margin-bottom: 12px;
       border-radius: 0 6px 6px 0;
     }
@@ -291,11 +265,102 @@
     }
     .event-item:hover { border-color: #00b4d8; }
 
-    /* 🔎 หน้าจอครอบส่องขยายภาพใหญ่สุดพลัง (Lightbox Mode) */
+    /* ป๊อปอัปส่องโมดอลรายละเอียด */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 2000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(4, 7, 13, 0.9);
+      backdrop-filter: blur(5px);
+    }
+    .modal-content {
+      background-color: #0b132b;
+      margin: 10% auto;
+      padding: 20px;
+      border: 2px solid #ffd700;
+      border-radius: 8px;
+      width: 92%;
+      max-width: 540px;
+      position: relative;
+      box-sizing: border-box;
+    }
+    .close-modal {
+      position: absolute;
+      top: 12px;
+      right: 18px;
+      color: #ffd700;
+      font-size: 26px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .carousel-container {
+      position: relative;
+      width: 100%;
+      height: 280px;
+      background: #060a12;
+      border-radius: 6px;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: zoom-in;
+    }
+    .carousel-img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+      display: none;
+    }
+    .carousel-img.active { display: block; }
+    .carousel-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(0, 180, 216, 0.8);
+      color: white;
+      border: none;
+      padding: 10px 14px;
+      cursor: pointer;
+      font-weight: bold;
+      border-radius: 4px;
+      z-index: 50;
+    }
+    .btn-prev { left: 8px; }
+    .btn-next { right: 8px; }
+
+    .action-buttons {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 6px;
+      margin: 12px 0;
+    }
+    .act-btn {
+      padding: 10px 2px;
+      border: none;
+      border-radius: 4px;
+      font-weight: bold;
+      font-size: 12px;
+      cursor: pointer;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+    }
+    .btn-phone { background-color: #2ec4b6; color: #fff; }
+    .btn-line { background-color: #06d6a0; color: #000; }
+    .btn-chat { background-color: #00b4d8; color: #000; }
+    .btn-share { background-color: #ff9f1c; color: #fff; }
+    .btn-edit { background-color: #e63946; color: #fff; grid-column: span 4; margin-top: 4px; }
+
+    /* 🔎 บล็อกครอบส่องขยายวัตถุมงคล (Lightbox) หน้าสุด */
     .lightbox {
       display: none;
       position: fixed;
-      z-index: 9999; /* ดันให้อยู่หน้าสุดของหน้าจอ */
+      z-index: 9999; 
       left: 0;
       top: 0;
       width: 100%;
@@ -312,24 +377,42 @@
       border: 2px solid #ffd700;
       box-shadow: 0 0 30px rgba(0, 180, 216, 0.5);
     }
+
+    /* ปรับแต่งความสูง Margin สัดส่วนเมื่อใช้งานบนจอมือถือเล็กสุด */
+    @media (max-width: 480px) {
+      .sticky-header-container { position: fixed; }
+      .main-content { margin-top: 165px; padding: 10px; }
+      header h1 { font-size: 19px; }
+      .tab-btn { font-size: 13px; padding: 10px 5px; }
+      .action-buttons { grid-template-columns: repeat(2, 1fr); }
+      .btn-edit { grid-column: span 2; }
+    }
   </style>
 </head>
 <body>
 
-  <header>
-    <h1>แพลตฟอร์ม คม วังน้อย พระเครื่อง ออนไลน์</h1>
-    <p style="margin:5px 0 0 0; color:#ffffff;">แพลตฟอร์มพระเครื่องออนไลน์ ใช้งานง่าย และฟรี</p>
-    <button class="btn-cyan" style="width:auto; margin-top:10px; background-color:#ffd700;" onclick="openAdminPanel()">🔑 เฉพาะแอดมิน (Admin Panel)</button>
-  </header>
+  <div class="sticky-header-container">
+    <header>
+      <h1>แพลตฟอร์ม คม วังน้อย พระเครื่อง ออนไลน์</h1>
+      <p>แพลตฟอร์มพระเครื่องออนไลน์ ใช้งานง่าย และฟรี</p>
+      <button class="btn-cyan" style="width:auto; padding:4px 10px; margin-top:5px; font-size:11px; background-color:#ffd700;" onclick="openAdminPanel()">🔑 แอดมิน (Admin)</button>
+    </header>
 
-  <div class="marquee-container">
-    <div class="marquee-text" id="newsTicker">กำลังดึงข้อมูลข่าวด่วนล่าสุด...</div>
+    <div class="marquee-container">
+      <div class="marquee-text" id="newsTicker">กำลังดึงข้อมูลข่าวด่วนล่าสุด...</div>
+    </div>
+
+    <div class="tab-bar">
+      <button class="tab-btn active" onclick="switchMainTab('marketTab', this)">🏆 รายการประกาศ</button>
+      <button class="tab-btn" onclick="switchMainTab('uploadTab', this)">✍️ ประกาศปล่อยเช่า</button>
+      <button class="tab-btn" onclick="switchMainTab('wantedTab', this)">🔍 ใบสั่งตั้งรับพระ</button>
+      <button class="tab-btn" onclick="switchMainTab('supportTab', this)">🤝 แจ้งเรื่อง / ความเช่วยเหลือ</button>
+    </div>
   </div>
 
-  <div class="main-layout">
+  <div class="main-content">
     
-    <div class="sidebar">
-      <!-- คัดกรองข้อมูล -->
+    <div id="marketTab" class="tab-content active">
       <div class="panel-box">
         <h2>🔍 ค้นหา</h2>
         <div class="form-group">
@@ -349,13 +432,29 @@
         </div>
       </div>
 
-      <!-- เมนู 1: ฝากลงประกาศปล่อยเช่า -->
+      <div class="panel-box">
+        <h2 class="neon-text">🏆 รายการที่ลงประกาศ</h2>
+        <div class="board-grid" id="amuletBoardView"><p>กำลังดึงข้อมูลรายการพระเครื่อง...</p></div>
+      </div>
+
+      <div class="panel-box">
+        <h2 class="neon-text">📅 ปฏิทินข่าวกิจกรรมและงานประกวดพระเครื่อง</h2>
+        <div id="eventsBoardView"><p>กำลังโหลดรายการปฏิทินงานประกวด...</p></div>
+      </div>
+
+      <div class="panel-box">
+        <h2 class="neon-text">🔍 กระดานใบสั่งตามหาพระด่วน</h2>
+        <div id="wantedBoardView"><p>กำลังโหลดรายการใบสั่ง...</p></div>
+      </div>
+    </div>
+
+    <div id="uploadTab" class="tab-content">
       <div class="panel-box">
         <h2>ลงประกาศปล่อยเช่าพระเครื่อง</h2>
         <form id="amuletForm">
-          <div class="form-group"><label>ชื่อผู้ใช้งาน</label><input type="text" id="username" value="" required></div>
+          <div class="form-group"><label>ชื่อผู้ประกาศ</label><input type="text" id="username" value="" required></div>
           <div class="form-group">
-            <label>หมวดหมู่</label>
+            <label>เลือกหมวดหมู่</label>
             <select id="type" required>
               <option value="พระเบญจภาคี">พระเบญจภาคี</option>
               <option value="พระหลักยอดนิยม">พระหลักยอดนิยม</option>
@@ -374,13 +473,14 @@
           <button type="submit" class="btn-cyan" id="submitBtn">ตั้งประกาศปล่อยเช่าพระเครื่อง</button>
         </form>
       </div>
+    </div>
 
-      <!-- เมนู 2: ออกใบสั่งตั้งรับพระด่วน -->
+    <div id="wantedTab" class="tab-content">
       <div class="panel-box" style="border-top-color:#ff9f1c;">
         <h2 style="color:#ff9f1c;">ออกใบสั่งประกาศตั้งรับพระเครื่อง (Wanted)</h2>
         <form id="wantedForm">
           <div class="form-group"><label>ชื่อผู้ตั้งรับซื้อ</label><input type="text" id="wContactName" value="" required></div>
-          <div class="form-group"><label>ชื่อพระเครื่องที่ตามหา / รายละเอียดใบสั่ง</label><input type="text" id="wName" placeholder="เช่น หลวงพ่อเงิน พิมพ์นิยม" required></div>
+          <div class="form-group"><label>ชื่อพระเครื่องที่ตามหา</label><input type="text" id="wName" placeholder="เช่น หลวงพ่อเงิน พิมพ์นิยม" required></div>
           <div class="form-group">
             <label>หมวดหมู่พระที่ตั้งรับ</label>
             <select id="wType" required>
@@ -392,133 +492,129 @@
             </select>
           </div>
           <div class="form-group"><label>งบประมาณสู้ราคาสูงสุด (บาท)</label><input type="number" id="wPrice" required></div>
-          <div class="form-group"><label>เบอร์โทรศัพท์ หรือ ช่องทางติดต่อกลับ</label><input type="text" id="wContact" value="" required></div>
+          <div class="form-group"><label>ช่องทางติดต่อกลับ</label><input type="text" id="wContact" value="" required></div>
           <div class="form-group"><label>กำหนดรหัส PIN ประจำใบสั่งนี้</label><input type="password" id="wPin" placeholder="รหัส 4 หลัก" required></div>
           <button type="submit" class="btn-cyan" style="background-color:#ff9f1c; color:#000;">ส่งประกาศใบสั่งตั้งรับพระ</button>
         </form>
       </div>
+    </div>
 
-      <!-- เมนู 3: แจ้งเรื่องร้องเรียน -->
+    <div id="supportTab" class="tab-content">
       <div class="panel-box" style="border-top-color: #ef4444;">
-        <h2 style="color:#ef4444;">🤝 แจ้งเรื่องร้องเรียน & ขอความช่วยเหลือ</h2>
+        <h2 style="color:#ef4444;">🤝 แจ้งเรื่องร้องเรียน & ขอความช่วยเหลือถึงแอดมิน</h2>
         <form id="reportForm">
           <div class="form-group"><label>เบอร์โทร หรือ ไลน์ไอดี ของผู้แจ้ง</label><input type="text" id="repContact" placeholder="กรอกช่องทางติดต่อ" required></div>
-          <div class="form-group"><label>รายละเอียดปัญหาที่ต้องการให้แอดมินช่วย</label><textarea id="repMessage" rows="3" placeholder="ระบุเรื่องร้องเรียน..." required></textarea></div>
+          <div class="form-group"><label>รายละเอียดปัญหาที่ต้องการให้ช่วย</label><textarea id="repMessage" rows="4" placeholder="ระบุเรื่องราวร้องเรียน..." required></textarea></div>
           <button type="submit" class="btn-cyan" style="background-color:#ef4444; color:#fff;">ส่งเรื่องให้แอดมิน</button>
         </form>
       </div>
     </div>
 
-    <div class="content-area">
-      <!-- กระดานสินค้าประกาศพระเครื่องหลัก -->
-      <div class="panel-box">
-        <h2 class="neon-text">🏆 รายการพระเครื่องและวัตถุมงคลที่ลงประกาศ</h2>
-        <div class="board-grid" id="amuletBoardView"><p>กำลังประมวลผลดึงข้อมูลรายการพระเครื่อง...</p></div>
-      </div>
-
-      <!-- กระดานกิจกรรมข่าวด่วนงานประกวด -->
-      <div class="panel-box">
-        <h2 class="neon-text">📅 ปฏิทินข่าวกิจกรรมและงานประกวดพระเครื่อง</h2>
-        <div id="eventsBoardView"><p>กำลังโหลดรายการปฏิทินงานประกวด...</p></div>
-      </div>
-
-      <!-- กระดานใบสั่ง -->
-      <div class="panel-box">
-        <h2 class="neon-text">🔍 กระดานใบสั่ง</h2>
-        <div id="wantedBoardView"><p>กำลังโหลดรายการใบสั่ง...</p></div>
-      </div>
-    </div>
-
   </div>
 
-  <!-- โมดอลป๊อปอัปรายละเอียดพระเครื่อง -->
   <div id="amuletModal" class="modal">
     <div class="modal-content">
       <span class="close-modal" onclick="closeAmuletModal()">×</span>
-      <h3 id="modalTitle" class="neon-text" style="margin-top:0; font-size:24px;">ชื่อพระวัตถุมงคล</h3>
+      <h3 id="modalTitle" class="neon-text" style="margin-top:0; font-size:22px;">ชื่อพระ</h3>
       <div style="margin-bottom:10px;">
         <span id="modalBadge" style="background:#ffd700; color:#000; padding:3px 8px; font-weight:bold; font-size:12px; border-radius:4px;">ประเภท</span>
         <span id="modalStatusBadge" class="status-badge" style="position:static; display:inline-block; margin-left:10px;">สถานะ</span>
       </div>
       
-      <!-- สไลเดอร์แสดงรูปภาพ (ปรับแก้ให้ดักจับคลิกภาพรวมที่นี่) -->
       <div class="carousel-container" id="modalCarousel" onclick="handleCarouselContainerClick(event)"></div>
-      <div style="text-align:center; font-size:12px; color:#a5f3fc; margin-bottom:10px;">💡 แนะนำ: คลิกตรงพื้นที่รูปภาพด้านบน เพื่อเปิดโหมดขยายใหญ่ส่องเนื้อพระเต็มตา</div>
+      <div style="text-align:center; font-size:11px; color:#a5f3fc; margin-bottom:10px;">💡 แนะนำ: จิ้มกดที่ตัวรูปภาพด้านบนเพื่อส่องกล้องขยายใหญ่เต็มตา</div>
       
       <div id="modalPrice" class="price">0 ฿</div>
-      <div id="modalLocation" style="color:#fff; font-size:14px; margin-bottom:5px;">📍 สถานที่: </div>
-      <div id="modalOwner" style="color:#94a3b8; font-size:13px; margin-bottom:15px;">ผู้ประกาศ: </div>
+      <div id="modalLocation" style="color:#fff; font-size:13px; margin-bottom:4px;">📍 สถานที่: </div>
+      <div id="modalOwner" style="color:#94a3b8; font-size:13px; margin-bottom:12px;">ผู้ประกาศ: </div>
       
       <div class="action-buttons">
         <a id="btnCallAction" class="act-btn btn-phone" href="#">📞 โทรออก</a>
         <a id="btnLineAction" class="act-btn btn-line" href="#" target="_blank">💬 ทักไลน์</a>
         <button class="act-btn btn-chat" onclick="focusChatInput()">💬 แช้ตคุย</button>
         <button class="act-btn btn-share" onclick="copyShareLink()">🔗 แชร์โพสต์</button>
-        <button class="act-btn btn-edit" onclick="triggerEditListing()">⚙️ แก้ไขสถานะประกาศ หรือ ลบโพสต์นี้</button>
+        <button class="act-btn btn-edit" onclick="triggerEditListing()">⚙️ จัดการประกาศ/ลบโพสต์</button>
       </div>
 
       <div class="chat-section" style="background:#1c2541; padding:10px; border-radius:6px;">
-        <h4 style="margin:0 0 8px 0; color:#00b4d8;">กล่องพูดคุยสอบถาม</h4>
-        <div id="modalChatBox" style="height:100px; overflow-y:auto; background:#060a12; padding:8px; font-size:13px; border-radius:4px; margin-bottom:8px;"></div>
+        <h4 style="margin:0 0 6px 0; color:#00b4d8; font-size:13px;">กล่องพูดคุยสอบถาม</h4>
+        <div id="modalChatBox" style="height:90px; overflow-y:auto; background:#060a12; padding:8px; font-size:12px; border-radius:4px; margin-bottom:8px;"></div>
         <div style="display:flex; gap:6px;">
-          <input type="text" id="modalChatInput" placeholder="พิมพ์ข้อความ..." style="flex:1; padding:6px; background:#060a12; border:1px solid #3a506b; color:#fff;">
-          <button style="background:#ffd700; border:none; padding:6px 12px; font-weight:bold; cursor:pointer;" onclick="sendModalChat()">ส่ง</button>
+          <input type="text" id="modalChatInput" placeholder="พิมพ์ข้อความ..." style="flex:1; padding:6px; background:#060a12; border:1px solid #3a506b; color:#fff; font-size:13px;">
+          <button style="background:#ffd700; border:none; padding:6px 12px; font-weight:bold; cursor:pointer; font-size:13px;" onclick="sendModalChat()">ส่ง</button>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- แผงควบคุมระบบของแอดมิน -->
   <div id="adminModal" class="modal">
-    <div class="modal-content" style="max-width:700px; border-color:#e63946;">
+    <div class="modal-content" style="max-width:650px; border-color:#e63946;">
       <span class="close-modal" onclick="closeAdminPanel()">×</span>
-      <h2 style="color:#e63946; margin-top:0;">🔐 แผงควบคุมผู้ดูแลระบบ (Admin Control Panel)</h2>
+      <h2 style="color:#e63946; margin-top:0; font-size:20px;">🔐 แผงควบคุมผู้ดูแลระบบ (Admin)</h2>
       
       <div id="adminAuthBox">
         <div class="form-group">
           <label>กรอกรหัสผ่านความปลอดภัยแอดมิน (Admin PIN)</label>
-          <input type="password" id="adminPinInput" placeholder="กรอกรหัสผ่านความปลอดภัย...">
+          <input type="password" id="adminPinInput" placeholder="กรอกรหัสความปลอดภัย...">
         </div>
         <button class="btn-cyan" style="background-color:#e63946; color:#fff;" onclick="verifyAdminAccess()">เข้าสู่ระบบแอดมิน</button>
       </div>
 
-      <div id="adminMainContent" style="display:none; max-height:500px; overflow-y:auto; margin-top:15px;">
-        <div class="panel-box" style="border-top-color:#00b4d8; margin-bottom:15px;">
+      <div id="adminMainContent" style="display:none; max-height:450px; overflow-y:auto; margin-top:12px;">
+        <div class="panel-box" style="border-top-color:#00b4d8; margin-bottom:12px;">
           <h3>📢 อัปเดตตัววิ่งแถบข่าวหน้าเว็บ</h3>
-          <div class="form-group"><input type="text" id="admNews" placeholder="ระบุเนื้อความประกาศข่าวด่วน..."></div>
+          <div class="form-group"><input type="text" id="admNews" placeholder="ระบุเนื้อความข่าวด่วน..."></div>
           <button class="btn-cyan" onclick="submitAdminNews()">บันทึกตัววิ่งข่าวด่วน</button>
         </div>
 
-        <div class="panel-box" style="border-top-color:#ffd700; margin-bottom:15px;">
-          <h3>📅 บันทึกปฏิทินงานประกวดพระเครื่องชุดใหม่</h3>
+        <div class="panel-box" style="border-top-color:#ffd700; margin-bottom:12px;">
+          <h3>📅 บันทึกปฏิทินงานประกวดพระเครื่อง</h3>
           <div class="form-group"><label>วันที่จัดงาน</label><input type="text" id="admEvDate" placeholder="เช่น 28-29 มิถุนายน 2026"></div>
           <div class="form-group"><label>ชื่องานประกวด</label><input type="text" id="admEvName"></div>
           <div class="form-group"><label>สถานที่จัดงาน</label><input type="text" id="admEvLoc"></div>
           <div class="form-group"><label>ผู้จัดงาน</label><input type="text" id="admEvOrg"></div>
-          <div class="form-group"><label>URL ลิงก์รายละเอียดงานประกวด</label><input type="text" id="admEvUrl" placeholder="https://..."></div>
-          <button class="btn-cyan" style="background-color:#ffd700; color:#000;" onclick="submitAdminEvent()">บันทึกกิจกรรมปฏิทิน</button>
+          <div class="form-group"><label>URL ลิงก์รายละเอียดงาน</label><input type="text" id="admEvUrl" placeholder="https://..."></div>
+          <button class="btn-cyan" style="background-color:#ffd700; color:#000;" onclick="submitAdminEvent()">บันทึกปฏิทิน</button>
         </div>
 
         <div class="panel-box" style="border-top-color:#ff9f1c;">
-          <h3>📩 รายการแจ้งเรื่องร้องเรียน/ขอความช่วยเหลือ</h3>
+          <h3>📩 รายการร้องเรียน / ความช่วยเหลือ</h3>
           <div id="adminReportsListView"></div>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- 🔎 หน้าจอขยายภาพส่องพระใหญ่สุดพลัง (Lightbox Container) -->
   <div id="lightboxView" class="lightbox" onclick="closeLightbox()">
-    <img id="lightboxImg" src="" alt="ภาพส่องขยายวัตถุมงคล">
+    <img id="lightboxImg" src="" alt="ส่องพระแท้ขยายใหญ่">
   </div>
 
   <script>
-    const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbxWHrUc5Q4mWXBsOsEStMYuuPqVBuiBhUdwY7c4-R7t9tfOAFMBsV7IibhQW2y6EbJb/exec";
+    // สลับวางลิงก์ Web App URL ของจริง
+    const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbxt_xmg-sHglOoG_S0T6ey5VkVeCjDdmHbQaOTIW4MhZ-Trtlz6RcHkROfLaeGBybNi/exec";
 
     var cachedListings = [];
     var activeImgIndex = 0;
     var currentSelectedListing = null;
     var currentAdminPin = "";
+
+    // 📌 ฟังก์ชันใหม่สำหรับสลับแท็บบนหน้าจอมือถือ
+    function switchMainTab(tabId, btnElement) {
+      // ซ่อนทุกแท็บเนื้อหา
+      var contents = document.querySelectorAll('.tab-content');
+      contents.forEach(function(content) { content.classList.remove('active'); });
+      
+      // เอาสถานะ active ออกจากทุกปุ่มแท็บ
+      var buttons = document.querySelectorAll('.tab-btn');
+      buttons.forEach(function(btn) { btn.classList.remove('active'); });
+
+      // เปิดแท็บและปุ่มที่คลิกเลือก
+      document.getElementById(tabId).classList.add('active');
+      btnElement.classList.add('active');
+
+      // เลื่อนจอกลับไปด้านบนสุดอัตโนมัติเมื่อกดสลับแท็บเพื่อความสะดวก
+      window.scrollTo({top: 0, behavior: 'smooth'});
+    }
 
     async function loadDashboardData() {
       try {
@@ -527,7 +623,7 @@
 
         if (data.news && data.news.length > 0) {
           var latestNews = data.news[data.news.length - 1];
-          document.getElementById("newsTicker").innerText = "📢 ข่าวด่วน: " + latestNews.Message + " (" + latestNews.Timestamp + ")";
+          document.getElementById("newsTicker").innerText = "📢 ข่าวด่วน: updated version 2.8 คม วังน้อย พระเครื่อง ออนไลน์ ใช้งานง่าย และฟรี" + latestNews.Message + " (" + latestNews.Timestamp + ")";
         }
 
         cachedListings = data.listings ? [...data.listings].reverse() : [];
@@ -542,8 +638,7 @@
             evDiv.className = "event-item";
             evDiv.innerHTML = `
               <strong style="color:#ffd700;">📅 วันที่: ${ev.Date} - งาน: ${ev.Name}</strong>
-              <div style="font-size:13px; margin-top:4px; color:#fff;">📍 สถานที่: ${ev.Location} | จัดโดย: ${ev.Organizer}</div>
-              <small style="color:#00b4d8;">👉 คลิกเพื่อดูรายละเอียด</small>
+              <div style="font-size:13px; margin-top:4px; color:#fff;">📍 สถานที่: ${ev.Location}</div>
             `;
             evDiv.onclick = function() { if(ev.URL) window.open(ev.URL, '_blank'); };
             evBoard.appendChild(evDiv);
@@ -560,10 +655,9 @@
             var wDiv = document.createElement("div");
             wDiv.className = "wanted-item";
             wDiv.innerHTML = `
-              <strong style="color:#00b4d8;">🔍 ต้องการรับเช่าด่วน: ${wItem.Name}</strong>
-              <div style="font-size:14px; margin:4px 0;">สายกลุ่มพระ: <b>${wItem.Type}</b> | สู้ราคาสูงสุด: <span style="color:#ffd700; font-weight:bold;">${Number(wItem.Price).toLocaleString()} ฿</span></div>
-              <div style="font-size:12px; color:#cbd5e1; margin-bottom:8px;">👤 ใบสั่งออกโดยคุณ: ${wItem.ContactName}</div>
-              <button class="btn-cyan" style="width:auto; padding:5px 12px; background-color:#ff9f1c; color:#000;" onclick="offerAmuletDirect('${wItem.ContactName}', '${wItem.Contact}', '${wItem.Name}')">🙋‍♂️ กดเสนอพระเครื่ององค์นี้</button>
+              <strong style="color:#00b4d8;">🔍 ประกาศต้องการเช่า: ${wItem.Name}</strong>
+              <div style="font-size:14px; margin:4px 0;">ประเภท: <b>${wItem.Type}</b> | สู้ราคา: <span style="color:#ffd700; font-weight:bold;">${Number(wItem.Price).toLocaleString()} ฿</span></div>
+              <button class="btn-cyan" style="width:auto; padding:4px 10px; background-color:#ff9f1c; color:#000; font-size:12px;" onclick="offerAmuletDirect('${wItem.ContactName}', '${wItem.Contact}', '${wItem.Name}')">🙋‍♂️ กดเสนอพระเครื่ององค์นี้</button>
             `;
             wantedBoard.appendChild(wDiv);
           });
@@ -571,20 +665,15 @@
           wantedBoard.innerHTML = "<p>ไม่มีรายการใบสั่งตามหาในขณะนี้</p>";
         }
 
-        if(currentAdminPin !== "") {
-          renderAdminReports(data.reports || []);
-        }
-
-      } catch (err) {
-        console.error("ระบบผิดพลาด: ", err);
-      }
+        if(currentAdminPin !== "") { renderAdminReports(data.reports || []); }
+      } catch (err) { console.error("ระบบขัดข้อง: ", err); }
     }
 
     function renderListings(listingsArray) {
       var board = document.getElementById("amuletBoardView");
       board.innerHTML = "";
       if (!listingsArray || listingsArray.length === 0) {
-        board.innerHTML = "<p>ไม่พบรายการพระเครื่องประกาศปล่อยเช่าตามเงื่อนไขที่เลือก</p>";
+        board.innerHTML = "<p>ไม่พบรายการพระเครื่องปล่อยเช่าตามข้อตกลงเงื่อนไขที่เลือก</p>";
         return;
       }
 
@@ -607,10 +696,10 @@
           <div class="card-thumbnail-container">
             <img class="card-thumbnail" src="${firstImg}" alt="รูปพระเครื่อง">
           </div>
-          <h4 style="margin:5px 0; font-size:16px; color:#ffd700; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${item.Title}</h4>
+          <h4 style="margin:5px 0; font-size:15px; color:#ffd700; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${item.Title}</h4>
           <div class="price">${Number(item.Price).toLocaleString()} ฿</div>
           <div style="font-size:12px; color:#cbd5e1;">📍 ${item.Location} | โดย: ${item.Username}</div>
-          <div class="action-buttons" style="margin-top:10px; grid-template-columns: repeat(2, 1fr);" onclick="event.stopPropagation();">
+          <div class="action-buttons" style="margin-top:8px; grid-template-columns: repeat(2, 1fr);" onclick="event.stopPropagation();">
             <a class="act-btn btn-phone" href="tel:${item.Phone}">📞 โทร</a>
             <a class="act-btn btn-line" href="https://line.me/ti/p/~${item.Line}" target="_blank">💬 ไลน์</a>
           </div>
@@ -660,7 +749,7 @@
           var img = document.createElement("img");
           img.className = "carousel-img" + (idx === 0 ? " active" : "");
           img.src = url.trim();
-          img.setAttribute("data-src", url.trim()); // บันทึก Path สำหรับดึงไปส่องขยายรูป
+          img.setAttribute("data-src", url.trim());
           carousel.appendChild(img);
         });
         if(imgUrls.length > 1) {
@@ -676,13 +765,8 @@
       fetchChatHistory(item.ID);
     }
 
-    // 🔎 ฟังก์ชันใหม่: ดักจับคลิกภาพรวมของกล่อง ส่องรูปขยายภาพใหญ่ได้ชัวร์ไม่โดนปุ่มบัง
     function handleCarouselContainerClick(event) {
-      // ถ้ากดโดนปุ่มเลื่อนรูปซ้ายขวา ให้ข้ามฟังก์ชันขยายภาพไปเลย
-      if (event.target.classList.contains('carousel-btn')) {
-        return;
-      }
-      // ดึงรูปภาำที่แสดงอยู่ปัจจุบันออกมาขยายใหญ่
+      if (event.target.classList.contains('carousel-btn')) return;
       var activeImg = document.querySelector("#modalCarousel .carousel-img.active");
       if (activeImg && activeImg.getAttribute("data-src")) {
         openLightboxImage(activeImg.getAttribute("data-src"));
@@ -693,13 +777,10 @@
       document.getElementById("lightboxImg").src = src;
       document.getElementById("lightboxView").style.display = "flex";
     }
-    
-    function closeLightbox() {
-      document.getElementById("lightboxView").style.display = "none";
-    }
+    function closeLightbox() { document.getElementById("lightboxView").style.display = "none"; }
 
     function changeSlide(direction, event) {
-      if (event) event.stopPropagation(); // หยุดการคลิกไม่ให้ส่งไปถึงกล่องใหญ่ขยายรูป
+      if (event) event.stopPropagation();
       var images = document.querySelectorAll("#modalCarousel .carousel-img");
       if(images.length <= 1) return;
       images[activeImgIndex].classList.remove("active");
@@ -720,11 +801,10 @@
 
     async function triggerEditListing() {
       if(!currentSelectedListing) return;
-      var inputPin = prompt("🔑 กรอกรหัส PIN ประจำโพสต์ 4 หลัก หรือ รหัสผ่านแอดมิน เพื่อจัดการแก้ไขโพสต์นี้:");
+      var inputPin = prompt("🔑 กรอกรหัส PIN ประจำโพสต์ 4 หลัก หรือ รหัสแอดมิน เพื่อจัดการแก้ไขโพสต์นี้:");
       if(!inputPin) return;
 
       var actionChoice = prompt("ระบุคำสั่งการทำงาน:\nพิมพ์ '1' เพื่อเปลี่ยนสถานะเป็น [ปิดแล้ว]\nพิมพ์ '2' เพื่อเปลี่ยนสถานะเป็น [พร้อมขาย]\nพิมพ์ '3' เพื่อลบประกาศประกาศนี้ออกถาวร");
-      
       var nextStatus = currentSelectedListing.Status;
       var subAction = "update";
       
@@ -734,15 +814,7 @@
       else { alert("คำสั่งไม่ถูกต้อง"); return; }
 
       var isSystemAdmin = (inputPin === currentAdminPin && currentAdminPin !== "") ? true : false;
-
-      var payload = {
-        action: "updateAmuletStatus",
-        id: currentSelectedListing.ID,
-        pin: inputPin,
-        status: nextStatus,
-        subAction: subAction,
-        isAdmin: isSystemAdmin
-      };
+      var payload = { action: "updateAmuletStatus", id: currentSelectedListing.ID, pin: inputPin, status: nextStatus, subAction: subAction, isAdmin: isSystemAdmin };
 
       var res = await fetch(WEB_APP_URL, { method: "POST", body: JSON.stringify(payload) });
       var data = await res.json();
@@ -750,9 +822,7 @@
         alert("ทำรายการจัดการแก้ไขสถานะประกาศเรียบร้อยครับ!");
         closeAmuletModal();
         loadDashboardData();
-      } else {
-        alert("เกิดข้อผิดพลาด: " + data.message);
-      }
+      } else { alert("เกิดข้อผิดพลาด: " + data.message); }
     }
 
     async function fetchChatHistory(id) {
@@ -777,12 +847,7 @@
       var input = document.getElementById("modalChatInput");
       var text = input.value.trim();
       if(!text || !currentSelectedListing) return;
-      var payload = {
-        action: "sendInListingChat",
-        id: currentSelectedListing.ID,
-        sender: document.getElementById("username").value,
-        message: text
-      };
+      var payload = { action: "sendInListingChat", id: currentSelectedListing.ID, sender: document.getElementById("username").value, message: text };
       input.value = "";
       var res = await fetch(WEB_APP_URL, { method: "POST", body: JSON.stringify(payload) });
       var d = await res.json();
@@ -807,28 +872,25 @@
         contact: document.getElementById("wContact").value,
         pin: document.getElementById("wPin").value
       };
-      
       var res = await fetch(WEB_APP_URL, { method: "POST", body: JSON.stringify(payload) });
       var data = await res.json();
       if(data.status === "success") {
         alert("สำเร็จ! บันทึกและตั้งกระดานใบสั่งตั้งรับพระเครื่องเรียบร้อยครับ");
         document.getElementById("wantedForm").reset();
         loadDashboardData();
+        switchMainTab('marketTab', document.querySelectorAll('.tab-btn')[0]); // วิ่งกลับมาหน้ากระดานแรก
       }
     });
 
     document.getElementById("reportForm").addEventListener("submit", async function(e) {
       e.preventDefault();
-      var payload = {
-        action: "addReport",
-        contact: document.getElementById("repContact").value,
-        message: document.getElementById("repMessage").value
-      };
+      var payload = { action: "addReport", contact: document.getElementById("repContact").value, message: document.getElementById("repMessage").value };
       var res = await fetch(WEB_APP_URL, { method: "POST", body: JSON.stringify(payload) });
       var data = await res.json();
       if(data.status === "success") {
         alert("ส่งเรื่องร้องเรียน/ขอความช่วยเหลือถึงแอดมินเรียบร้อยแล้วครับ");
         document.getElementById("reportForm").reset();
+        switchMainTab('marketTab', document.querySelectorAll('.tab-btn')[0]);
       }
     });
 
@@ -837,10 +899,7 @@
     
     async function verifyAdminAccess() {
       var pin = document.getElementById("adminPinInput").value;
-      if (!pin.trim()) {
-        alert("กรุณากรอกรหัสผ่านแอดมิน!");
-        return;
-      }
+      if (!pin.trim()) { alert("กรุณากรอกรหัสผ่านแอดมิน!"); return; }
       try {
         var payload = { action: "verifyAdminPin", pin: pin.trim() };
         var response = await fetch(WEB_APP_URL, { method: "POST", body: JSON.stringify(payload) });
@@ -852,19 +911,14 @@
           document.getElementById("adminMainContent").style.display = "block";
           loadDashboardData();
           alert("ยินดีต้อนรับครับพี่คม เข้าสู่ระบบผู้ดูแลระบบสำเร็จ");
-        } else {
-          alert("รหัสผ่านผู้ดูแลระบบไม่ถูกต้อง!");
-        }
-      } catch (err) {
-        alert("ระบบตรวจสอบรหัสผ่านขัดข้อง");
-      }
+        } else { alert("รหัสผ่านผู้ดูแลระบบไม่ถูกต้อง!"); }
+      } catch (err) { alert("ระบบตรวจสอบรหัสผ่านขัดข้อง"); }
     }
 
     function renderAdminReports(reportsArray) {
       var view = document.getElementById("adminReportsListView");
       view.innerHTML = "";
       var reversed = [...reportsArray].reverse(); 
-      
       if(reversed.length === 0) {
         view.innerHTML = "<p>ไม่มีรายการแจ้งเรื่องช่วยเหลือในขณะนี้</p>";
         return;
@@ -875,7 +929,7 @@
         rDiv.innerHTML = `
           <div><b>📥 วันที่:</b> ${r.Timestamp} | <b>สถานะ:</b> [${r.Status}]</div>
           <div><b>📞 ข้อมูลติดต่อผู้แจ้ง:</b> ${r.UserContact}</div>
-          <p style="margin:5px 0; color:#fff;"><b>เนื้อหาเรื่องร้องเรียน:</b> ${r.Message}</p>
+          <p style="margin:5px 0; color:#fff;"><b>เนื้อหา:</b> ${r.Message}</p>
           ${r.Status !== "อ่านแล้ว" ? `<button class="btn-cyan" style="width:auto; padding:3px 8px; font-size:11px;" onclick="markReportAsRead('${r.ReportID}')">ทำเครื่องหมายว่าอ่านแล้ว</button>` : ""}
         `;
         view.appendChild(rDiv);
@@ -929,7 +983,7 @@
       e.preventDefault();
       var btn = document.getElementById("submitBtn");
       btn.disabled = true;
-      btn.innerText = "กำลังประมวลผลอัปโหลดไฟล์รูปภาพ...";
+      btn.innerText = "กำลังประมวลผลอัปโหลดไฟล์เข้าคลัง Google Drive...";
 
       var fileInput = document.getElementById("imageFiles");
       var files = fileInput.files;
@@ -958,16 +1012,13 @@
         var response = await fetch(WEB_APP_URL, { method: "POST", body: JSON.stringify(payload) });
         var resJson = await response.json();
         if (resJson.status === "success") {
-          alert("สำเร็จ! รหัสประกาศคือ: " + resJson.id);
+          alert("สำเร็จ! ลงประกาศพระเครื่องเรียบร้อย");
           document.getElementById("amuletForm").reset();
           loadDashboardData();
+          switchMainTab('marketTab', document.querySelectorAll('.tab-btn')[0]); // ย้ายผู้ใช้กลับหน้ากระดานส่องพระหลัก
         }
-      } catch (err) {
-        alert("การอัปโหลดขัดข้อง");
-      } finally {
-        btn.disabled = false;
-        btn.innerText = "ตั้งประกาศปล่อยเช่าพระเครื่อง";
-      }
+      } catch (err) { alert("การอัปโหลดขัดข้อง"); }
+      finally { btn.disabled = false; btn.innerText = "ตั้งประกาศปล่อยเช่าพระเครื่อง"; }
     });
 
     window.onclick = function(e) {
