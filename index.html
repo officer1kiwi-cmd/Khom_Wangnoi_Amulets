@@ -403,10 +403,10 @@
     </div>
 
     <div class="tab-bar">
-      <button class="tab-btn active" onclick="switchMainTab('marketTab', this)">🏆 รายการประกาศ</button>
-      <button class="tab-btn" onclick="switchMainTab('uploadTab', this)">✍️ ประกาศปล่อยเช่า</button>
-      <button class="tab-btn" onclick="switchMainTab('wantedTab', this)">🔍 ใบสั่งตั้งรับพระ</button>
-      <button class="tab-btn" onclick="switchMainTab('supportTab', this)">🤝 แจ้งเรื่อง / ความเช่วยเหลือ</button>
+      <button class="tab-btn active" onclick="switchMainTab('marketTab', this)">🏆 รายการ</button>
+      <button class="tab-btn" onclick="switchMainTab('uploadTab', this)">✍️ ลงขาย</button>
+      <button class="tab-btn" onclick="switchMainTab('wantedTab', this)">🔍 ใบสั่ง</button>
+      <button class="tab-btn" onclick="switchMainTab('supportTab', this)">🤝 บอกแอดมิน</button>
     </div>
   </div>
 
@@ -623,7 +623,7 @@
 
         if (data.news && data.news.length > 0) {
           var latestNews = data.news[data.news.length - 1];
-          document.getElementById("newsTicker").innerText = "📢 ข่าวด่วน: updated version 2.8 คม วังน้อย พระเครื่อง ออนไลน์ ใช้งานง่าย และฟรี" + latestNews.Message + " (" + latestNews.Timestamp + ")";
+          document.getElementById("newsTicker").innerText = "📢 ข่าวด่วน: updated version 2.8.1 คม วังน้อย พระเครื่อง ออนไลน์ ใช้งานง่าย และฟรี" + latestNews.Message + " (" + latestNews.Timestamp + ")";
         }
 
         cachedListings = data.listings ? [...data.listings].reverse() : [];
