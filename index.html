@@ -15,7 +15,7 @@
       height: 100%;
     }
 
-    /* 📌 1. ระบบล็อกส่วนหัวแพลตฟอร์มจนถึงข่าวสารวิ่งไว้ไม่ให้เลื่อนตาม (Sticky Top) */
+    /* ระบบล็อกส่วนหัวแพลตฟอร์มจนถึงข่าวสารวิ่งไว้ไม่ให้เลื่อนตาม (Sticky Top) */
     .sticky-header-container {
       position: fixed;
       top: 0;
@@ -64,12 +64,12 @@
       100% { transform: translate3d(-100%, 0, 0); }
     }
 
-    /* 📌 2. แถบสลับแท็บเมนูด้านบน (Navigation Tabs) */
+    /* แถบสลับแท็บเมนูด้านบน (Navigation Tabs) */
     .tab-bar {
       display: flex;
       background-color: #0b132b;
       border-bottom: 2px solid #1c2541;
-      overflow-x: auto; /* ถ้ายาวเกินจอมือถือจะเลื่อนสไลด์ด้านข้างได้ */
+      overflow-x: auto;
       scrollbar-width: none;
     }
     .tab-bar::-webkit-scrollbar {
@@ -103,17 +103,17 @@
 
     /* ส่วนเนื้อหาขยับลงมาด้านล่างเพื่อไม่ให้โดนหัวเว็บบัง */
     .main-content {
-      margin-top: 175px; /* ระยะเว้นเผื่อส่วนหัวที่โดนล็อก */
+      margin-top: 175px;
       padding: 15px;
       box-sizing: border-box;
     }
 
-    /* 📌 ควบคุมการแสดงผลของแต่ละแท็บ */
+    /* ควบคุมการแสดงผลของแต่ละแท็บ */
     .tab-content {
-      display: none; /* ซ่อนไว้ก่อน */
+      display: none;
     }
     .tab-content.active {
-      display: block; /* แสดงเฉพาะแท็บที่ถูกเลือก */
+      display: block;
       animation: fadeIn 0.3s ease-in-out;
     }
     @keyframes fadeIn {
@@ -180,7 +180,7 @@
       box-shadow: 0 0 12px rgba(0, 180, 216, 0.6);
     }
 
-    /* กระดานสินค้าแสดงผลแบบ Grid ปรับให้ยืดหยุ่นตามหน้าจอ */
+    /* กระดานสินค้าแสดงผลแบบ Grid */
     .board-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
@@ -255,15 +255,31 @@
       margin-bottom: 12px;
       border-radius: 0 6px 6px 0;
     }
+    
+    /* 📅 ตกแต่งกล่องกิจกรรมงานประกวดพระเครื่อง */
     .event-item {
       background-color: #111a36;
       border: 1px solid #1c2541;
+      border-left: 4px solid #ffd700;
       padding: 12px;
       margin-bottom: 10px;
       border-radius: 6px;
-      cursor: pointer;
     }
-    .event-item:hover { border-color: #00b4d8; }
+    .btn-event-link {
+      display: inline-block;
+      background-color: #00b4d8;
+      color: #060a12;
+      text-decoration: none;
+      font-size: 11px;
+      font-weight: bold;
+      padding: 4px 10px;
+      border-radius: 4px;
+      margin-top: 6px;
+      transition: background 0.2s;
+    }
+    .btn-event-link:hover {
+      background-color: #ffd700;
+    }
 
     /* ป๊อปอัปส่องโมดอลรายละเอียด */
     .modal {
@@ -378,7 +394,6 @@
       box-shadow: 0 0 30px rgba(0, 180, 216, 0.5);
     }
 
-    /* ปรับแต่งความสูง Margin สัดส่วนเมื่อใช้งานบนจอมือถือเล็กสุด */
     @media (max-width: 480px) {
       .sticky-header-container { position: fixed; }
       .main-content { margin-top: 165px; padding: 10px; }
@@ -443,7 +458,7 @@
       </div>
 
       <div class="panel-box">
-        <h2 class="neon-text">🔍 กระดานใบสั่งตามหาพระด่วน</h2>
+        <h2 class="neon-text">🔍 กระดานใบสั่ง</h2>
         <div id="wantedBoardView"><p>กำลังโหลดรายการใบสั่ง...</p></div>
       </div>
     </div>
@@ -504,7 +519,7 @@
         <h2 style="color:#ef4444;">🤝 แจ้งเรื่องร้องเรียน & ขอความช่วยเหลือถึงแอดมิน</h2>
         <form id="reportForm">
           <div class="form-group"><label>เบอร์โทร หรือ ไลน์ไอดี ของผู้แจ้ง</label><input type="text" id="repContact" placeholder="กรอกช่องทางติดต่อ" required></div>
-          <div class="form-group"><label>รายละเอียดปัญหาที่ต้องการให้ช่วย</label><textarea id="repMessage" rows="4" placeholder="ระบุเรื่องราวร้องเรียน..." required></textarea></div>
+          <div class="form-group"><label>รายละเอียดปัญหาที่ต้องการให้ช่วย</label><textarea id="repMessage" rows="4" placeholder="ระบุเรื่องราวที่ต้องการให้แอดมินช่วยเหลือ..." required></textarea></div>
           <button type="submit" class="btn-cyan" style="background-color:#ef4444; color:#fff;">ส่งเรื่องให้แอดมิน</button>
         </form>
       </div>
@@ -515,7 +530,7 @@
   <div id="amuletModal" class="modal">
     <div class="modal-content">
       <span class="close-modal" onclick="closeAmuletModal()">×</span>
-      <h3 id="modalTitle" class="neon-text" style="margin-top:0; font-size:22px;">ชื่อพระ</h3>
+      <h3 id="modalTitle" class="neon-text" style="margin-top:0; font-size:22px;">ชื่อวัตถุมงคล</h3>
       <div style="margin-bottom:10px;">
         <span id="modalBadge" style="background:#ffd700; color:#000; padding:3px 8px; font-weight:bold; font-size:12px; border-radius:4px;">ประเภท</span>
         <span id="modalStatusBadge" class="status-badge" style="position:static; display:inline-block; margin-left:10px;">สถานะ</span>
@@ -578,7 +593,7 @@
         </div>
 
         <div class="panel-box" style="border-top-color:#ff9f1c;">
-          <h3>📩 รายการร้องเรียน / ความช่วยเหลือ</h3>
+          <h3>📩 รายการร้องเรียนและความต้องการให้ช่วยเหลือ</h3>
           <div id="adminReportsListView"></div>
         </div>
       </div>
@@ -590,29 +605,22 @@
   </div>
 
   <script>
-    // สลับวางลิงก์ Web App URL ของจริง
-    const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbxt_xmg-sHglOoG_S0T6ey5VkVeCjDdmHbQaOTIW4MhZ-Trtlz6RcHkROfLaeGBybNi/exec";
+    const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbwl-ZRLJIWjJh9UThq_8AGKxDptW6J33TdD4ujpbtR-JlwrNK_uAKiAGlmAONRkRn0O/exec";
 
     var cachedListings = [];
     var activeImgIndex = 0;
     var currentSelectedListing = null;
     var currentAdminPin = "";
 
-    // 📌 ฟังก์ชันใหม่สำหรับสลับแท็บบนหน้าจอมือถือ
     function switchMainTab(tabId, btnElement) {
-      // ซ่อนทุกแท็บเนื้อหา
       var contents = document.querySelectorAll('.tab-content');
       contents.forEach(function(content) { content.classList.remove('active'); });
       
-      // เอาสถานะ active ออกจากทุกปุ่มแท็บ
       var buttons = document.querySelectorAll('.tab-btn');
       buttons.forEach(function(btn) { btn.classList.remove('active'); });
 
-      // เปิดแท็บและปุ่มที่คลิกเลือก
       document.getElementById(tabId).classList.add('active');
       btnElement.classList.add('active');
-
-      // เลื่อนจอกลับไปด้านบนสุดอัตโนมัติเมื่อกดสลับแท็บเพื่อความสะดวก
       window.scrollTo({top: 0, behavior: 'smooth'});
     }
 
@@ -623,24 +631,41 @@
 
         if (data.news && data.news.length > 0) {
           var latestNews = data.news[data.news.length - 1];
-          document.getElementById("newsTicker").innerText = "📢 ข่าวด่วน: updated version 2.8.1 คม วังน้อย พระเครื่อง ออนไลน์ ใช้งานง่าย และฟรี" + latestNews.Message + " (" + latestNews.Timestamp + ")";
+          document.getElementById("newsTicker").innerText = "📢 ข่าวด่วน: updated version2.8.2 คม วังน้อย พระเครื่อง ออนไลน์ ใช้งานง่าย และฟรี" + latestNews.Message + " (" + latestNews.Timestamp + ")";
         }
 
         cachedListings = data.listings ? [...data.listings].reverse() : [];
         renderListings(cachedListings);
 
+        // 📌 1. แก้ไขปฏิทินงานประกวด (ดักจับคีย์พิมพ์ใหญ่-เล็ก และเพิ่มปุ่มดูรายละเอียดเพิ่มเติม)
         var evBoard = document.getElementById("eventsBoardView");
         if (data.events && data.events.length > 0) {
           evBoard.innerHTML = "";
           var reversedEvents = [...data.events].reverse();
           reversedEvents.forEach(function(ev) {
+            // ป้องกันการแสดงผล undefined โดยตรวจสอบคีย์พิมพ์ใหญ่-พิมพ์เล็กจากฐานข้อมูลร่วมกัน
+            var eDate = ev.Date || ev.date || "ไม่ระบุวัน";
+            var eName = ev.Name || ev.name || "ไม่ระบุชื่องาน";
+            var eLoc = ev.Location || ev.location || "ไม่ระบุสถานที่";
+            var eOrg = ev.Organizer || ev.organizer || "ไม่ระบุผู้จัด";
+            var eUrl = ev.URL || ev.Url || ev.url || "";
+
             var evDiv = document.createElement("div");
             evDiv.className = "event-item";
-            evDiv.innerHTML = `
-              <strong style="color:#ffd700;">📅 วันที่: ${ev.Date} - งาน: ${ev.Name}</strong>
-              <div style="font-size:13px; margin-top:4px; color:#fff;">📍 สถานที่: ${ev.Location}</div>
+            
+            var htmlContent = `
+              <strong style="color:#ffd700;">📅 วันที่: ${eDate}</strong>
+              <div style="font-size:14px; margin-top:4px; font-weight:bold; color:#00b4d8;">🏆 งาน: ${eName}</div>
+              <div style="font-size:13px; margin-top:2px; color:#fff;">📍 สถานที่: ${eLoc}</div>
+              <div style="font-size:12px; color:#94a3b8;">👤 ผู้จัด: ${eOrg}</div>
             `;
-            evDiv.onclick = function() { if(ev.URL) window.open(ev.URL, '_blank'); };
+            
+            // ถ้าหลังบ้านมีการบันทึก URL ไว้ ให้สร้างปุ่มกดลิงก์ไปหน้าต้นทาง
+            if(eUrl && eUrl.trim() !== "") {
+              htmlContent += `<a href="${eUrl.trim()}" target="_blank" class="btn-event-link">🔗 ดูรายละเอียดเพิ่มเติม</a>`;
+            }
+            
+            evDiv.innerHTML = htmlContent;
             evBoard.appendChild(evDiv);
           });
         } else {
@@ -666,14 +691,52 @@
         }
 
         if(currentAdminPin !== "") { renderAdminReports(data.reports || []); }
+        
+        // 📌 2. ส่วนดักจับลิงก์แชร์ตรง (Deep Linking Check) หลังจากโหลดข้อมูลการตลาดเสร็จสิ้น
+        checkDirectSharedAmulet();
+
       } catch (err) { console.error("ระบบขัดข้อง: ", err); }
+    }
+
+    // 📌 ฟังก์ชันตรวจสอบลิงก์แชร์ตรงเข้าหน้ารายละเอียดพระองค์นั้นๆ ทันที
+    function checkDirectSharedAmulet() {
+      var urlParams = new URLSearchParams(window.location.search);
+      var sharedId = urlParams.get('amuletId');
+      if (sharedId && cachedListings.length > 0) {
+        var foundItem = cachedListings.find(function(item) {
+          return String(item.ID) === String(sharedId);
+        });
+        if (foundItem) {
+          // หน่วงเวลาเล็กน้อยเพื่อให้หน้าจอเรนเดอร์เรียบร้อยแล้วสั่งเปิดป๊อปอัปส่องทันที
+          setTimeout(function() {
+            openAmuletDetailsModal(foundItem);
+          }, 400);
+        }
+      }
+    }
+
+    // 📌 2. แก้ไขระบบคัดลอกลิงก์แชร์ ให้เป็น URL เว็บไซต์ตรงพ่วง ID พระเครื่ององค์นั้น
+    function copyShareLink() {
+      if(!currentSelectedListing) return;
+      
+      // ดึง URL ปัจจุบันของหน้าเว็บพี่คม ตัดส่วน query string เก่าออก (ถ้ามี)
+      var currentWebUrl = window.location.origin + window.location.pathname;
+      // พ่วง ID ประกาศเข้าไปเป็นพารามิเตอร์ต่อท้าย
+      var shareableLink = currentWebUrl + "?amuletId=" + currentSelectedListing.ID;
+      
+      navigator.clipboard.writeText(shareableLink).then(function() {
+        alert("🔗 คัดลอกลิงก์ประกาศสำเร็จแล้ว!\nคุณสามารถนำลิงก์นี้ไปวางแชร์ใน Line หรือ Facebook ได้ทันที เมื่อผู้ใช้กดเข้ามาจะเด้งเข้าส่องพระองค์นี้โดยตรง");
+      }).catch(function(err) {
+        // แผนสำรองกรณีบราวเซอร์บล็อก clipboard api
+        prompt("คัดลอกลิงก์แชร์ประกาศตรงที่นี่:", shareableLink);
+      });
     }
 
     function renderListings(listingsArray) {
       var board = document.getElementById("amuletBoardView");
       board.innerHTML = "";
       if (!listingsArray || listingsArray.length === 0) {
-        board.innerHTML = "<p>ไม่พบรายการพระเครื่องปล่อยเช่าตามข้อตกลงเงื่อนไขที่เลือก</p>";
+        board.innerHTML = "<p>ไม่พบรายการพระเครื่องประกาศปล่อยเช่าตามข้อตกลงเงื่อนไขที่เลือก</p>";
         return;
       }
 
@@ -855,11 +918,6 @@
     }
 
     function focusChatInput() { document.getElementById("modalChatInput").focus(); }
-    function copyShareLink() {
-      var text = `ส่องพระแท้: ${currentSelectedListing.Title} ราคา ${currentSelectedListing.Price} บาท นัดเจอได้ที่ ${currentSelectedListing.Location}`;
-      navigator.clipboard.writeText(text);
-      alert("คัดลอกเนื้อหาแชร์โพสต์นี้เรียบร้อยครับ!");
-    }
 
     document.getElementById("wantedForm").addEventListener("submit", async function(e) {
       e.preventDefault();
@@ -878,7 +936,7 @@
         alert("สำเร็จ! บันทึกและตั้งกระดานใบสั่งตั้งรับพระเครื่องเรียบร้อยครับ");
         document.getElementById("wantedForm").reset();
         loadDashboardData();
-        switchMainTab('marketTab', document.querySelectorAll('.tab-btn')[0]); // วิ่งกลับมาหน้ากระดานแรก
+        switchMainTab('marketTab', document.querySelectorAll('.tab-btn')[0]);
       }
     });
 
@@ -1015,7 +1073,7 @@
           alert("สำเร็จ! ลงประกาศพระเครื่องเรียบร้อย");
           document.getElementById("amuletForm").reset();
           loadDashboardData();
-          switchMainTab('marketTab', document.querySelectorAll('.tab-btn')[0]); // ย้ายผู้ใช้กลับหน้ากระดานส่องพระหลัก
+          switchMainTab('marketTab', document.querySelectorAll('.tab-btn')[0]);
         }
       } catch (err) { alert("การอัปโหลดขัดข้อง"); }
       finally { btn.disabled = false; btn.innerText = "ตั้งประกาศปล่อยเช่าพระเครื่อง"; }
