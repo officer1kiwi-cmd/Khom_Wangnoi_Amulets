@@ -631,7 +631,7 @@
 
         if (data.news && data.news.length > 0) {
           var latestNews = data.news[data.news.length - 1];
-          document.getElementById("newsTicker").innerText = "📢 ข่าวด่วน: updated version2.8.2 คม วังน้อย พระเครื่อง ออนไลน์ ใช้งานง่าย และฟรี" + latestNews.Message + " (" + latestNews.Timestamp + ")";
+          document.getElementById("newsTicker").innerText = "📢 ข่าวด่วน: " + latestNews.Message + " (" + latestNews.Timestamp + ")";
         }
 
         cachedListings = data.listings ? [...data.listings].reverse() : [];
